@@ -1,12 +1,11 @@
-import React from 'react'
-import Nav from './Nav/Nav';
+import React, { Component } from "react";
+import Nav from "./Nav/Nav";
 
-const Header = () => {
-  return (
-    <header>
+class Header extends Component {
+  render() {
+    return <div>
       <Nav/>
-    </header>
-  )
+    </div>;
+  }
 }
-
-export default Header
+export default Header;
