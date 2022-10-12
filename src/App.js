@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React , {useEffect,useState,useRef} from 'react'
 import '@tomtom-international/web-sdk-maps/dist/maps.css'
