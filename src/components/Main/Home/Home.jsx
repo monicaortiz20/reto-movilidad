@@ -2,6 +2,7 @@ import './Home.css';
 import React , {useEffect,useState,useRef} from 'react'
 import '@tomtom-international/web-sdk-maps/dist/maps.css'
 import * as tt from "@tomtom-international/web-sdk-maps";
+import '@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css';
 
 
 const MAX_ZOOM = 17;
