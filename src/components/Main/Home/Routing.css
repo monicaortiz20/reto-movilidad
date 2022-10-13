@@ -1,0 +1,26 @@
+.app{
+    height: 600px;
+    width: 100vh;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+}
+
+.map{
+    height: 100%;
+    width: 100vh;
+}
+
+.marker{
+    background-color: lightblue;
+    border-radius: 40%;
+    border: solid, 2px, black
+}
+
+.marker-delivery{
+    background-color: darkblue;
+    border-radius: 40%;
+    border: solid, 2px, white
+}
