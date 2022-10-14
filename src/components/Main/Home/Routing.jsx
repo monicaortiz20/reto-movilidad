@@ -9,14 +9,16 @@ const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
 
 const Routing = () => {
     const mapElement = useRef();
-    const [startLatitude, setStartLatitude] = useState('2.7505287');
-    const [startLongitude, setStartLongitude] = useState('41.6709659');
+    const [startLatitude, setStartLatitude] = useState('-3.6886008');
+    const [startLongitude, setStartLongitude] = useState('40.4069749');
     const [destinationLatitude, setDestinationLatitude] = useState(
-      '2.5010908655347097'
+      '-3.733055453979186'
     );
     const [destinationLongitude, setDestinationLongitude] = useState(
-      '41.57083364442753'
+      '40.340701479890676'
     );
+
+
     const [result, setResult] = useState({});
     const [mapZoom, setMapZoom] = useState(17);
     const [map, setMap] = useState({});
@@ -44,7 +46,6 @@ const calculateRoute = () => {
         windingness: "high",
         locations: `${startLatitude},${startLongitude}:${destinationLatitude},${destinationLongitude}`,
       })
-    //   .go()
       .then(function (routeData) {
         console.log(routeData.toGeoJson());
         const data = routeData.toGeoJson();
@@ -127,7 +128,7 @@ const resultList = result.features ? (
      timeBudgetInSec: 1000,
      origin: [parseFloat(2.7505287), parseFloat(41.6709659)],
    })
-//    .go()
+
     .then((routeData) => {
      const data = routeData.toGeoJson();
      console.log(data);
