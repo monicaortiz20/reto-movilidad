@@ -172,7 +172,7 @@ const Routing = () => {
     return (
         <>
         { map && <div className="routing">
-            <div ref={mapElement} className="map"/>
+            <div ref={mapElement} className="map" style={{height: '600px'}}/>
             <div className='search-bar'></div>
             <h2>Where to?</h2>
             <input type="text" id="longitude" className='longitude' placeholder='Longitude' onChange={(e)=>{setLongitude (e.target.value)}} />
@@ -182,3 +182,6 @@ const Routing = () => {
         </>
     )
 }
+
+export default Routing;
+

@@ -1,17 +1,3 @@
-.app{
-    height: 600px;
-    width: 100vh;
-}
-
-body{
-    display: flex;
-    justify-content: center;
-}
-
-.map{
-    height: 100%;
-    width: 100vh;
-}
 
 .marker{
     background-color: lightblue;
