@@ -9,13 +9,9 @@ import tt from "@tomtom-international/web-sdk-services";
 import { services } from '@tomtom-international/web-sdk-services';
 import { map, LngLat } from '@tomtom-international/web-sdk-maps'
 import './Home.css';
-
-
 const MAX_ZOOM = 17;
  const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
-
 function Home() {
-
   const [startLatitude, setStartLatitude] = useState("");
   const [startLongitude, setStartLongitude] = useState("");
   const [destinationLatitude, setDestinationLatitude] = useState(
@@ -25,9 +21,7 @@ function Home() {
     ""
   );
   const [result, setResult] = useState({});
-
   const mapElement = useRef();
-
   const [mapZoom, setMapZoom] = useState(17);
   const [map, setMap] = useState({});
   const [input, setInput] = useState("")
@@ -35,9 +29,7 @@ function Home() {
   const [address, setAddress] = useState([])
   const [debouncedText] = useDebounce(input, 2000); //almacenamos el valor del input
   const  [debouncedText2]=  useDebounce(input2, 2000);
-
   const [center,setCenter] = useState(["-3.6886008", "40.4069749"])
-
   const getAddress = async () => {
     try{
       const  data  = await axios.get(` https://api.tomtom.com/search/2/geocode/${input}.json?storeResult=false&typeahead=true&limit=1&countrySet=ES&lat=40.4165&lon=-3.70256&view=Unified&key=${TOMTOMAPIKEY}`)
@@ -48,18 +40,12 @@ function Home() {
     console.log(lon,"soy lon");
     setStartLatitude(lon)
     setStartLongitude(lat)
-  
-      
     // console.log(lat,lon);
-
     return data
   }catch(error){
         console.log(error);
     }
-    
-    
 }
-
 const getAddress2 = async () => {
   try{
     const  data2  = await axios.get(` https://api.tomtom.com/search/2/geocode/${input2}.json?storeResult=false&typeahead=true&limit=1&countrySet=ES&lat=40.4165&lon=-3.70256&view=Unified&key=${TOMTOMAPIKEY}`)
@@ -71,21 +57,13 @@ const getAddress2 = async () => {
   console.log(lat,"soy lat2");
   console.log(lon,"soy lon2");
   console.log();
-
-    
   // console.log(lat,lon);
-
   return data2
 }catch(error){
       console.log(error);
   }
-  
-  
 }
-
-
   useEffect(() => {
-
     getAddress()
     getAddress2()
     let map = ttmaps.map({
@@ -97,14 +75,12 @@ const getAddress2 = async () => {
     setMap(map);
     return () => map.remove();
   }, [debouncedText, debouncedText2]);
-
   const handleChange = (e) => {
     setInput(e.target.value)
   }
   const handleChange2 = (e) => {
     setInput2(e.target.value)
   }
-
   const calculateRoute = () => {
     tt.services
       .calculateRoute({
@@ -143,7 +119,7 @@ const getAddress2 = async () => {
             "line-join": "round"
           },
           paint: {
-            "line-color": "#ff0000",
+            "line-color": "#FF0000",
             "line-width": 2
           }
         });
@@ -151,17 +127,14 @@ const getAddress2 = async () => {
       })
       .catch((err) => {console.log(err)}
       )
-  
-} 
-
-
+}
   return (
     <div>
       <div ref={mapElement} className="mapDiv"></div>
       <div className="App">
         <div >
-          <nav style={{ backgroundColor: "#4287f5" }}>
-            <p>TomTom Maps + React = 😃</p>
+          <nav style={{ backgroundColor: "#4287F5" }}>
+            <p>TomTom Maps + React = :sonriente:</p>
           </nav>
           <div>
             <section>
@@ -193,7 +166,5 @@ const getAddress2 = async () => {
       </div>
     </div>
   )
-
   }
- 
 export default Home;
