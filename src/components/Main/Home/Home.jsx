@@ -1,117 +1,199 @@
-import './Home.css';
 import React , {useEffect,useState,useRef} from 'react'
-import '@tomtom-international/web-sdk-maps/dist/maps.css'
-import * as tt from "@tomtom-international/web-sdk-maps";
-import '@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css';
-import axios from 'axios'
 import {useDebounce} from 'use-debounce'
+import axios from 'axios'
+import '@tomtom-international/web-sdk-maps/dist/maps.css'
+import '@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css';
+import "@tomtom-international/web-sdk-maps/dist/maps.css";
+import * as ttmaps from "@tomtom-international/web-sdk-maps";
+import tt from "@tomtom-international/web-sdk-services";
+import { services } from '@tomtom-international/web-sdk-services';
+import { map, LngLat } from '@tomtom-international/web-sdk-maps'
+import './Home.css';
 
 
 const MAX_ZOOM = 17;
  const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
 
 function Home() {
+
+  const [startLatitude, setStartLatitude] = useState("");
+  const [startLongitude, setStartLongitude] = useState("");
+  const [destinationLatitude, setDestinationLatitude] = useState(
+    ""
+  );
+  const [destinationLongitude, setDestinationLongitude] = useState(
+    ""
+  );
+  const [result, setResult] = useState({});
+
   const mapElement = useRef();
-  const [mapLongitude, setMapLongitude] = useState(-3.70256);
-  const [mapLatitude, setMapLatitude] = useState(40.4165);
-  const [mapZoom, setMapZoom] = useState(13);
+
+  const [mapZoom, setMapZoom] = useState(17);
   const [map, setMap] = useState({});
   const [input, setInput] = useState("")
-    const [address,setAddress]= useState([])
-    const [debouncedText] = useDebounce(input, 2000); //almacenamos el valor del input
+  const [input2, setInput2] = useState("")
+  const [address, setAddress] = useState([])
+  const [debouncedText] = useDebounce(input, 2000); //almacenamos el valor del input
+  const  [debouncedText2]=  useDebounce(input2, 2000);
 
-  // const increaseZoom = () => {
-  //   if (mapZoom < MAX_ZOOM) {
-  //     setMapZoom(mapZoom + 1);
-  //   }
-  // };
+  const [center,setCenter] = useState(["-3.6886008", "40.4069749"])
 
-  // const decreaseZoom = () => {
-  //   if (mapZoom > 1) {
-  //     setMapZoom(mapZoom - 1);
-  //   }
-  // };
+  const getAddress = async () => {
+    try{
+      const  data  = await axios.get(` https://api.tomtom.com/search/2/geocode/${input}.json?storeResult=false&typeahead=true&limit=1&countrySet=ES&lat=40.4165&lon=-3.70256&view=Unified&key=${TOMTOMAPIKEY}`)
+    console.log("Esto es data",data);
+    const lat= data.data.results[0].position.lat.toString()
+    const lon= data.data.results[0].position.lon.toString()
+    console.log(lat,"soy lat");
+    console.log(lon,"soy lon");
+    setStartLatitude(lon)
+    setStartLongitude(lat)
+  
+      
+    // console.log(lat,lon);
+
+    return data
+  }catch(error){
+        console.log(error);
+    }
+    
+    
+}
+
+const getAddress2 = async () => {
+  try{
+    const  data2  = await axios.get(` https://api.tomtom.com/search/2/geocode/${input2}.json?storeResult=false&typeahead=true&limit=1&countrySet=ES&lat=40.4165&lon=-3.70256&view=Unified&key=${TOMTOMAPIKEY}`)
+  console.log("Esto es data2",data2);
+  const lat= data2.data.results[0].position.lat.toString()
+  const lon= data2.data.results[0].position.lon.toString()
+  setDestinationLatitude(lon)
+  setDestinationLongitude(lat)
+  console.log(lat,"soy lat2");
+  console.log(lon,"soy lon2");
+  console.log();
+
+    
+  // console.log(lat,lon);
+
+  return data2
+}catch(error){
+      console.log(error);
+  }
+  
+  
+}
+
+
   useEffect(() => {
+
     getAddress()
-    let map = tt.map({
-      /* 
-      This key will API key only works on this Stackblitz. To use this code in your own project,
-      sign up for an API key on the TomTom Developer Portal.
-      */
+    getAddress2()
+    let map = ttmaps.map({
       key: `${TOMTOMAPIKEY}`,
       container: mapElement.current,
-      center: [mapLongitude, mapLatitude],
+      center: center,
       zoom: mapZoom
     });
     setMap(map);
     return () => map.remove();
-  }, [debouncedText]);
+  }, [debouncedText, debouncedText2]);
 
-
-  const getAddress = async () => {
-    try{
-    const  data  = await axios.get(`https://api.tomtom.com/search/2/geocode/${input}.json?storeResult=false&typeahead=true&limit=1&countrySet=ES&lat=40.4165&lon=-3.70256&view=Unified&key=${TOMTOMAPIKEY}`)
-    console.log(data);
-    const lat= data.data.results[0].position.lat
-    const lon= data.data.results[0].position.lon
-
-    console.log(lat,lon);
-    return data
-    }catch(error){
-        console.log(error);
-    }
-}
-
-const handleChange = (e) => {
+  const handleChange = (e) => {
     setInput(e.target.value)
   }
+  const handleChange2 = (e) => {
+    setInput2(e.target.value)
+  }
 
-  const updateMap = () => {
-    map.setCenter([parseFloat(mapLongitude), parseFloat(mapLatitude)]);
-    map.setZoom(mapZoom);
-  };
-
+  const calculateRoute = () => {
+    tt.services
+      .calculateRoute({
+        key: `${TOMTOMAPIKEY}`,
+        routeType: "thrilling",
+        hilliness: "high",
+        windingness: "high",
+        locations: `${startLatitude},${startLongitude}:${destinationLatitude},${destinationLongitude}`
+      })
+      .then(function (routeData) {
+        console.log(routeData.toGeoJson());
+        const data = routeData.toGeoJson();
+        setResult(data);
+        const direction = routeData.toGeoJson().features[0].geometry.coordinates;
+        map.addLayer({
+          id: Math.random().toString(),
+          type: "line",
+          source: {
+            type: "geojson",
+            data: {
+              type: "FeatureCollection",
+              features: [
+                {
+                  type: "Feature",
+                  geometry: {
+                    type: "LineString",
+                    properties: {},
+                    coordinates: direction
+                  }
+                }
+              ]
+            }
+          },
+          layout: {
+            "line-cap": "round",
+            "line-join": "round"
+          },
+          paint: {
+            "line-color": "#ff0000",
+            "line-width": 2
+          }
+        });
+        map.setCenter([parseFloat(startLatitude), parseFloat(startLongitude)]);
+      })
+      .catch((err) => {console.log(err)}
+      )
   
+} 
+
+
   return (
-    <div >
-      <nav  style={{ backgroundColor: "#4287f5" }}>
-        <p>TomTom Maps + React = 😃</p>
-      </nav>
-      <div >
-        <section>
-          <h4>A donde quieres ir ?</h4>
-          <section>
-            <label htmlFor="origin"></label>
-            <input
-              type="text"
-              name="origin"
-              value={input}
-              placeholder="origin"
-              onChange={(e) => handleChange(e)}
-            />
-          </section>
-          {/* <section>
-            <label htmlFor="destiny"></label>
-            <input
-              type="text"
-              name="destiny"
-              value={mapLatitude}
-              onChange={(e) => handleChange(e)}
-            />
-          </section> */}
-          {/* <section>
-            <p className="search"></p>
-            <button  onClick={updateMap}>
-              Update Map
-            </button>
-          </section> */}
-        </section>
-        <section >
-          <div ref={mapElement} className="mapDiv" />
-        </section>
+    <div>
+      <div ref={mapElement} className="mapDiv"></div>
+      <div className="App">
+        <div >
+          <nav style={{ backgroundColor: "#4287f5" }}>
+            <p>TomTom Maps + React = 😃</p>
+          </nav>
+          <div>
+            <section>
+              <h4>A donde quieres ir ?</h4>
+              <section>
+                <label htmlFor="origin"></label>
+                <input
+                  type="text"
+                  name="origin"
+                  value={input}
+                  placeholder="origin"
+                  onChange={(e) => handleChange(e)}
+                />
+              </section>
+              <section>
+                <label htmlFor="destination"></label>
+                <input
+                  type="text"
+                  name="destination"
+                  value={input2}
+                  placeholder="destination"
+                  onChange={(e) => handleChange2(e)}
+                />
+              </section>
+              </section>
+          </div>
+          <button onClick={calculateRoute}>Calculate Route</button>
+        </div>
       </div>
     </div>
-  );
-}
+  )
+
+  }
  
 export default Home;
