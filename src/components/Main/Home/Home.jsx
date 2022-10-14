@@ -109,9 +109,9 @@ const getAddress2 = async () => {
     tt.services
       .calculateRoute({
         key: `${TOMTOMAPIKEY}`,
-        routeType: "thrilling",
-        hilliness: "high",
-        windingness: "high",
+        routeType: "eco",
+        // hilliness: "high",
+        // windingness: "high",
         locations: `${startLatitude},${startLongitude}:${destinationLatitude},${destinationLongitude}`
       })
       .then(function (routeData) {
