@@ -25,7 +25,7 @@ function Home() {
   const [debouncedText] = useDebounce(input, 2000); //almacenamos el valor del input
   const  [debouncedText2]=  useDebounce(input2, 2000);
   const [center,setCenter] = useState(["-3.6886008", "40.4069749"])
-  const [LngLat,setLngLat]=(startLatitude,startLongitude)
+
 
   const getAddress = async () => {
     try{
@@ -72,53 +72,7 @@ const getAddress2 = async () => {
    
     setMap(map);
 
-    // marker start
-    // map.on('load', () => {
-    //   let div = document.createElement('div')
-    //   div.innerHTML= '<p>Hey, baby!</p>'
-    
-    //   let popup = new ttmaps.Popup({
-    //     offset: 35,
-    //   }).setDOMContent(div)
-    
-    //   const element = document.createElement('div')
-    //     element.className = 'marker'
-    
-    //     let marker = new ttmaps.Marker({
-    //       width: 32,
-    //       height:32,
-    //       anchor: 'bottom',
-    //       color:'#469d89',
-    //     }).setLngLat([Number(startLatitude), Number(startLongitude)]).setPopup(popup)
-   
-    //     marker.addTo(map)
-        
-    // })
-    
-    //MarkerDestination:
-    // map.on('load', () => {
-    //   let div2 = document.createElement('div')
-    //   div2.innerHTML= '<p>You did it!</p>'
-    
-    //   let popup2 = new ttmaps.Popup({
-    //     offset: 35,
-    //   }).setDOMContent(div2)
-    
-    //   const element = document.createElement('div')
-    //     element.className = 'marker'
-    
-    //     let markerDestination = new ttmaps.Marker({
-    //       width: 32,
-    //       height:32,
-    //       anchor: 'bottom',
-    //       color:'#469d89',
-    //     }).setLngLat([Number(destinationLatitude), Number(destinationLongitude)]).setPopup(popup2)
-   
-    //     markerDestination.addTo(map)
-    //     markerDestination.off('remove',()=>calculateRoute())
-    // })
-
-    return () => map.remove();
+       return () => map.remove();
     
   }, [debouncedText, debouncedText2]);
 
