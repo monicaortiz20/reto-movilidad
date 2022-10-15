@@ -5,7 +5,7 @@ import '@tomtom-international/web-sdk-maps/dist/maps.css'
 import '@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css';
 import "@tomtom-international/web-sdk-maps/dist/maps.css";
 import * as ttmaps from "@tomtom-international/web-sdk-maps";
-import tt from "@tomtom-international/web-sdk-services";
+import tt, { LngLat,setLngLat } from "@tomtom-international/web-sdk-services";
 import './Home.css';
 
  const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
@@ -25,8 +25,9 @@ function Home() {
   const [debouncedText] = useDebounce(input, 2000); //almacenamos el valor del input
   const  [debouncedText2]=  useDebounce(input2, 2000);
   const [center,setCenter] = useState(["-3.6886008", "40.4069749"])
+  const [LngLat,setLngLat]=(startLatitude,startLongitude)
 
-  const prueba = [40.32642, -3.75899]
+  const prueba = [40.4069749,-3.6886008]
 
   const getAddress = async () => {
     try{
@@ -39,32 +40,7 @@ function Home() {
       setStartLatitude(lon)
       setStartLongitude(lat)
      
-      const addmarker =() => {
-        const element = document.createElement('div')
-        element.className = 'marker'
-        const markerStart = new ttmaps.Marker({
-          element:element
-        })
-        .setLngLat(prueba)
-        // .setLngLat([Number(startLatitude), Number(startLongitude)])
-        .addTo(map)
-        console.log('esto es el markerStart', markerStart)
-
-
-        let popupOffsets = {
-          // top: [0, 0],
-          bottom: [0, -30],
-          // 'bottom-right': [0, -70],
-          // 'bottom-left': [0, -70],
-          // left: [25, -35],
-          // right: [-25, -35]
-        }
-        
-        var popup = new ttmaps.Popup({offset: popupOffsets}).setHTML("You are here, baby!");
-        markerStart.setPopup(popup).togglePopup();
-      }
-      addmarker()
-  
+   
     return data
   }catch(error){
         console.log(error);
@@ -85,18 +61,41 @@ const getAddress2 = async () => {
       console.log(error);
   }
 }
+
+
+
+
   useEffect(() => {
     getAddress()
     getAddress2()
+    
     let map = ttmaps.map({
       key: `${TOMTOMAPIKEY}`,
       container: mapElement.current,
       center: center,
       zoom: mapZoom
     });
-    
+   
     setMap(map);
-    return () => map.remove();
+    map.on("render",() => {
+      let div = document.createElement('div')
+      div.innerHTML ='<p>Im here!</p>'
+      let popUp = new ttmaps.Popup({
+        closeButton: false,
+        offset: 50,
+        anchor: 'bottom'
+      }).setDOMContent(div)
+      const markerStart = new ttmaps.Marker({
+        width: 22,
+        height:22,
+      })
+      markerStart.addTo(map)
+      .setLngLat([Number(startLatitude),Number(startLongitude)]).setPopup(popUp)
+      
+      console.log('esto es el markerStart', markerStart)
+    })
+    
+    return () => map.remove() 
     
   }, [debouncedText, debouncedText2]);
 
