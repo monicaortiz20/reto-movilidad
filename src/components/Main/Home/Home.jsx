@@ -113,9 +113,11 @@ const getAddress2 = async () => {
         }).setLngLat([Number(destinationLatitude), Number(destinationLongitude)]).setPopup(popup2)
    
         markerDestination.addTo(map)
+
     })
 
     return () => map.remove();
+    
     
   }, [debouncedText, debouncedText2]);
 
