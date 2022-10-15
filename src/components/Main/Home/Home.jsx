@@ -134,18 +134,17 @@ const getAddress2 = async () => {
       <div className="App">
         <div >
           <nav style={{ backgroundColor: "#4287F5" }}>
-            <p>TomTom Maps + React = :sonriente:</p>
           </nav>
           <div>
             <section>
-              <h4>A donde quieres ir ?</h4>
+              <h4>¿A dónde vas?</h4>
               <section>
                 <label htmlFor="origin"></label>
                 <input
                   type="text"
                   name="origin"
                   value={input}
-                  placeholder="origin"
+                  placeholder="Introduce tu origen"
                   onChange={(e) => handleChange(e)}
                 />
               </section>
@@ -155,13 +154,13 @@ const getAddress2 = async () => {
                   type="text"
                   name="destination"
                   value={input2}
-                  placeholder="destination"
+                  placeholder="Introduce tu destino"
                   onChange={(e) => handleChange2(e)}
                 />
               </section>
               </section>
           </div>
-          <button onClick={calculateRoute}>Calculate Route</button>
+          <button onClick={calculateRoute}>Buscar</button>
         </div>
       </div>
     </div>
