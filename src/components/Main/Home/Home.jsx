@@ -73,49 +73,50 @@ const getAddress2 = async () => {
     setMap(map);
 
     // marker start
-    map.on('load', () => {
-      let div = document.createElement('div')
-      div.innerHTML= '<p>Hey, baby!</p>'
+    // map.on('load', () => {
+    //   let div = document.createElement('div')
+    //   div.innerHTML= '<p>Hey, baby!</p>'
     
-      let popup = new ttmaps.Popup({
-        offset: 35,
-      }).setDOMContent(div)
+    //   let popup = new ttmaps.Popup({
+    //     offset: 35,
+    //   }).setDOMContent(div)
     
-      const element = document.createElement('div')
-        element.className = 'marker'
+    //   const element = document.createElement('div')
+    //     element.className = 'marker'
     
-        let marker = new ttmaps.Marker({
-          width: 32,
-          height:32,
-          anchor: 'bottom',
-          color:'#469d89',
-        }).setLngLat([Number(startLatitude), Number(startLongitude)]).setPopup(popup)
+    //     let marker = new ttmaps.Marker({
+    //       width: 32,
+    //       height:32,
+    //       anchor: 'bottom',
+    //       color:'#469d89',
+    //     }).setLngLat([Number(startLatitude), Number(startLongitude)]).setPopup(popup)
    
-        marker.addTo(map)
+    //     marker.addTo(map)
         
-    })
+    // })
     
     //MarkerDestination:
-    map.on('load', () => {
-      let div2 = document.createElement('div')
-      div2.innerHTML= '<p>You did it!</p>'
+    // map.on('load', () => {
+    //   let div2 = document.createElement('div')
+    //   div2.innerHTML= '<p>You did it!</p>'
     
-      let popup2 = new ttmaps.Popup({
-        offset: 35,
-      }).setDOMContent(div2)
+    //   let popup2 = new ttmaps.Popup({
+    //     offset: 35,
+    //   }).setDOMContent(div2)
     
-      const element = document.createElement('div')
-        element.className = 'marker'
+    //   const element = document.createElement('div')
+    //     element.className = 'marker'
     
-        let markerDestination = new ttmaps.Marker({
-          width: 32,
-          height:32,
-          anchor: 'bottom',
-          color:'#469d89',
-        }).setLngLat([Number(destinationLatitude), Number(destinationLongitude)]).setPopup(popup2)
+    //     let markerDestination = new ttmaps.Marker({
+    //       width: 32,
+    //       height:32,
+    //       anchor: 'bottom',
+    //       color:'#469d89',
+    //     }).setLngLat([Number(destinationLatitude), Number(destinationLongitude)]).setPopup(popup2)
    
-        markerDestination.addTo(map)
-    })
+    //     markerDestination.addTo(map)
+    //     markerDestination.off('remove',()=>calculateRoute())
+    // })
 
     return () => map.remove();
     
@@ -139,7 +140,7 @@ const getAddress2 = async () => {
         key: `${TOMTOMAPIKEY}`,
         routeType: "eco",
         // hilliness: "high",
-        // windingness: "high",
+        // windingness: "high",º
         locations: `${startLatitude},${startLongitude}:${destinationLatitude},${destinationLongitude}`
       })
       .then(function (routeData) {
@@ -176,6 +177,50 @@ const getAddress2 = async () => {
           }
         });
         map.setCenter([parseFloat(startLatitude), parseFloat(startLongitude)]);
+        map.on('data', () => {
+          let div = document.createElement('div')
+          div.innerHTML= '<p>Hey, baby!</p>'
+        
+          let popup = new ttmaps.Popup({
+            offset: 35,
+          }).setDOMContent(div)
+        
+          const element = document.createElement('div')
+            element.className = 'marker'
+        
+            let marker = new ttmaps.Marker({
+              width: 32,
+              height:32,
+              anchor: 'bottom',
+              color:'#469d89',
+            }).setLngLat([Number(startLatitude), Number(startLongitude)]).setPopup(popup)
+       
+            marker.addTo(map)
+
+           // MarkerDestination:
+    map.on('data', () => {
+      let div2 = document.createElement('div')
+      div2.innerHTML= '<p>You did it!</p>'
+    
+      let popup2 = new ttmaps.Popup({
+        offset: 35,
+      }).setDOMContent(div2)
+    
+      const element = document.createElement('div')
+        element.className = 'marker'
+    
+        let markerDestination = new ttmaps.Marker({
+          width: 32,
+          height:32,
+          anchor: 'bottom',
+          color:'#469d89',
+        }).setLngLat([Number(destinationLatitude), Number(destinationLongitude)]).setPopup(popup2)
+   
+        markerDestination.addTo(map)
+        markerDestination.off('remove',()=>calculateRoute())
+    })
+            
+        })
       })
       .catch((err) => {console.log(err)}
       )
