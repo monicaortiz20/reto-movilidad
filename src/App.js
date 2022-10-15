@@ -8,10 +8,10 @@ import Footer from './components/Footer/Footer';
 const App = () => {
   return (
     <div>
-      <BrowserRouter>
-        <Header />
-        <Main />
-        <Footer />
+      <BrowserRouter>D
+      <Header/>
+      <Main/>
+      <Footer/>
       </BrowserRouter>
 
     </div>
