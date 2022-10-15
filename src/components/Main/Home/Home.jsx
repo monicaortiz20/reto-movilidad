@@ -6,11 +6,7 @@ import '@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css';
 import "@tomtom-international/web-sdk-maps/dist/maps.css";
 import * as ttmaps from "@tomtom-international/web-sdk-maps";
 import tt from "@tomtom-international/web-sdk-services";
-// import { services } from '@tomtom-international/web-sdk-services';
-// import { map, LngLat } from '@tomtom-international/web-sdk-maps'
 import './Home.css';
-
-// const MAX_ZOOM = 17;
 
  const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
 
@@ -26,23 +22,49 @@ function Home() {
   const [map, setMap] = useState({});
   const [input, setInput] = useState("")
   const [input2, setInput2] = useState("")
-  // const [address, setAddress] = useState([])
   const [debouncedText] = useDebounce(input, 2000); //almacenamos el valor del input
   const  [debouncedText2]=  useDebounce(input2, 2000);
   const [center,setCenter] = useState(["-3.6886008", "40.4069749"])
 
+  const prueba = [40.32642, -3.75899]
 
   const getAddress = async () => {
     try{
       const  data  = await axios.get(` https://api.tomtom.com/search/2/geocode/${input}.json?storeResult=false&typeahead=true&limit=1&countrySet=ES&lat=40.4165&lon=-3.70256&view=Unified&key=${TOMTOMAPIKEY}`)
-    // console.log("Esto es data",data);
-    const lat= data.data.results[0].position.lat.toString()
-    const lon= data.data.results[0].position.lon.toString()
-    // console.log(lat,"soy lat");
-    // console.log(lon,"soy lon");
-    setStartLatitude(lon)
-    setStartLongitude(lat)
-    // console.log(lat,lon);
+      const lat= data.data.results[0].position.lat.toString()
+      const lon= data.data.results[0].position.lon.toString()
+
+      console.log('esto lat y lon', lat, lon)
+
+      setStartLatitude(lon)
+      setStartLongitude(lat)
+     
+      const addmarker =() => {
+        const element = document.createElement('div')
+        element.className = 'marker'
+        const markerStart = new ttmaps.Marker({
+          element:element
+        })
+        .setLngLat(prueba)
+        // .setLngLat([Number(startLatitude), Number(startLongitude)])
+        .addTo(map)
+        console.log('esto es el markerStart', markerStart)
+
+
+        let popupOffsets = {
+          // top: [0, 0],
+          bottom: [0, -30],
+          // 'bottom-right': [0, -70],
+          // 'bottom-left': [0, -70],
+          // left: [25, -35],
+          // right: [-25, -35]
+        }
+        
+        var popup = new ttmaps.Popup({offset: popupOffsets}).setHTML("You are here, baby!");
+        markerStart.setPopup(popup).togglePopup();
+      }
+      addmarker()
+  
     return data
   }catch(error){
         console.log(error);
@@ -51,15 +73,13 @@ function Home() {
 const getAddress2 = async () => {
   try{
     const  data2  = await axios.get(` https://api.tomtom.com/search/2/geocode/${input2}.json?storeResult=false&typeahead=true&limit=1&countrySet=ES&lat=40.4165&lon=-3.70256&view=Unified&key=${TOMTOMAPIKEY}`)
-  // console.log("Esto es data2",data2);
-  const lat= data2.data.results[0].position.lat.toString()
-  const lon= data2.data.results[0].position.lon.toString()
-  setDestinationLatitude(lon)
-  setDestinationLongitude(lat)
-  // console.log(lat,"soy lat2");
-  // console.log(lon,"soy lon2");
-  // console.log();
-  // console.log(lat,lon);
+
+    const lat= data2.data.results[0].position.lat.toString()
+    const lon= data2.data.results[0].position.lon.toString()
+
+    setDestinationLatitude(lon)
+    setDestinationLongitude(lat)
+
   return data2
 }catch(error){
       console.log(error);
@@ -74,8 +94,10 @@ const getAddress2 = async () => {
       center: center,
       zoom: mapZoom
     });
+    
     setMap(map);
     return () => map.remove();
+    
   }, [debouncedText, debouncedText2]);
 
   const handleChange = (e) => {
@@ -86,7 +108,31 @@ const getAddress2 = async () => {
     setInput2(e.target.value)
   }
 
+    //   //marker:
+    //  const addMarker = ()=> {      
+    //     // const popUpOffset = {
+    //     //     bottom: [0, -30]
+    //     // }
+    //     // const popUp = new tt.Popup({offset: popUpOffset }).setHTML('Hey, baby
 
+    //     const element = document.createElement('div')
+    //     element.className = 'marker'
+    //     const marker = new ttmaps.Marker({
+    //         draggable:true,
+    //         element:element,
+    //     })
+    //     .setLngLat([startLongitude,startLatitude])
+    //     .addTo(map)      
+
+    //     //cuando movamos el marker, va a coger la nueva lat y long del marker
+    //     // marker.on('dragend', (e) => {
+    //     //     const lngLat = marker.getLngLat()
+    //     //     setLatitude(lngLat.lat)
+    //     //     setLongitude(lngLat.lng)
+    //     //
+    //     // marker.setPopup(popUp).togglePopup()
+    //  }
+    // addmarker()
   
   const calculateRoute = () => {
     tt.services
@@ -127,7 +173,7 @@ const getAddress2 = async () => {
           },
           paint: {
             "line-color": "#52b788",
-            "line-width": 4
+            "line-width": 6
           }
         });
         map.setCenter([parseFloat(startLatitude), parseFloat(startLongitude)]);
