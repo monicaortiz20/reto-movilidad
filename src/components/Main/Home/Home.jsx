@@ -72,57 +72,7 @@ const getAddress2 = async () => {
    
     setMap(map);
 
-<<<<<<< HEAD
-    // marker start
-    map.on('load', () => {
-      let div = document.createElement('div')
-      div.innerHTML= '<p>Hey, baby!</p>'
-    
-      let popup = new ttmaps.Popup({
-        offset: 35,
-      }).setDOMContent(div)
-    
-      const element = document.createElement('div')
-        element.className = 'marker'
-    
-        let marker = new ttmaps.Marker({
-          width: 32,
-          height:32,
-          anchor: 'bottom',
-          color:'#469d89',
-        }).setLngLat([Number(startLatitude), Number(startLongitude)]).setPopup(popup)
-   
-        marker.addTo(map)
-        
-    })
-    
-    //MarkerDestination:
-    map.on('load', () => {
-      let div2 = document.createElement('div')
-      div2.innerHTML= '<p>You did it!</p>'
-    
-      let popup2 = new ttmaps.Popup({
-        offset: 35,
-      }).setDOMContent(div2)
-    
-      const element = document.createElement('div')
-        element.className = 'marker'
-    
-        let markerDestination = new ttmaps.Marker({
-          width: 32,
-          height:32,
-          anchor: 'bottom',
-          color:'#469d89',
-        }).setLngLat([Number(destinationLatitude), Number(destinationLongitude)]).setPopup(popup2)
-   
-        markerDestination.addTo(map)
-
-    })
-
-    return () => map.remove();
-=======
        return () => map.remove();
->>>>>>> b7723e337b1d0af634d82ba751b3306bcc663c91
     
     
   }, [debouncedText, debouncedText2]);
