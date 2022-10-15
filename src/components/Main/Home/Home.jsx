@@ -5,7 +5,7 @@ import '@tomtom-international/web-sdk-maps/dist/maps.css'
 import '@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css';
 import "@tomtom-international/web-sdk-maps/dist/maps.css";
 import * as ttmaps from "@tomtom-international/web-sdk-maps";
-import tt from "@tomtom-international/web-sdk-services";
+import tt, { LngLat,setLngLat } from "@tomtom-international/web-sdk-services";
 import './Home.css';
 
  const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
@@ -25,6 +25,7 @@ function Home() {
   const [debouncedText] = useDebounce(input, 2000); //almacenamos el valor del input
   const  [debouncedText2]=  useDebounce(input2, 2000);
   const [center,setCenter] = useState(["-3.6886008", "40.4069749"])
+
 
   const getAddress = async () => {
     try{
@@ -61,15 +62,17 @@ const getAddress2 = async () => {
   useEffect(() => {
     getAddress()
     getAddress2()
+    
     let map = ttmaps.map({
       key: `${TOMTOMAPIKEY}`,
       container: mapElement.current,
       center: center,
       zoom: mapZoom
     });
-    
+   
     setMap(map);
 
+<<<<<<< HEAD
     // marker start
     map.on('load', () => {
       let div = document.createElement('div')
@@ -117,6 +120,9 @@ const getAddress2 = async () => {
     })
 
     return () => map.remove();
+=======
+       return () => map.remove();
+>>>>>>> b7723e337b1d0af634d82ba751b3306bcc663c91
     
     
   }, [debouncedText, debouncedText2]);
@@ -139,7 +145,7 @@ const getAddress2 = async () => {
         key: `${TOMTOMAPIKEY}`,
         routeType: "eco",
         // hilliness: "high",
-        // windingness: "high",
+        // windingness: "high",º
         locations: `${startLatitude},${startLongitude}:${destinationLatitude},${destinationLongitude}`
       })
       .then(function (routeData) {
@@ -176,6 +182,50 @@ const getAddress2 = async () => {
           }
         });
         map.setCenter([parseFloat(startLatitude), parseFloat(startLongitude)]);
+        map.on('data', () => {
+          let div = document.createElement('div')
+          div.innerHTML= '<p>Hey, baby!</p>'
+        
+          let popup = new ttmaps.Popup({
+            offset: 35,
+          }).setDOMContent(div)
+        
+          const element = document.createElement('div')
+            element.className = 'marker'
+        
+            let marker = new ttmaps.Marker({
+              width: 32,
+              height:32,
+              anchor: 'bottom',
+              color:'#469d89',
+            }).setLngLat([Number(startLatitude), Number(startLongitude)]).setPopup(popup)
+       
+            marker.addTo(map)
+
+           // MarkerDestination:
+    map.on('data', () => {
+      let div2 = document.createElement('div')
+      div2.innerHTML= '<p>You did it!</p>'
+    
+      let popup2 = new ttmaps.Popup({
+        offset: 35,
+      }).setDOMContent(div2)
+    
+      const element = document.createElement('div')
+        element.className = 'marker'
+    
+        let markerDestination = new ttmaps.Marker({
+          width: 32,
+          height:32,
+          anchor: 'bottom',
+          color:'#469d89',
+        }).setLngLat([Number(destinationLatitude), Number(destinationLongitude)]).setPopup(popup2)
+   
+        markerDestination.addTo(map)
+        markerDestination.off('remove',()=>calculateRoute())
+    })
+            
+        })
       })
       .catch((err) => {console.log(err)}
       )
