@@ -1,3 +1,12 @@
 .mapDiv{
     height: 500px;
 }
+
+.marker{
+    background-color: #469d89;
+    border: solid 3px black;
+    border-radius: 40px;
+    background-size: cover;
+    width: 22px;
+    height: 22px;
+}
