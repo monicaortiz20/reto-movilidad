@@ -1,10 +1,10 @@
 import React from "react";
 import { shallow } from "enzyme";
-import Signup from "./Signup";
+import ProtectedRoute from "./ProtectedRoute";
 
-describe("Signup", () => {
+describe("ProtectedRoute", () => {
   test("matches snapshot", () => {
-    const wrapper = shallow(<Signup />);
+    const wrapper = shallow(<ProtectedRoute />);
     expect(wrapper).toMatchSnapshot();
   });
 });
