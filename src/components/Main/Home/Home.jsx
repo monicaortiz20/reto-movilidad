@@ -1,6 +1,5 @@
 import React , {useEffect,useState,useRef} from 'react'
 import {useDebounce} from 'use-debounce'
-import { useAuth } from '../../../context/authContext'
 import axios from 'axios'
 import '@tomtom-international/web-sdk-maps/dist/maps.css'
 import '@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css';
@@ -8,15 +7,12 @@ import "@tomtom-international/web-sdk-maps/dist/maps.css";
 import * as ttmaps from "@tomtom-international/web-sdk-maps";
 import tt, { LngLat,setLngLat } from "@tomtom-international/web-sdk-services";
 import './Home.css';
-import { Navigate, useNavigate } from 'react-router-dom'
+
 
  const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
 
 function Home() {
 
-  // // const {user, logout} = useAuth()
-  // console.log('user', user)
-  // const navigate = useNavigate()
 
   const [startLatitude, setStartLatitude] = useState("");
   const [startLongitude, setStartLongitude] = useState("");
@@ -94,16 +90,6 @@ const getAddress2 = async () => {
     setInput2(e.target.value)
   }
 
-  // const handleLogout = async () => {
-  //   try {
-  //     await logout()
-  //     navigate('/')
-      
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-  
   const calculateRoute = () => {
     tt.services
       .calculateRoute({
@@ -195,25 +181,14 @@ const getAddress2 = async () => {
 }
   return (
     <>
-
     <div>
       <div ref={mapElement} className="mapDiv"></div>
-      {/* ********************************VER DONDE PONER ESTE BOTON lOGOUT ********************************* */}
-
       <div className="controllsDiv">
           <div>
             <section className="userWhere">
               <h5 className="userName">¡Hola Usuario!</h5>
               <h4 className="whereTo">¿A dónde vas?</h4>
               <section className="sectionInputs">
-            </section>
-              {/* <>
-              {if(user){
-                .....condicional para que renderice el mapa + user + btn logout
-              <p>Hola, {user.displayname || user.email}</p>
-              }}
-              </> */}
-              <section>
                 <label htmlFor="origin"></label>
                 <input
                   className="originInput"
