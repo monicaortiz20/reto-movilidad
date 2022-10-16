@@ -200,7 +200,7 @@ const getAddress2 = async () => {
     {map && 
     <div>
       <div ref={mapElement} className="mapDiv"></div>
-      {/* ********************************VER DONDE PONER ESTE BOTON  lOGOUT ********************************* */}
+      {/* ********************************VER DONDE PONER ESTE BOTON lOGOUT ********************************* */}
       <button onClick={handleLogout}>Logout</button>
       <div className="controllsDiv">
           <div>
@@ -215,8 +215,6 @@ const getAddress2 = async () => {
               <p>Hola, {user.displayname || user.email}</p>
               }}
               </> */}
-              
-              <h4>¿A dónde vas?</h4>
               <section>
                 <label htmlFor="origin"></label>
                 <input
