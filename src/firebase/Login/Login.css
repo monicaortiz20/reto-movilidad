@@ -14,7 +14,7 @@
     }
 
     .formDiv{
-        @apply  absolute flex flex-col w-[100%] h-[53%] top-[380px] left-0 items-center justify-center rounded-tl-[40px] rounded-tr-[40px] bg-blackLogin
+        @apply  absolute flex flex-col w-[100%] h-[53%] top-[380px] left-0 items-center justify-center rounded-tl-[40px] rounded-tr-[40px] bg-blackLogin 
     }
 
     .form{
