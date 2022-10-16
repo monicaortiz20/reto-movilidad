@@ -1,5 +1,6 @@
 import React , {useEffect,useState,useRef} from 'react'
 import {useDebounce} from 'use-debounce'
+// import { useAuth } from '../../../context/authContext'
 import axios from 'axios'
 import '@tomtom-international/web-sdk-maps/dist/maps.css'
 import '@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css';
@@ -11,6 +12,9 @@ import './Home.css';
  const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
 
 function Home() {
+
+  // const {user} = useAuth()
+  // console.log('user', user)
 
   const [startLatitude, setStartLatitude] = useState("");
   const [startLongitude, setStartLongitude] = useState("");
