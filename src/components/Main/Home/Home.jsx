@@ -97,7 +97,7 @@ const getAddress2 = async () => {
   const handleLogout = async () => {
     try {
       await logout()
-      navigate('/login')
+      navigate('/')
       
     } catch (error) {
       console.log(error)
@@ -109,8 +109,6 @@ const getAddress2 = async () => {
       .calculateRoute({
         key: `${TOMTOMAPIKEY}`,
         routeType: "eco",
-        // hilliness: "high",
-        // windingness: "high",º
         locations: `${startLatitude},${startLongitude}:${destinationLatitude},${destinationLongitude}`
       })
       .then(function (routeData) {
@@ -202,16 +200,8 @@ const getAddress2 = async () => {
       <div ref={mapElement} className="mapDiv"></div>
       <div className="App">
         <div >
-          {/* <nav style={{ backgroundColor: "#4287F5" }}>
-          </nav> */}
           <div>
             <section>
-              {/* <>
-              {if(user){
-                .....condicional para que renderice el mapa + user + btn logout
-              <p>Hola, {user.displayname || user.email}</p>
-              }}
-              </> */}
               <button onClick={handleLogout}>Logout</button>
               <h4>¿A dónde vas?</h4>
               <section>
