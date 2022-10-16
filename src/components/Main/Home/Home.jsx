@@ -1,6 +1,5 @@
 import React , {useEffect,useState,useRef} from 'react'
 import {useDebounce} from 'use-debounce'
-//import { useAuth } from '../../../context/authContext'
 import axios from 'axios'
 import '@tomtom-international/web-sdk-maps/dist/maps.css'
 import '@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css';
@@ -8,15 +7,12 @@ import "@tomtom-international/web-sdk-maps/dist/maps.css";
 import * as ttmaps from "@tomtom-international/web-sdk-maps";
 import tt, { LngLat,setLngLat } from "@tomtom-international/web-sdk-services";
 import './Home.css';
-// import { Navigate, useNavigate } from 'react-router-dom'
+
 
  const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
 
 function Home() {
 
-  // const {user, logout} = useAuth()
-  // console.log('este es el user logado', user)
-  // const navigate = useNavigate()
 
   const [startLatitude, setStartLatitude] = useState("");
   const [startLongitude, setStartLongitude] = useState("");
@@ -94,16 +90,7 @@ const getAddress2 = async () => {
     setInput2(e.target.value)
   }
 
-  // const handleLogout = async () => {
-  //   try {
-  //     await logout()
-  //     navigate('/')
-      
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-  
+
   const calculateRoute = () => {
     tt.services
       .calculateRoute({
@@ -197,36 +184,39 @@ const getAddress2 = async () => {
     <>
     <div>
       <div ref={mapElement} className="mapDiv"></div>
-      <div className="App">
-        <div >
+      <div className="controllsDiv">
           <div>
-            <section>
-              <h4>¿A dónde vas?</h4>
-              <section>
+            <section className="userWhere">
+              <h5 className="userName">¡Hola Usuario!</h5>
+              <h4 className="whereTo">¿A dónde vas?</h4>
+              <section className="sectionInputs">
                 <label htmlFor="origin"></label>
                 <input
+                  className="originInput"
                   type="text"
                   name="origin"
                   value={input}
                   placeholder="Introduce tu origen"
                   onChange={(e) => handleChange(e)}
                 />
+                <hr className="hr" />
               </section>
-              <section>
+              <section className="sectionInputs">
                 <label htmlFor="destination"></label>
                 <input
+                className="destinyInput"
                   type="text"
                   name="destination"
                   value={input2}
                   placeholder="Introduce tu destino"
                   onChange={(e) => handleChange2(e)}
                 />
+                <hr className="hr" />
               </section>
               </section>
           </div>
-          <button onClick={calculateRoute}>Buscar</button>
+          <button className="searchRoute" onClick={calculateRoute}>Buscar</button>
         </div>
-      </div>
     </div>
     </>
   )
