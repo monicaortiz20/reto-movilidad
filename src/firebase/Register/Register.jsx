@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useAuth } from '../../context/authContext';
+import React, { useContext, useState } from 'react'
+import { authContext } from '../../context/authContext';
 import { useNavigate } from 'react-router-dom';
 import { Alert } from '../Alert/Alert';
 
@@ -9,7 +9,7 @@ const Register = () => {
     password: '',
   });
 
-  const { signup } = useAuth()
+  const { signup } = useContext(authContext)
   const navigate = useNavigate()
   const [error, setError] = useState()
 

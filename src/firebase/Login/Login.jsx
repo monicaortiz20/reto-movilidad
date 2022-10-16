@@ -1,5 +1,6 @@
-import React, { useState} from 'react'
-import { useAuth } from '../../context/authContext';
+import React, { useState, useContext} from 'react'
+import { authContext } from '../../context/authContext';
+
 import { useNavigate } from 'react-router-dom';
 import { Alert } from '../Alert/Alert';
 
@@ -10,7 +11,7 @@ const Login = () => {
     password: '',
   });
 
-  const { login, loginWithGoogle }  = useAuth()
+  const { login, loginWithGoogle }  = useContext(authContext)
   const navigate = useNavigate()
   const [error, setError] = useState()
 

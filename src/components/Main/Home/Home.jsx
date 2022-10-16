@@ -1,6 +1,6 @@
 import React , {useEffect,useState,useRef} from 'react'
 import {useDebounce} from 'use-debounce'
-import { useAuth } from '../../../context/authContext'
+//import { useAuth } from '../../../context/authContext'
 import axios from 'axios'
 import '@tomtom-international/web-sdk-maps/dist/maps.css'
 import '@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css';
@@ -8,15 +8,15 @@ import "@tomtom-international/web-sdk-maps/dist/maps.css";
 import * as ttmaps from "@tomtom-international/web-sdk-maps";
 import tt, { LngLat,setLngLat } from "@tomtom-international/web-sdk-services";
 import './Home.css';
-import { Navigate, useNavigate } from 'react-router-dom'
+// import { Navigate, useNavigate } from 'react-router-dom'
 
  const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
 
 function Home() {
 
-  const {user, logout} = useAuth()
-  console.log('user', user)
-  const navigate = useNavigate()
+  // const {user, logout} = useAuth()
+  // console.log('este es el user logado', user)
+  // const navigate = useNavigate()
 
   const [startLatitude, setStartLatitude] = useState("");
   const [startLongitude, setStartLongitude] = useState("");
@@ -94,15 +94,15 @@ const getAddress2 = async () => {
     setInput2(e.target.value)
   }
 
-  const handleLogout = async () => {
-    try {
-      await logout()
-      navigate('/')
+  // const handleLogout = async () => {
+  //   try {
+  //     await logout()
+  //     navigate('/')
       
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
   
   const calculateRoute = () => {
     tt.services
@@ -195,14 +195,12 @@ const getAddress2 = async () => {
 }
   return (
     <>
-    {map && 
     <div>
       <div ref={mapElement} className="mapDiv"></div>
       <div className="App">
         <div >
           <div>
             <section>
-              <button onClick={handleLogout}>Logout</button>
               <h4>¿A dónde vas?</h4>
               <section>
                 <label htmlFor="origin"></label>
@@ -229,7 +227,7 @@ const getAddress2 = async () => {
           <button onClick={calculateRoute}>Buscar</button>
         </div>
       </div>
-    </div>}
+    </div>
     </>
   )
   }

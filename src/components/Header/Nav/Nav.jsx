@@ -1,10 +1,22 @@
-import React from 'react'
-import { useAuth } from '../../../context/authContext'
+import React, {useContext} from 'react'
+import { authContext } from '../../../context/authContext';
+import { Navigate, useNavigate } from 'react-router-dom'
 import {Link} from 'react-router-dom'
 
 const Nav = () => {
 
-  const {user, logout} = useAuth()
+  const navigate = useNavigate()
+  const {user, logout} = useContext(authContext)
+
+  const handleLogout = async () => {
+    try {
+      await logout()
+      navigate('/')
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <>
@@ -13,7 +25,7 @@ const Nav = () => {
         <Link to ="/login" className='Login'>Login</Link>
         <Link to ="/register" className='Register'>Register</Link>
         {user? 
-        <span><Link to ="/profile" className='Profile'>Profile</Link>¡Hola, {user}!<button onClick={logout}>Log out</button></span>
+        <span><Link to ="/profile" className='Profile'>Profile</Link>¡Hola, {user}!<button onClick={handleLogout}>Log out</button></span>
         : ''}
     </div>
     </>
