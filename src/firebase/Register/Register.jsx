@@ -75,8 +75,12 @@ const Register = () => {
           placeholder='******'
           id='password' />
 
+          <input type="checkbox" /><p>Acepto los términos y condiciones</p>
+
         <button>Regístrate</button>
       </form>
+
+        <p>¿Olvidaste la contraseña?</p>
     </div>
   )
 }
