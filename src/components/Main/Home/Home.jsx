@@ -14,9 +14,9 @@ import { Navigate, useNavigate } from 'react-router-dom'
 
 function Home() {
 
-  const {user, logout} = useAuth()
-  console.log('user', user)
-  const navigate = useNavigate()
+  // // const {user, logout} = useAuth()
+  // console.log('user', user)
+  // const navigate = useNavigate()
 
   const [startLatitude, setStartLatitude] = useState("");
   const [startLongitude, setStartLongitude] = useState("");
@@ -94,15 +94,15 @@ const getAddress2 = async () => {
     setInput2(e.target.value)
   }
 
-  const handleLogout = async () => {
-    try {
-      await logout()
-      navigate('/')
+  // const handleLogout = async () => {
+  //   try {
+  //     await logout()
+  //     navigate('/')
       
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
   
   const calculateRoute = () => {
     tt.services
@@ -195,41 +195,53 @@ const getAddress2 = async () => {
 }
   return (
     <>
-    {map && 
+
     <div>
       <div ref={mapElement} className="mapDiv"></div>
-      <div className="App">
-        <div >
+      {/* ********************************VER DONDE PONER ESTE BOTON lOGOUT ********************************* */}
+
+      <div className="controllsDiv">
           <div>
-            <section>
-              <button onClick={handleLogout}>Logout</button>
-              <h4>¿A dónde vas?</h4>
+            <section className="userWhere">
+              <h5 className="userName">¡Hola Usuario!</h5>
+              <h4 className="whereTo">¿A dónde vas?</h4>
+              <section className="sectionInputs">
+            </section>
+              {/* <>
+              {if(user){
+                .....condicional para que renderice el mapa + user + btn logout
+              <p>Hola, {user.displayname || user.email}</p>
+              }}
+              </> */}
               <section>
                 <label htmlFor="origin"></label>
                 <input
+                  className="originInput"
                   type="text"
                   name="origin"
                   value={input}
                   placeholder="Introduce tu origen"
                   onChange={(e) => handleChange(e)}
                 />
+                <hr className="hr" />
               </section>
-              <section>
+              <section className="sectionInputs">
                 <label htmlFor="destination"></label>
                 <input
+                className="destinyInput"
                   type="text"
                   name="destination"
                   value={input2}
                   placeholder="Introduce tu destino"
                   onChange={(e) => handleChange2(e)}
                 />
+                <hr className="hr" />
               </section>
               </section>
           </div>
-          <button onClick={calculateRoute}>Buscar</button>
+          <button className="searchRoute" onClick={calculateRoute}>Buscar</button>
         </div>
-      </div>
-    </div>}
+    </div>
     </>
   )
   }
