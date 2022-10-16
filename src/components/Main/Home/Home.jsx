@@ -185,38 +185,39 @@ const getAddress2 = async () => {
     {map && 
     <div>
       <div ref={mapElement} className="mapDiv"></div>
-      <div className="App">
-        <div >
-          {/* <nav style={{ backgroundColor: "#4287F5" }}>
-          </nav> */}
+      <div className="controllsDiv">
           <div>
-            <section>
-              <h4>¿A dónde vas?</h4>
-              <section>
+            <section className="userWhere">
+              <h5 className="userName">¡Hola Usuario!</h5>
+              <h4 className="whereTo">¿A dónde vas?</h4>
+              <section className="sectionInputs">
                 <label htmlFor="origin"></label>
                 <input
+                  className="originInput"
                   type="text"
                   name="origin"
                   value={input}
                   placeholder="Introduce tu origen"
                   onChange={(e) => handleChange(e)}
                 />
+                <hr className="hr" />
               </section>
-              <section>
+              <section className="sectionInputs">
                 <label htmlFor="destination"></label>
                 <input
+                className="destinyInput"
                   type="text"
                   name="destination"
                   value={input2}
                   placeholder="Introduce tu destino"
                   onChange={(e) => handleChange2(e)}
                 />
+                <hr className="hr" />
               </section>
               </section>
           </div>
-          <button onClick={calculateRoute}>Buscar</button>
+          <button className="searchRoute" onClick={calculateRoute}>Buscar</button>
         </div>
-      </div>
     </div>}
     </>
   )
