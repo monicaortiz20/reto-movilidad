@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useAuth } from '../../context/authContext';
 import { useNavigate } from 'react-router-dom';
 import { Alert } from '../Alert/Alert';
+import './Register.css'
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -39,7 +40,7 @@ const Register = () => {
     <div>
 
       {error && <Alert message={error} />}
-      <form onSubmit={handleSubmit}>
+      <form className="formDiv"onSubmit={handleSubmit}>
         <label htmlFor="name">Name</label>
         <input onChange={handleChange}
           type="name"
