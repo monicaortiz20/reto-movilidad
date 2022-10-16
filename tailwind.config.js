@@ -8,7 +8,9 @@ module.exports = {
       colors: {
         'neutro': '#E7E8E3',
         'blackController': '#1B1C17',
+        'blackLogin': ' #35392D',
         'greenSearch':'#B4C43B'
+
       },
       fontFamily: {
         'overpass': ['Overpass', 'sans-serif'],

@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+    .loginDiv{
+        @apply flex
+    }
+    .formDiv{
+        @apply absolute flex flex-col w-[360px] h-[424px] top-[380px] left-12 items-center justify-center rounded-tl-[40px] rounded-tr-[40px] bg-blackLogin
+    }
+
+    .form{
+        @apply gap-7
+    }
+    .email{
+        @apply absolute w-[288px] h-[54px] rounded-lg left-[39px]  top-[48px] text-sm gap-6 px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200  focus:outline-none focus:border-purple-400 
+    }
+    .password{
+      @apply  absolute w-[288px] h-[54px] rounded-lg left-[39px] top-[123px] text-sm gap-6 px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200  focus:outline-none focus:border-purple-400 
+    }
+    .loginBtn{
+        @apply absolute w-[288px] h-[54px] rounded-lg left-[39px] top-[231px] text-sm gap-6 px-4 py-3  focus:bg-gray-100 border  border-gray-200  focus:outline-none focus:border-purple-400  bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  tracking-wide font-semibold  cursor-pointer transition ease-in duration-500
+    }
+}
