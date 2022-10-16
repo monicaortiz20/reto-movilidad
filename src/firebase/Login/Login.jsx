@@ -1,85 +1,61 @@
-import { useEffect, useState } from 'react';
-// import { googleAuthProvider, signInWithPopup, onAuthStateChanged } from 'react-firebase/auth'
-// import { auth, userExists } from '../firebaseConfig'
+import React, { useState} from 'react'
+import { useAuth } from '../../context/authContext';
+import { useNavigate } from 'react-router-dom';
 
-
-// const Login = () => {
-
-//   const [currentUser, setCurrentUser] = useState(null)
-//   //0 - inicializado  1 - loading  2- login completo  
-//   //3 -login pero sin registro  4- no hay nadie logueado
-//   const [state, setCurrentstate] = useState(0)
-  
-//   useEffect(()=> {
-//     setCurrentstate(1)
-//     onAuthStateChanged(auth, handleUserStateChanged);
-
-//   }, [])
-
-//   async function handleUserStateChanged(user){
-//     if(user){
-//       const isRegistered = await userExists(user.id)
-//       if(isRegistered){
-
-//         //rediriguir a dashboard
-//         setCurrentstate(2)
-//       }else {
-//         setCurrentstate(3)
-//       }
-//     }else{
-//       setCurrentstate(4)
-//       console.log('None authenticated.')
-//     }
-//   } 
-
-//     async function handleOnClick() {
-//       const googleProvider = new googleAuthProvider();
-//       await signInWithGoogle(googleProvider);
-
-//       async function signInWithGoogle(googleAuthProvider) {
-//         try {
-//           const res = await signInWithPopup(auth, googleProvider);
-//           console.log('esto es res', res)
-  
-//         } catch(error) {
-//           console.log(error)
-//         }
-//       }
-  
-//     }
-
-
-//   if(state ===2){
-//     return <div>You are authenticated and registered.</div>
-//   }
-
-//   if(state ===4){
-//     return (<div>
-//       <div>Login</div>
-//       <button onClick={handleOnClick}>Login with Google</button>
-//     </div>)
-//   }
-
-//   return <div>Loading...</div>
-  
-// }
-
-// export default Login
-
-
-import React from 'react'
 
 const Login = () => {
-  // const [user, setUser] = useState({
-  //   email:'',
-  //   password: ''
-  // })
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+  });
+
+  const { login }  = useAuth()
+  const navigate = useNavigate()
+  const [error, setError] = useState()
+
+const handleChange = ({target:{name, value}}) => {
+  setUser({...user,[name]: value})
+}
+
+const handleSubmit = async (e) => {
+  e.preventDefault()
+  setError('')
+  try {
+    await login(user.email, user.password)
+    navigate('/')
+
+  } catch (error) {
+    console.log(error.code)
+    if(error.code === 'auth/internal-error'){
+      setError('Invalid email')
+    } else if(error.code === 'auth/weak-password'){
+      setError('Your password must have a minimum of 6 characters')
+    }
+    // setError(error.message)
+  }
+  
+}
 
   return (
     <div>
-      <form>
-        <input type="email" name='email' id='email' />
-        <input type="password" name='password' id='password' />
+
+      {error&& <p>{error}</p>}
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email</label>
+        <input onChange={handleChange}
+         type="email"
+          name='email'
+          placeholder='youremail@company.com'
+          />
+
+        <label htmlFor="password"> Password</label>
+        <input onChange={handleChange} 
+        type="password" 
+        name='password' 
+        placeholder='******'
+        id='password' />
+
+        <button>Login</button>
       </form>
     </div>
   )

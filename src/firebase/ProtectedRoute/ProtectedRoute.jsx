@@ -1,9 +1,18 @@
-import React, { Component } from "react";
+// import React from 'react'
+// import { useAuth } from '../../context/authContext'
+// import { Navigate} from 'react-router-dom'
 
-class ProtectedRoute extends Component {
-  render() {
-    return <div>ProtectedRoute</div>;
-  }
-}
+// const ProtectedRoute = ({children}) => {
 
-export default ProtectedRoute;
+//   const { user, loading } = useAuth()
+
+//   if (loading) return <h2>Loading</h2>;
+
+//   if (!user) return <Navigate to='/login' />;
+
+//   return (
+//     <>{children}</>
+//   )
+// }
+
+// export default ProtectedRoute
