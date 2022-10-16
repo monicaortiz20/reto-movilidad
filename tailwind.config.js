@@ -7,9 +7,11 @@ module.exports = {
     extend: {
       colors: {
         'neutro': '#E7E8E3',
+        'neutroLogin': '#B8BAAB',
         'blackController': '#1B1C17',
         'blackLogin': ' #35392D',
-        'greenSearch':'#B4C43B'
+        'greenSearch':'#B4C43B',
+        'boxShadow': '#000000'
 
       },
       fontFamily: {

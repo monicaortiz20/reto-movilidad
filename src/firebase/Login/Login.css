@@ -3,24 +3,66 @@
 @tailwind utilities;
 
 @layer base {
-
-    .loginDiv{
-        @apply flex
+    body{
+        @apply overflow-auto flex items-center justify-center h-[100vh] w-[360px] bg-blackController 
     }
+
+    .logo{
+        @apply w-[224px] h-[209px] absolute bg-neutroLogin top-[111px] flex items-center justify-center text-[40px]
+       
+
+    }
+
     .formDiv{
-        @apply absolute flex flex-col w-[360px] h-[424px] top-[380px] left-12 items-center justify-center rounded-tl-[40px] rounded-tr-[40px] bg-blackLogin
+        @apply  absolute flex flex-col w-[100%] h-[53%] top-[380px] left-0 items-center justify-center rounded-tl-[40px] rounded-tr-[40px] bg-blackLogin
     }
 
     .form{
-        @apply gap-7
+        @apply gap-7 flex flex-col absolute items-center top-12
     }
     .email{
-        @apply absolute w-[288px] h-[54px] rounded-lg left-[39px]  top-[48px] text-sm gap-6 px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200  focus:outline-none focus:border-purple-400 
+        @apply  w-[288px] h-[54px] rounded-lg left-[39px]  top-[48px] text-sm gap-6 px-4 py-3 bg-neutroLogin  border-gray-200  text-blackLogin placeholder-blackLogin
     }
     .password{
-      @apply  absolute w-[288px] h-[54px] rounded-lg left-[39px] top-[123px] text-sm gap-6 px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200  focus:outline-none focus:border-purple-400 
+      @apply   w-[288px] h-[54px] rounded-lg left-[39px] top-[123px] text-sm gap-6 px-4 py-3 bg-neutroLogin text-black placeholder-blackLogin border-gray-200 
     }
     .loginBtn{
-        @apply absolute w-[288px] h-[54px] rounded-lg left-[39px] top-[231px] text-sm gap-6 px-4 py-3  focus:bg-gray-100 border  border-gray-200  focus:outline-none focus:border-purple-400  bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  tracking-wide font-semibold  cursor-pointer transition ease-in duration-500
+        @apply  flex items-center justify-center w-[288px] h-[54px] rounded-lg left-[39px] top-[231px] gap-6 px-4 py-3 bg-greenSearch text-blackController font-bold  p-3  text-xl
+    }
+
+    .linkRegister{
+        @apply flex items-center justify-center space-x-2 mt-[40%] mb-[1%] text-neutro 
+    }
+
+    .or{
+      @apply  flex items-center justify-center space-x-2 mt-[2%] mb-[7%] text-neutro font-normal
+    }
+
+    .googleBtn{
+        @apply shadow-boxShadow flex flex-row justify-center gap-6 items-center px-2 py-8 w-[30%] h-[40px] left-[139px] bg-neutro rounded-[2rem]   }
+    .googleLogo{
+        @apply w-[1.5rem] h-[20rem] 
     }
 }
+/* 
+Width
+10px
+Height
+9.41px
+Top
+10px
+Left
+12px */
+
+
+/* position: absolute;
+width: 88px;
+height: 40px;
+left: 139px;
+top: 704px; */
+
+/* Neutro/N90 */
+/* 
+background: #E7E8E3;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 16px; */ 
