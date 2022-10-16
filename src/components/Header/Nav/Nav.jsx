@@ -7,14 +7,16 @@ const Nav = () => {
   const {user, logout} = useAuth()
 
   return (
+    <>
     <div>
         <Link to ="/" className='Home'>Home</Link>
         <Link to ="/login" className='Login'>Login</Link>
         <Link to ="/register" className='Register'>Register</Link>
-        
-        <Link to ="/profile" className='Profile'>{{user}? {style:{ display:'block'}} : {style:{display:'none'}}}Profile</Link>
-
+        {user? 
+        <span><Link to ="/profile" className='Profile'>Profile</Link>¡Hola, {user}!<button onClick={logout}>Log out</button></span>
+        : ''}
     </div>
+    </>
   )
 }
 export default Nav
