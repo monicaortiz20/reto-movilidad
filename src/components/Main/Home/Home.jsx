@@ -95,8 +95,13 @@ const getAddress2 = async () => {
   }
 
   const handleLogout = async () => {
-    await logout()
-    navigate('/login')
+    try {
+      await logout()
+      navigate('/login')
+      
+    } catch (error) {
+      console.log(error)
+    }
   }
   
   const calculateRoute = () => {
@@ -204,7 +209,7 @@ const getAddress2 = async () => {
               {/* <>
               {if(user){
                 .....condicional para que renderice el mapa + user + btn logout
-              <p>Hola, {user.email}</p>
+              <p>Hola, {user.displayname || user.email}</p>
               }}
               </> */}
               <button onClick={handleLogout}>Logout</button>

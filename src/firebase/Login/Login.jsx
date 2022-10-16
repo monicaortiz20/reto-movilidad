@@ -1,6 +1,7 @@
 import React, { useState} from 'react'
 import { useAuth } from '../../context/authContext';
 import { useNavigate } from 'react-router-dom';
+import { Alert } from '../Alert/Alert';
 
 
 const Login = () => {
@@ -9,12 +10,22 @@ const Login = () => {
     password: '',
   });
 
-  const { login }  = useAuth()
+  const { login, loginWithGoogle }  = useAuth()
   const navigate = useNavigate()
   const [error, setError] = useState()
 
 const handleChange = ({target:{name, value}}) => {
   setUser({...user,[name]: value})
+}
+
+const handleGoogleLogin = async () => {
+  try {
+    await loginWithGoogle()
+    navigate('/')
+    
+  } catch (error) { 
+    setError(error.message)
+  }
 }
 
 const handleSubmit = async (e) => {
@@ -28,10 +39,9 @@ const handleSubmit = async (e) => {
     console.log(error.code)
     if(error.code === 'auth/internal-error'){
       setError('Invalid email')
-    } else if(error.code === 'auth/weak-password'){
-      setError('Your password must have a minimum of 6 characters')
+    } else if(error.code === 'auth/wrong-password'){
+      setError('Your password is wrong')
     }
-    // setError(error.message)
   }
   
 }
@@ -39,7 +49,7 @@ const handleSubmit = async (e) => {
   return (
     <div>
 
-      {error&& <p>{error}</p>}
+      {error&& <Alert message={error}/>}
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <input onChange={handleChange}
@@ -57,6 +67,7 @@ const handleSubmit = async (e) => {
 
         <button>Login</button>
       </form>
+      <button onClick={handleGoogleLogin}>Google</button>
     </div>
   )
 }
