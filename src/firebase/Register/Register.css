@@ -1,8 +1,8 @@
-@tailwind base;
+
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+@layer components {
     .registerContainer{
         @apply flex flex-col
     }
@@ -21,7 +21,7 @@
     .regInputs{
         @apply  w-[288px] h-[54px] rounded-lg left-[39px]  top-[48px] text-sm gap-6 px-4 py-3 bg-neutroLogin  border-gray-200  text-blackLogin placeholder-blackLogin
     }
-    .registerBtn{
+    .registerButton{
         @apply  flex items-center justify-center w-[288px] h-[54px] rounded-lg left-[39px] top-[231px] gap-6 px-4 py-3 bg-greenSearch text-blackController font-bold  p-3  text-xl
     }
     .checkbox{

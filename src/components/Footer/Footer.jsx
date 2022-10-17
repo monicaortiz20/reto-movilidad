@@ -2,8 +2,7 @@ import React from 'react'
 import './Footer.css'
 
 const Footer = () => {
-  return (
-    <p>footer</p>
+  return (<></>
   )
 }
 

@@ -82,7 +82,7 @@ const Register = () => {
           <section className='termsConditions'>
           <input   type="checkbox" /><p className="checkbox">Acepto los términos y condiciones</p>
           </section>
-        <button className="registerBtn">Regístrate</button>
+        <button className="registerButton">Regístrate</button>
       </form>
 
         <p>¿Olvidaste la contraseña?</p>
