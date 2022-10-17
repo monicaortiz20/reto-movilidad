@@ -25,22 +25,22 @@ const Login = () => {
   //o se actualiza algún estado
   //para detectar si el usuario está logueado o no, es decir, si esta autenticado
 
-  useEffect(() => {
-    onAuthStateChanged(auth, handleUserStateChanged);
-  }, []);
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, handleUserStateChanged);
+  // }, []);
 
-  async function handleUserStateChanged(user){
-    if(user){
-      const isRegistered = await userExists(user.uid)
-      if(isRegistered){
-        console.log(user.displayName)
-        navigate('/')
-      }
-    } else {
-      console.log('No hay nadie autenticado')
-    }
-  }
-//-------------------------------------
+  // async function handleUserStateChanged(user){
+  //   if(user){
+  //     const isRegistered = await userExists(user.uid)
+  //     if(isRegistered){
+  //       console.log(user.displayName)
+  //       navigate('/')
+  //     }
+  //   } else {
+  //     console.log('No hay nadie autenticado')
+  //   }
+  // }
+//------------------------------------- 
 
   const handleChange = ({ target: { name, value } }) => {
     setUser({ ...user, [name]: value })
