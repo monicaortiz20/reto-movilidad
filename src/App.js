@@ -12,7 +12,6 @@ const App = () => {
 
     const [user, setUser] = useState('')
 
-
     const signup = (email, password) => 
     createUserWithEmailAndPassword(auth, email, password);
 
@@ -28,9 +27,9 @@ const App = () => {
         const googleProvider = new GoogleAuthProvider()
         return signInWithPopup(auth,googleProvider)
     }
-
+    //para renderizar el estado user, detecta si está autenticado/registrado o no
     // useEffect(() => {
-    //    const unsubscribe =  onAuthStateChanged(auth, (currentUser)  => {
+    //    const unsubscribe =  onAuthStateChanged(auth, (currentUser)  => { 
     //         setUser(currentUser)
     //     })
     //     return () => unsubscribe();
