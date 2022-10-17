@@ -32,9 +32,27 @@ const Login = () => {
       setError(error.message)
     }
   } 
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setError('')
+    try {
+      await login(user.email, user.password)
+      navigate('/')
+
+    } catch (error) {
+      console.log(error.code)
+      if (error.code === 'auth/internal-error') {
+        setError('Invalid email')
+      } else if (error.code === 'auth/wrong-password') {
+        setError('Your password is wrong')
+      }
+    }
+  }
+
     return (
       <>
-        <div className='logo'>LOGO</div>
+        <div className='loginLogo'>LOGO</div>
         <div className='loginDiv' onSubmit={handleSubmit}>
           <div className='formDiv'>
             <div className="form">

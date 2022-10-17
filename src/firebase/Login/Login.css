@@ -4,10 +4,10 @@
 
 @layer base {
     body{
-        @apply overflow-auto flex items-center justify-center h-[100vh] w-[360px] bg-blackController 
+        @apply overflow-auto flex items-center justify-center h-[100vh]  bg-blackController 
     }
 
-    .logo{
+    .loginLogo{
         @apply w-[224px] h-[209px] absolute bg-neutroLogin top-[111px] flex items-center justify-center text-[40px]
        
 

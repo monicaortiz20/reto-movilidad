@@ -2,7 +2,8 @@ import React, { useContext, useState } from 'react'
 import { authContext } from '../../context/authContext';
 import { useNavigate } from 'react-router-dom';
 import { Alert } from '../Alert/Alert';
-import './Register.css'
+import './Register.css';
+import R from '../../assets/img/R-logo-final.png';
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -37,48 +38,51 @@ const Register = () => {
   }
 
   return (
-    <div>
+    <div className='registerContainer'>
 
       {error && <Alert message={error} />}
-      <form className="formDiv"onSubmit={handleSubmit}>
-        <label htmlFor="name">Name</label>
-        <input onChange={handleChange}
+        <section className='logoContainer'>
+          <img className="logo" src={R} alt="reduce.logo" />
+          <p className='welcome'>Bienvenido!</p>
+        </section>
+      <form className="formRegister"onSubmit={handleSubmit}>
+   
+        <input className='regInputs' onChange={handleChange}
           type="name"
           name='name'
-          placeholder='Marina'
+          placeholder='Nombre'
         />
 
-        <label htmlFor="name">Apellido</label>
-        <input onChange={handleChange}
+        <input className="regInputs" onChange={handleChange}
           type="apellido"
           name='apellido'
-          placeholder='García'
+          placeholder='Apellidos'
         />
 
-        <label htmlFor="email">Email</label>
-        <input onChange={handleChange}
+    
+        <input className="regInputs" onChange={handleChange}
           type="email"
           name='email'
-          placeholder='youremail@company.com'
+          placeholder='Email'
         />
 
-        <label htmlFor="password"> Contaseña</label>
-        <input onChange={handleChange}
+       
+        <input className="regInputs" onChange={handleChange}
           type="password"
           name='password'
-          placeholder='******'
+          placeholder='Contraseña'
           id='password' />
 
-        <label htmlFor="password"> Repetir contraseña</label>
-        <input onChange={handleChange}
+
+        <input className="regInputs" onChange={handleChange}
           type="password"
           name='password'
-          placeholder='******'
-          id='password' />
-
-          <input type="checkbox" /><p>Acepto los términos y condiciones</p>
-
-        <button>Regístrate</button>
+          placeholder='Repetir Contraseña'
+          id='password2' />
+          <section className='termsConditions'>
+          <input   type="checkbox" /><p className="checkbox">Acepto los términos y condiciones</p>
+          </section>
+        <button className="registerBtn">Regístrate</button>
       </form>
 
         <p>¿Olvidaste la contraseña?</p>

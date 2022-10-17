@@ -183,8 +183,6 @@ const getAddress2 = async () => {
     <>
     <div>
       <div ref={mapElement} className="mapDiv"></div>
-      {/* ********************************VER DONDE PONER ESTE BOTON lOGOUT ********************************* */}
-      <button onClick={handleLogout}>Logout</button>
       <div className="controllsDiv">
           <div>
             <section className="userWhere">
