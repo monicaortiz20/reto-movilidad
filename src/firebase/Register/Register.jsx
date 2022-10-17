@@ -45,35 +45,27 @@ const Register = () => {
           <img className="logo" src={R} alt="reduce.logo" />
           <p className='welcome'>Bienvenido!</p>
         </section>
-      <form className="formRegister"onSubmit={handleSubmit}>
-   
+      <form className="formRegister"onSubmit={handleSubmit}> 
         <input className='regInputs' onChange={handleChange}
           type="name"
           name='name'
           placeholder='Nombre'
         />
-
         <input className="regInputs" onChange={handleChange}
           type="apellido"
           name='apellido'
           placeholder='Apellidos'
         />
-
-    
         <input className="regInputs" onChange={handleChange}
           type="email"
           name='email'
           placeholder='Email'
         />
-
-       
         <input className="regInputs" onChange={handleChange}
           type="password"
           name='password'
           placeholder='Contraseña'
           id='password' />
-
-
         <input className="regInputs" onChange={handleChange}
           type="password"
           name='password'
@@ -84,7 +76,6 @@ const Register = () => {
           </section>
         <button className="registerButton">Regístrate</button>
       </form>
-
         <p>¿Olvidaste la contraseña?</p>
     </div>
   )

@@ -10,6 +10,7 @@ module.exports = {
         'neutroLogin': '#B8BAAB',
         'blackController': '#1B1C17',
         'blackLogin': ' #35392D',
+        'blackProfile': '##1E1E1E',
         'greenSearch':'#B4C43B',
         'boxShadow': '#000000'
 
