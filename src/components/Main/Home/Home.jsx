@@ -1,19 +1,23 @@
-import React , {useEffect,useState,useRef} from 'react'
-import {useDebounce} from 'use-debounce'
+import React , {useEffect,useState,useRef,useContext} from 'react'
 import axios from 'axios'
 import '@tomtom-international/web-sdk-maps/dist/maps.css'
 import '@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css';
 import "@tomtom-international/web-sdk-maps/dist/maps.css";
 import * as ttmaps from "@tomtom-international/web-sdk-maps";
 import tt, { LngLat,setLngLat } from "@tomtom-international/web-sdk-services";
-import './Home.css';
 
+import {useDebounce} from 'use-debounce'
+import './Home.css';
+import { authContext } from '../../../context/authContext';
 
  const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
 
 function Home() {
+  //Context
+ const{userName,setUsername}=useContext(authContext)
+ const {userGoogle,setUserGoogle}= useContext(authContext)
 
-
+  //States
   const [startLatitude, setStartLatitude] = useState("");
   const [startLongitude, setStartLongitude] = useState("");
   const [destinationLatitude, setDestinationLatitude] = useState("");
@@ -126,14 +130,14 @@ const getAddress2 = async () => {
             "line-join": "round"
           },
           paint: {
-            "line-color": "#52b788",
+            "line-color": "#B4C43B",
             "line-width": 6
           }
         });
         map.setCenter([parseFloat(startLatitude), parseFloat(startLongitude)]);
         map.on('data', () => {
           let div = document.createElement('div')
-          div.innerHTML= '<p>Hey, baby!</p>'
+          div.innerHTML= '<p>You´re here!</p>'
         
           let popup = new ttmaps.Popup({
             offset: 35,
@@ -146,7 +150,7 @@ const getAddress2 = async () => {
               width: 32,
               height:32,
               anchor: 'bottom',
-              color:'#469d89',
+              color:'#B4C43B',
             }).setLngLat([Number(startLatitude), Number(startLongitude)]).setPopup(popup)
        
             marker.addTo(map)
@@ -154,7 +158,7 @@ const getAddress2 = async () => {
            // MarkerDestination:
     map.on('data', () => {
       let div2 = document.createElement('div')
-      div2.innerHTML= '<p>You did it!</p>'
+      div2.innerHTML= '<p>This is your destiny!</p>'
     
       let popup2 = new ttmaps.Popup({
         offset: 35,
@@ -167,7 +171,8 @@ const getAddress2 = async () => {
           width: 32,
           height:32,
           anchor: 'bottom',
-          color:'#469d89',
+          color:'#B4C43B',
+
         }).setLngLat([Number(destinationLatitude), Number(destinationLongitude)]).setPopup(popup2)
    
         markerDestination.addTo(map)
@@ -186,7 +191,8 @@ const getAddress2 = async () => {
       <div className="controllsDiv">
           <div>
             <section className="userWhere">
-              <h5 className="userName">¡Hola Usuario!</h5>
+             { ({userName}|| {userGoogle})?<h5 className="userName">¡Hola, {userName}{userGoogle}!</h5>
+              : <h5 className="userName">¡Bienvenido!</h5>}
               <h4 className="whereTo">¿A dónde vas?</h4>
               <section className="sectionInputs">
 

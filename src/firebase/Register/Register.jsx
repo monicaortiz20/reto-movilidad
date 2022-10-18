@@ -127,7 +127,6 @@ const Register = () => {
           </section>
         <button className="registerButton">Regístrate</button>
       </form>
-
         <p>¿Olvidaste la contraseña?</p>
     </div>
   )
