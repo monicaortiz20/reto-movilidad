@@ -4,7 +4,7 @@ import { authContext } from '../../context/authContext';
 import {auth, registerNewUser} from '../firebaseConfig'
 // import { onAuthStateChanged } from 'firebase/firebase-auth'
 // import {userExists, db} from '../firebaseConfig'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Alert } from '../Alert/Alert';
 import './Login.css'
 import logoR from '../../assets/img/logo-final.png'
@@ -68,7 +68,7 @@ const Login = () => {
               <input onChange={handleChange} className="password" type="Password" placeholder="Password" />
             {/* </div> */}
 
-            <span className="linkRegister"> Crear cuenta nueva</span>
+            <Link to='/register' className="linkRegister"> Crear cuenta nueva</Link>
             <button type="submit" className="loginBtn"> Log in</button>
             <span className="or">o continúa con </span>
 
