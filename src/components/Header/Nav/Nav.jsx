@@ -8,6 +8,8 @@ const Nav = () => {
 
   const navigate = useNavigate()
   const {user, logout} = useContext(authContext)
+  const {userName,setUserName}= useContext(authContext)
+  const {userGoogle,setUserGoogle}= useContext(authContext)
   const [showSidebar, setShowSidebar] = useState(false)
 
   const toggleBar = () =>{
@@ -64,9 +66,15 @@ const Nav = () => {
           <Link onClick={toggleBar} to ="/register" className='linkmvl'>Regístrate</Link>
         </div>
         <div className='linksSideBar'>
-          {user? 
-        <span><Link to ="/profile" className='linkmvl'>Profile</Link>¡Holaaa!<button onClick={(handleLogout,toggleBar)}>Log out</button></span>
-        : 'no hay user'}
+        {/* { ({userName}|| {userGoogle})? */}
+        <span><Link to ="/profile" className='linkmvl'>Profile</Link></span>
+        {/* : 'no hay user'} */}
+        {/* ¡Hola, {userName}{userGoogle}!! */}
+        </div>
+        <div className='linksSideBar'>
+        { ({userName}|| {userGoogle})?
+        <button onClick={(handleLogout,toggleBar)} className='linkmvl' >Log out</button>
+        :''}
         </div>
       </div>
     </div>

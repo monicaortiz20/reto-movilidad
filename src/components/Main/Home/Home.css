@@ -39,5 +39,10 @@
     @apply h-[800px] w-[360px] relative rounded-2xl
     
 }
+
+/* Marker */
+.marker{
+    @apply bg-marker
+}
 }
 

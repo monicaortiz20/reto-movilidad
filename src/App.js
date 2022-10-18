@@ -10,7 +10,9 @@ import Footer from './components/Footer/Footer';
 
 const App = () => {
 
-    const [user, setUser] = useState('')
+    const [userName, setName] = useState('')
+    const [userLname,setUserLname]= useState('')
+    const [userGoogle, setUserGoogle] = useState('')
 
 
     const signup = (email, password) => 
@@ -26,13 +28,23 @@ const App = () => {
 
     const loginWithGoogle = () => {
         const googleProvider = new GoogleAuthProvider()
-        return signInWithPopup(auth,googleProvider)
-    }
+           return signInWithPopup(auth,googleProvider)}
 
+    //para saber qué user está autenticado
+    useEffect(() => {
+      const unsubscribe =  onAuthStateChanged(auth, (currentUser)  => {
+           setUserGoogle(currentUser.displayName)
+           console.log('soy display name ', currentUser.displayName)
+       })
+       return () => unsubscribe();
+   },[])
+  
     const functions = {
       signup,
       login,
-      user,
+      userName,
+      userLname,
+      userGoogle,
       logout,
       loginWithGoogle
     }
