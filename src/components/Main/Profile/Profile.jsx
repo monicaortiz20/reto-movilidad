@@ -18,8 +18,8 @@ const Profile = () => {
   return (
       <div className='profileContainer'>
         <section className='userInfo'>
-        <img src={profilePic} alt="user pic" className='user-img'/>
-        <h1 className='userName'>{user.name} {user.apellido}</h1>
+        <img src={profilePic} alt="user pic" className='userImg'/>
+        <h1 className='userName'>Full Name{user.name} {user.apellido}</h1>
         </section>
         <section className='buttonsContainer'>
          
