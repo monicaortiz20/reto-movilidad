@@ -1,101 +1,61 @@
-import './App.css';
-import React , {useEffect,useState,useRef} from 'react'
-import '@tomtom-international/web-sdk-maps/dist/maps.css'
-import * as tt from "@tomtom-international/web-sdk-maps";
+import React, {useState, useEffect} from 'react'
+import {BrowserRouter} from 'react-router-dom';
+import { authContext } from '../src/context/authContext';
+import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import {auth} from '../src/firebase/firebaseConfig'
 
+import Header from './components/Header/Header';
+import Main from './components/Main/Main';
+import Footer from './components/Footer/Footer';
 
-const MAX_ZOOM = 17;
- const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
+const App = () => {
+  const [userName, setName] = useState('')
+  const [userLname,setUserLname]= useState('')
+  const [userGoogle, setUserGoogle] = useState('')
 
-function App() {
-  const mapElement = useRef();
-  const [mapLongitude, setMapLongitude] = useState(-121.91599);
-  const [mapLatitude, setMapLatitude] = useState(37.36765);
-  const [mapZoom, setMapZoom] = useState(13);
-  const [map, setMap] = useState({});
+  const signup = (email, password) => 
+  createUserWithEmailAndPassword(auth, email, password);
 
-  const increaseZoom = () => {
-    if (mapZoom < MAX_ZOOM) {
-      setMapZoom(mapZoom + 1);
-    }
-  };
+  const login = (email, password) => {
+      signInWithEmailAndPassword(auth, email, password);
+  }
 
-  const decreaseZoom = () => {
-    if (mapZoom > 1) {
-      setMapZoom(mapZoom - 1);
-    }
-  };
+  const logout = () => {
+      signOut(auth)
+  }
 
-  const updateMap = () => {
-    map.setCenter([parseFloat(mapLongitude), parseFloat(mapLatitude)]);
-    map.setZoom(mapZoom);
-  };
-
+  const loginWithGoogle = () => {
+      const googleProvider = new GoogleAuthProvider()
+         return signInWithPopup(auth,googleProvider)}
+         
+  //para saber qué user está autenticado
   useEffect(() => {
-    let map = tt.map({
-      /* 
-      This key will API key only works on this Stackblitz. To use this code in your own project,
-      sign up for an API key on the TomTom Developer Portal.
-      */
-      key: `${TOMTOMAPIKEY}`,
-      container: mapElement.current,
-      center: [mapLongitude, mapLatitude],
-      zoom: mapZoom
-    });
-    setMap(map);
-    return () => map.remove();
-  }, []);
+    const unsubscribe =  onAuthStateChanged(auth, (currentUser)  => {
+         setUserGoogle(currentUser.displayName)
+         console.log('soy display name ', currentUser.displayName)
+     })
+     return () => unsubscribe();
+ },[])
 
-  return (
-    <div >
-      <nav  style={{ backgroundColor: "#4287f5" }}>
-        <p>TomTom Maps + React = 😃</p>
-      </nav>
-      <div >
-        <section>
-          <h4>Map Controls</h4>
-          <section>
-            <label htmlFor="longitude">Longitude</label>
-            <input
-              type="text"
-              name="longitude"
-              value={mapLongitude}
-              onChange={(e) => setMapLongitude(e.target.value)}
-            />
-          </section>
-          <section>
-            <label htmlFor="latitude">Latitude</label>
-            <input
-              type="text"
-              name="latitude"
-              value={mapLatitude}
-              onChange={(e) => setMapLatitude(e.target.value)}
-            />
-          </section>
-          <section>
-            <p>Zoom</p>
-
-            <button  onClick={decreaseZoom}>
-              -
-            </button>
-            <div className="mapZoomDisplay">{mapZoom}</div>
-            <button onClick={increaseZoom}>
-              +
-            </button>
-          </section>
-          <section>
-            <p className="updateButton"></p>
-            <button  onClick={updateMap}>
-              Update Map
-            </button>
-          </section>
-        </section>
-        <section >
-          <div ref={mapElement} className="mapDiv" />
-        </section>
-      </div>
-    </div>
-  );
+  const functions = {
+    signup,
+    login,
+    userName,
+    userLname,
+    userGoogle,
+    logout,
+    loginWithGoogle
+  }
+return (
+  <div>
+    <authContext.Provider value = {functions}>
+    <BrowserRouter>
+      <Header/>
+      <Main/>
+      <Footer/>
+    </BrowserRouter>
+    </authContext.Provider >
+  </div>
+)
 }
- 
-export default App;
+export default App

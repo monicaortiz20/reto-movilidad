@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@layer base {
+/* div padre del buscador  */
+.controllsDiv{                                                            
+    
+    @apply flex flex-col justify-between items-center rounded-2xl pt-[24px] pr-[24px] pb-[16px] pl-[24px] gap-[24px] bg-blackController w-[291px] h-[242px] absolute top-[605px] left-[34px]
+}
+/* nombre de user y a donde vas? */
+
+.userName{
+     @apply text-neutro text-base 
+}
+.whereTo{
+    @apply text-neutro text-lg mb-[6px]
+}
+.sectionInputs{
+    @apply w-[246px]
+}
+.originInput{
+    @apply w-[144px] h-[20px] flex items-center mb-1 bg-blackController text-neutro
+}
+.destinyInput{
+     @apply w-[144px] h-[20px] flex items-center mb-1  bg-blackController text-neutro
+}
+.hr{
+    @apply h-[1px] bg-neutro w-[243px] justify-start
+}
+.searchRoute{
+    @apply flex flex-col justify-center items-center text-center   p-0 gap-6 w-[108px] h-[43px] rounded-lg bg-greenSearch 
+}
+
+/* Div del mapa  */
+.mapDiv{
+    @apply h-[800px] w-[360px] relative rounded-2xl
+    
+}
+
+/* Marker */
+.marker{
+    @apply bg-marker
+}
+}
+
