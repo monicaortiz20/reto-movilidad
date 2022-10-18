@@ -7,7 +7,6 @@ import Login from '../../firebase/Login/Login';
 import Register from '../../firebase/Register/Register';
 
 
-
 const Main = () => {
   return (
     <main>
@@ -16,7 +15,6 @@ const Main = () => {
         <Route element={<Profile/>} path={'/profile'}>Profile</Route>
         <Route element={<Login/>} path={'/login'}>Login</Route>
         <Route element={<Register/>} path={'/register'}>Register</Route>
-
       </Routes>
     </main>
   )

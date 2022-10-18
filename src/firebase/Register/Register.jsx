@@ -73,24 +73,6 @@ const Register = () => {
 
 
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault()
-  //   setError('')
-  //   try {
-  //     await signup(user.email, user.password)
-  //     navigate('/')
-
-  //   } catch (error) {
-  //     console.log(error.code)
-  //     if (error.code === 'auth/internal-error') {
-  //       setError('Invalid email')
-  //     } else if (error.code === 'auth/weak-password') {
-  //       setError('Your password must have a minimum of 6 characters')
-  //     }
-  //   }
-
-  // }
-
   return (
     <div className='registerContainer'>
 
