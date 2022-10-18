@@ -19,6 +19,7 @@ const Register = () => {
   const [userName, setUserName] = useState('')
   const [userSurname, setUserSurname] = useState('')
   const [userPassword, setUserPassword] = useState('')
+  // const [userPic, setUserPic] = useState('')
 
   //creamos colección
   const submitData = (e) => {
@@ -27,7 +28,7 @@ const Register = () => {
       displayName: userName,
       displaySurname: userSurname,
       password: userPassword,
-      profilePic: ''
+      // profilePic: userPic
     });
   
     setUserName("");

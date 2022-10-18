@@ -1,12 +1,14 @@
 
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { authContext } from '../../context/authContext';
+import {auth, registerNewUser} from '../firebaseConfig'
+// import { onAuthStateChanged } from 'firebase/firebase-auth'
+// import {userExists, db} from '../firebaseConfig'
 import { useNavigate } from 'react-router-dom';
 import { Alert } from '../Alert/Alert';
 import './Login.css'
 import logoR from '../../assets/img/logo-final.png'
-import { registerNewUser } from '../firebaseConfig';
-import userEvent from '@testing-library/user-event';
+// import userEvent from '@testing-library/user-event';
 
 
 
@@ -27,28 +29,28 @@ const Login = () => {
   //llamos a useEffect para ejecutar código cada vez que se actualiza/renderiza el componente
   //o se actualiza algún estado
   //para detectar si el usuario está logueado o no, es decir, si esta autenticado
-  useEffect(() => {
-    onAuthStateChanged(auth, handleUserStateChanged);
-  }, []);
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, handleUserStateChanged);
+  // }, []);
 
-  async function handleUserStateChanged(user){
-    if(user){
-      const isRegistered = await userExists(user.uid)
-      if(isRegistered){
-        console.log(user.displayName)
-        navigate('/')
-      }
-    } else {    
-      navigate('/register')
-      // await registerNewUser({
-      //   uid: userEvent.uid,
-      //   displayName: user.displayName,
-      //   displaySurname: user.displaySurname,
-      //   profilePicture:'',
-      // })
-      console.log('No hay nadie autenticado')
-    }
-  }
+  // async function handleUserStateChanged(user){
+  //   if(user){
+  //     const isRegistered = await userExists(user.uid)
+  //     if(isRegistered){
+  //       console.log(user.displayName)
+  //       navigate('/')
+  //     }
+  //   } else {    
+  //     navigate('/register')
+  //     // await registerNewUser({
+  //     //   uid: userEvent.uid,
+  //     //   displayName: user.displayName,
+  //     //   displaySurname: user.displaySurname,
+  //     //   profilePicture:'',
+  //     // })
+  //     console.log('No hay nadie autenticado')
+  //   }
+  // }
 //-------------------------------------
 
   const handleChange = ({ target: { name, value } }) => {
