@@ -7,7 +7,7 @@ import './Nav.css'
 const Nav = () => {
 
   const navigate = useNavigate()
-  const {user, logout} = useContext(authContext)
+  const {userGoogle, logout} = useContext(authContext)
   const [showSidebar, setShowSidebar] = useState(false)
 
   const toggleBar = () =>{
@@ -64,8 +64,8 @@ const Nav = () => {
           <Link onClick={toggleBar} to ="/register" className='linkmvl'>Regístrate</Link>
         </div>
         <div className='linksSideBar'>
-          {user? 
-        <span><Link to ="/profile" className='linkmvl'>Profile</Link>¡Holaaa!<button onClick={(handleLogout,toggleBar)}>Log out</button></span>
+          {userGoogle.displayName ? 
+        <><Link to ="/profile" className='linkmvl'>Profile</Link><button onClick={(handleLogout,toggleBar)}>Log out</button></>
         : 'no hay user'}
         </div>
       </div>
