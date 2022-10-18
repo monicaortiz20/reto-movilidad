@@ -1,4 +1,4 @@
-import React, {useContext,useState} from 'react'
+import React, {useContext,useEffect,useState} from 'react'
 import { authContext } from '../../../context/authContext';
 import { Navigate, useNavigate } from 'react-router-dom'
 import {Link} from 'react-router-dom'
@@ -6,7 +6,7 @@ import './Nav.css'
 
 const Nav = () => {
   const navigate = useNavigate()
-  const {user, logout} = useContext(authContext)
+  const {logout} = useContext(authContext)
   const {userName,setUserName}= useContext(authContext)
   const {userGoogle,setUserGoogle}= useContext(authContext)
   const [showSidebar, setShowSidebar] = useState(false)
@@ -15,6 +15,13 @@ const Nav = () => {
       ? setShowSidebar(false)
       : setShowSidebar(true)
   }
+
+useEffect(() => {
+  if (userGoogle != null) {
+    navigate('/')
+  }
+}, [userGoogle])
+
   const handleLogout = async () => {
     try {
       await logout()
