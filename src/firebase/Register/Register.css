@@ -25,10 +25,13 @@
         @apply  flex items-center justify-center w-[288px] h-[54px] rounded-lg left-[39px] top-[231px] gap-6 px-4 py-3 bg-greenSearch text-blackController font-bold  p-3  text-xl
     }
     .checkbox{
-        @apply text-neutro
+        @apply text-neutro flex flex-row gap-1 w-[288px] justify-start px-2
     }
     .termsConditions{
-        @apply flex
+        @apply flex w-[288px]
+    }
+    .linkToRegister{
+        @apply flex py-1 flex-row justify-center gap-1  text-neutro text-sm
     }
     
 }

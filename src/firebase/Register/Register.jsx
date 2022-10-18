@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { authContext } from '../../context/authContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { app } from '../firebaseConfig'
 import { Alert } from '../Alert/Alert';
@@ -123,11 +123,11 @@ const Register = () => {
           value={password2}
           />
           <section className='termsConditions'>
-          <input   type="checkbox" /><p className="checkbox">Acepto los términos y condiciones</p>
+          <input   type="checkbox" /><p className="checkbox">Acepto los <p className='underline'>términos</p> y <p className='underline'>condiciones</p></p>
           </section>
         <button className="registerButton">Regístrate</button>
       </form>
-        <p>¿Olvidaste la contraseña?</p>
+        <p className='linkToRegister'>¿Eres <p className='text-greenSearch'>Reducer</p>?<Link to='/login'>  Iniciar Sesión</Link></p>
     </div>
   )
 }
