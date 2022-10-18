@@ -10,6 +10,7 @@ const Store = () => {
   // const [value, setValue] = useState('')
 
   const dbRef = collection(db, "users");
+  
   const data = {
     name: "Raja Tamil",
     country: "Canada"
