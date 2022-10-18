@@ -60,7 +60,7 @@ const Nav = () => {
           <Link onClick={toggleBar} to ="/register" className='linkmvl'>Regístrate</Link>
         </div>
         <div className='linksSideBar'>
-        <span><Link to ="/profile" className='linkmvl'>Profile</Link></span>
+        <span><Link onClick={toggleBar} to ="/profile" className='linkmvl'>Profile</Link></span>
         </div>
         <div className='linksSideBar'>
         { ({userName}|| {userGoogle})?
