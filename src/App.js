@@ -29,13 +29,6 @@ const App = () => {
         return signInWithPopup(auth,googleProvider)
     }
 
-    // useEffect(() => {
-    //    const unsubscribe =  onAuthStateChanged(auth, (currentUser)  => {
-    //         setUser(currentUser)
-    //     })
-    //     return () => unsubscribe();
-    // },[])
-
     const functions = {
       signup,
       login,
