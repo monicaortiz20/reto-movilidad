@@ -13,13 +13,16 @@ import './Profile.css'
 
 const Profile = () => {
 
-  const {user} = useContext(authContext)
+  const {userName,setUserName} = useContext(authContext)
+  const {userLname,setUserLname} = useContext(authContext)
+  const {userGoogle,setUserGoogle}= useContext(authContext)
+
 
   return (
       <div className='profileContainer'>
         <section className='userInfo'>
         <img src={profilePic} alt="user pic" className='userImg'/>
-        <h1 className='userName'>Full Name{user.name} {user.apellido}</h1>
+        <h1 className='userName'>{userName}{userLname}{userGoogle}</h1>
         </section>
         <section className='buttonsContainer'>
          
