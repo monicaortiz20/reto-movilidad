@@ -15,6 +15,28 @@ const Register = () => {
   const navigate = useNavigate()
   const [error, setError] = useState()
 
+  //registrar campos:
+  const [userName, setUserName] = useState('')
+  const [userSurname, setUserSurname] = useState('')
+  const [userPassword, setUserPassword] = useState('')
+
+  //creamos colección
+  const submitData = (e) => {
+    e.preventDefault();
+    db.collection('users').add({
+      displayName: userName,
+      displaySurname: userSurname,
+      password: userPassword,
+      profilePic: ''
+    });
+  
+    setUserName("");
+    setUserSurname("");
+    setUserPassword("");
+  };
+
+  
+
   const handleChange = ({ target: { name, value } }) => {
     setUser({ ...user, [name]: value })
   }
@@ -51,6 +73,7 @@ const Register = () => {
           type="name"
           name='name'
           placeholder='Nombre'
+          // onChange={(e) => setCustomerName(e.target.value)} revisar mañana
         />
 
         <input className="regInputs" onChange={handleChange}
