@@ -115,7 +115,7 @@ const Register = () => {
           value={password2}
           />
           <section className='termsConditions'>
-          <input   type="checkbox" /><p className="checkbox">Acepto los <p className='underline'>términos</p> y <p className='underline'>condiciones</p></p>
+          <input   type="checkbox" /><span className="checkbox">Acepto los términos y condiciones</span>
           </section>
         <button className="registerButton">Regístrate</button>
       </form>
