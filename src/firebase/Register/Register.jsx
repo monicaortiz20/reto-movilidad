@@ -83,30 +83,24 @@ const Register = () => {
           <p className='welcome'>Bienvenido!</p>
         </section>
       <form className="formRegister"onSubmit={addUser}>
-   
         <input className='regInputs' onChange={getName}
           type="name"
           name='name'
           placeholder='Nombre'
           value={userName}
            />
-
         <input className="regInputs" onChange={getLname}
           type="apellido"
           name='apellido'
           placeholder='Apellidos'
           value={userLname}
-        />
-
-    
+        />    
         <input className="regInputs" onChange={getUserMail}
           type="email"
           name='email'
           placeholder='Email'
           value={userMail}
-        />
-
-       
+        />      
         <input className="regInputs" onChange={getPassword}
           type="password"
           name='password'
@@ -114,8 +108,6 @@ const Register = () => {
           id='password'
           value={password}
            />
-
-
         <input className="regInputs" onChange={getPassword2}
           type="password"
           name='password'
@@ -124,7 +116,7 @@ const Register = () => {
           value={password2}
           />
           <section className='termsConditions'>
-          <input   type="checkbox" /><p className="checkbox">Acepto los <p className='underline'>términos</p> y <p className='underline'>condiciones</p></p>
+          <input   type="checkbox" /><span className="checkbox">Acepto los términos y condiciones</span>
           </section>
         <button  onClick={(setUserName, setUserLname)} className="registerButton">Regístrate</button>
       </form>

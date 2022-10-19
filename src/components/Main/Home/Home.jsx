@@ -17,6 +17,10 @@ function Home() {
  const{userName,setUsername}=useContext(authContext)
  const {userGoogle,setUserGoogle}= useContext(authContext)
 
+ //Estado para peticion a api propoa
+ const [distance,setDistance]= useState("")
+ const [painted,setPainted]= useState(false)
+
   //States
   const [startLatitude, setStartLatitude] = useState("");
   const [startLongitude, setStartLongitude] = useState("");
@@ -65,9 +69,18 @@ const getAddress2 = async () => {
   }
 }
 
+const getPolution= async()=>{
+
+  const  polution  = await axios.get(` https://xinmye.pythonanywhere.com/estimar?distance=${distance}`)
+  console.log(polution);
+}
+
+
+
   useEffect(() => {
     getAddress()
     getAddress2()
+    calculateRoute()
     
     let map = ttmaps.map({
       key: `${TOMTOMAPIKEY}`,
@@ -82,7 +95,6 @@ const getAddress2 = async () => {
     
     
   }, [debouncedText, debouncedText2]);
-
 
 
   
@@ -105,7 +117,11 @@ const getAddress2 = async () => {
         console.log(routeData.toGeoJson());
         const data = routeData.toGeoJson();
         setResult(data);
+        console.log("soy data de calculateRoute",data);
         const direction = routeData.toGeoJson().features[0].geometry.coordinates;
+        const distance= data.features[0].properties.summary.lengthInMeters
+        setDistance(distance)
+        console.log(distance);
         map.addLayer({
           id: Math.random().toString(),
           type: "line",
@@ -133,7 +149,8 @@ const getAddress2 = async () => {
             "line-color": "#B4C43B",
             "line-width": 6
           }
-        });
+        })
+        
         map.setCenter([parseFloat(startLatitude), parseFloat(startLongitude)]);
         map.on('data', () => {
           let div = document.createElement('div')
@@ -186,13 +203,17 @@ const getAddress2 = async () => {
 }
   return (
     <>
-    <div>
-      <div ref={mapElement} className="mapDiv"></div>
-      <div className="controllsDiv">
+    <div className='homeContainer'>
+      <div ref={mapElement}  className="mapDiv">
+      </div>
+      { painted ? <div className='controllsDiv' >
+        {console.log('soy la info de la ruta!!!!!!!!!!!!!!')}
+      </div>
+        : <div className="controllsDiv">
           <div>
             <section className="userWhere">
-             { ({userName}|| {userGoogle})?<h5 className="userName">¡Hola, {userName}{userGoogle}!</h5>
-              : <h5 className="userName">¡Bienvenido!</h5>}
+              {({ userName } || { userGoogle }) ? <h5 className="userName">¡Hola, {userName}{userGoogle}!</h5>
+                : <h5 className="userName">¡Bienvenido!</h5>}
               <h4 className="whereTo">¿A dónde vas?</h4>
               <section className="sectionInputs">
 
@@ -210,7 +231,7 @@ const getAddress2 = async () => {
               <section className="sectionInputs">
                 <label htmlFor="destination"></label>
                 <input
-                className="destinyInput"
+                  className="destinyInput"
                   type="text"
                   name="destination"
                   value={input2}
@@ -219,10 +240,10 @@ const getAddress2 = async () => {
                 />
                 <hr className="hr" />
               </section>
-              </section>
+            </section>
           </div>
-          <button className="searchRoute" onClick={calculateRoute}>Buscar</button>
-        </div>
+          <button className="searchRoute" onClick={calculateRoute} >Buscar</button>
+        </div>}
     </div>
     </>
   )

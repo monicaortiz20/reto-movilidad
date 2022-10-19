@@ -13,7 +13,8 @@ const Main = () => {
     <main>
       <Routes>
         <Route element={<Home/>} path={'/'}>Home</Route>
-        <Route element={<Profile/>} path={'/profile'}>Profile</Route>
+        {/* <Route element={<ProtectedRoute><Profile/></ProtectedRoute>} path={'/profile'}>Profile</Route> */}
+        <Route element={<Profile/>} path={'/profile'}>Perfil</Route>
         <Route element={<Login/>} path={'/login'}>Login</Route>
         <Route element={<Register/>} path={'/register'}>Register</Route>
       </Routes>
