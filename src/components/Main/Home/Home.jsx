@@ -34,8 +34,8 @@ function Home() {
   const [map, setMap] = useState({});
   const [input, setInput] = useState("")
   const [input2, setInput2] = useState("")
-  const [debouncedText] = useDebounce(input, 2000); //almacenamos el valor del input
-  const  [debouncedText2]=  useDebounce(input2, 2000);
+  const [debouncedText] = useDebounce(input, 500); //almacenamos el valor del input
+  const  [debouncedText2]=  useDebounce(input2, 500);
   const [center,setCenter] = useState(["-3.6886008", "40.4069749"])
 
 
@@ -71,7 +71,7 @@ const getAddress2 = async () => {
   }
 }
 
-const getPolution= async()=>{
+const getPolution = async()=>{
 
   const  polution  = await axios.get(` https://xinmye.pythonanywhere.com/estimar?distance=${distance}`)
   console.log(polution);
@@ -93,7 +93,7 @@ const getPolution= async()=>{
    
     setMap(map);
 
-       return () => map.remove();
+      return () => map
     
     
   }, [debouncedText, debouncedText2]);
