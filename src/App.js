@@ -13,11 +13,16 @@ const App = () => {
   const [userLname,setUserLname]= useState('')
   const [userGoogle, setUserGoogle] = useState('')
 
+<<<<<<< HEAD
   const signup = (email, password) => { 
   createUserWithEmailAndPassword(auth, email, password);
   // setUserName()
   // setUserLname()
   }
+=======
+
+
+>>>>>>> e09bf28e7dcbd3a7a056f9e8c565590e44adf1b8
 
   const login = (email, password) => {
       signInWithEmailAndPassword(auth, email, password)
@@ -58,7 +63,6 @@ const App = () => {
  },[])
 
   const functions = {
-    signup,
     login,
     userName,
     setUserName,

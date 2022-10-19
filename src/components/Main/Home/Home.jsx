@@ -218,7 +218,7 @@ const getPolution = async()=>{
                 : <h5 className="userName">¡Bienvenido!</h5>}
               <h4 className="whereTo">¿A dónde vas?</h4>
               <section className="sectionInputs">
-
+º
                 <label htmlFor="origin"></label>
                 <input
                   className="originInput"
