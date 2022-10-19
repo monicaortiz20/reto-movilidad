@@ -16,7 +16,7 @@ import { authContext } from '../../../context/authContext';
 function Home() {
   //Context
  const {userName,setUserName}=useContext(authContext)
- console.log(userName)
+ console.log('esto es el userName:', userName)
  const {userGoogle,setUserGoogle}= useContext(authContext)
 
  //Estado para peticion a api propoa
@@ -214,7 +214,7 @@ const getPolution= async()=>{
         : <div className="controllsDiv">
           <div>
             <section className="userWhere">
-              {({userName} || { userGoogle }) ? <h5 className="userName">¡Hola, {`${userName.name}`}!</h5>
+              {({userName} || { userGoogle }) ? <h5 className="userName">¡Hola, {`${userName}`}!</h5>
                 : <h5 className="userName">¡Bienvenido!</h5>}
               <h4 className="whereTo">¿A dónde vas?</h4>
               <section className="sectionInputs">
