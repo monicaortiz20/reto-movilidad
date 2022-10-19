@@ -3,8 +3,8 @@ import {Route, Routes} from 'react-router-dom';
 
 import Home from '../Main/Home/Home';
 import Profile from '../Main/Profile/Profile';
-import Login from '../../firebase/Login/Login';
-import Register from '../../firebase/Register/Register';
+import Login from './Login/Login';
+import Register from './Register/Register';
 // import ProtectedRoute from '../../firebase/ProtectedRoute/ProtectedRoute';
 
 

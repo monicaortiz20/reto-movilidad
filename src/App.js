@@ -9,12 +9,15 @@ import Main from './components/Main/Main';
 import Footer from './components/Footer/Footer';
 
 const App = () => {
-  const [userName, setName] = useState('')
+  const [userName, setUserName] = useState('')
   const [userLname,setUserLname]= useState('')
   const [userGoogle, setUserGoogle] = useState('')
 
-  const signup = (email, password) => 
+  const signup = (email, password) => { 
   createUserWithEmailAndPassword(auth, email, password);
+  setUserName()
+  setUserLname()
+  }
 
   const login = (email, password) => {
       signInWithEmailAndPassword(auth, email, password);
@@ -24,13 +27,14 @@ const App = () => {
       signOut(auth)
   }
 
-  const logoutMail = () => {
-    signOut()
-}
+//   const logoutMail = () => {
+//     signOut()
+// }
 
   const loginWithGoogle = () => {
       const googleProvider = new GoogleAuthProvider()
-         return signInWithPopup(auth,googleProvider)}
+         return signInWithPopup(auth,googleProvider)
+  }
          
   //para saber qué user está autenticado
   useEffect(() => {
@@ -48,7 +52,6 @@ const App = () => {
     userLname,
     userGoogle,
     logout,
-    logoutMail,
     loginWithGoogle
   }
 return (

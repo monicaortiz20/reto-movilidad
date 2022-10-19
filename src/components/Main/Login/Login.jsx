@@ -1,13 +1,13 @@
 
 import React, { useState, useContext, useEffect } from 'react'
-import { authContext } from '../../context/authContext';
-import {auth, registerNewUser} from '../firebaseConfig'
+import { authContext } from '../../../context/authContext';
+import {auth, registerNewUser} from '../../../firebase/firebaseConfig'
 // import { onAuthStateChanged } from 'firebase/firebase-auth'
 // import {userExists, db} from '../firebaseConfig'
 import { Link, useNavigate } from 'react-router-dom';
-import { Alert } from '../Alert/Alert';
+import { Alert } from '../../../firebase/Alert/Alert';
 import './Login.css'
-import logoR from '../../assets/img/logo-final.png'
+import logoR from '../../../assets/img/logo-final.png';
 // import userEvent from '@testing-library/user-event';
 
 

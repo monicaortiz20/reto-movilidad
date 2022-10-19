@@ -1,23 +1,29 @@
-import React, { useContext, useState } from 'react'
-import { authContext } from '../../context/authContext';
+import React, { useContext, useEffect, useState } from 'react'
+import { authContext } from '../../../context/authContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { getFirestore, collection, addDoc } from "firebase/firestore";
-import { app } from '../firebaseConfig'
-import { Alert } from '../Alert/Alert';
+import { app } from '../../../firebase/firebaseConfig'
+import { Alert } from '../../../firebase/Alert/Alert';
+import {useDebounce} from 'use-debounce'
 import './Register.css';
-import R from '../../assets/img/R-logo-final.png';
+import R from '../../../assets/img/R-logo-final.png';
 
 const db = getFirestore(app);
 
 
 const Register = () => {
-  const [userName, setUserName] = useState('')
-  const [userLname, setUserLname] = useState('')
+  const {userName, setUserName} = useContext(authContext )
+  const {userLname, setUserLname} = useContext(authContext)
+
+  // const [nameRegister, setNameRegister] = useState('')
+  // const [lNameRegister, setLNameRegister] = useState('')
   const [userMail, setUserMail] = useState('')
   const [password, setPassword] = useState('')
   const [password2, setPassword2] = useState('')
   const navigate = useNavigate()
   
+  // const [debouncedName] = useDebounce(nameRegister, 2000);
+  // const [debouncedLname] = useDebounce(lNameRegister, 2000);
   const [error, setError] = useState()
   const { signup } = useContext(authContext)
 
@@ -31,30 +37,33 @@ const Register = () => {
     password: password    
   };
 
+// useEffect(() => {
+
+// }, [debouncedName, debouncedLname])
+
   const addUser = (e) => {
     e.preventDefault()
   addDoc(dbRef, data)
-    .then(docRef => {
-      console.log("Document has been added successfully");
-      console.log('esto es data registrada', data.name)
-      setUserName(data.name)
-      navigate('/')
-    })
-    .catch(error => {
-      console.log(error);
-    })
+  .then(docRef => {
+    console.log("Document has been added successfully");
+    console.log('esto es data registrada', data.name)
+    // navigate('/')
+  })
   }
 
 
 
   const getName = (event) => {
     event.preventDefault()
-    setUserName(event.target.value);
+    setUserName(event.target.value)
+
+
   };
 
   const getLname = (event) => {
     event.preventDefault()
-    setUserLname(event.target.value);
+    setUserLname(event.target.value)
+
   };
 
   const getUserMail = (event) => {
@@ -118,7 +127,7 @@ const Register = () => {
           <section className='termsConditions'>
           <input   type="checkbox" /><span className="checkbox">Acepto los términos y condiciones</span>
           </section>
-        <button  onClick={(setUserName, setUserLname)} className="registerButton">Regístrate</button>
+        <button className="registerButton">Regístrate</button>
       </form>
         <span className='linkToRegister'>¿Eres <span className='text-greenSearch'>Reducer</span>?<Link to='/login'>  Iniciar Sesión</Link></span>
     </div>
