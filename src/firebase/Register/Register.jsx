@@ -82,30 +82,24 @@ const Register = () => {
           <p className='welcome'>Bienvenido!</p>
         </section>
       <form className="formRegister"onSubmit={addUser}>
-   
         <input className='regInputs' onChange={getName}
           type="name"
           name='name'
           placeholder='Nombre'
           value={userName}
            />
-
         <input className="regInputs" onChange={getLname}
           type="apellido"
           name='apellido'
           placeholder='Apellidos'
           value={userLname}
-        />
-
-    
+        />    
         <input className="regInputs" onChange={getUserMail}
           type="email"
           name='email'
           placeholder='Email'
           value={userMail}
-        />
-
-       
+        />      
         <input className="regInputs" onChange={getPassword}
           type="password"
           name='password'
@@ -113,8 +107,6 @@ const Register = () => {
           id='password'
           value={password}
            />
-
-
         <input className="regInputs" onChange={getPassword2}
           type="password"
           name='password'

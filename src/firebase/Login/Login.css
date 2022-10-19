@@ -4,10 +4,10 @@
 
 @layer base {
     body{
-        @apply overflow-auto flex items-center justify-center h-[100vh]  bg-blackController 
+        @apply overflow-auto flex  justify-center h-[100vh]  bg-blackController 
     }
     .loginDiv{
-        @apply flex flex-col flex-wrap items-center justify-center content-center
+        @apply flex flex-col  items-center justify-center content-center
     }
    .logoCont{
     @apply flex 

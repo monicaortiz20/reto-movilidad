@@ -4,7 +4,7 @@
 
 @layer components {
     .registerContainer{
-        @apply flex flex-col
+        @apply flex flex-col 
     }
     .logoContainer{
         @apply flex flex-col items-center justify-center content-center my-5
