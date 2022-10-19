@@ -119,7 +119,7 @@ const Register = () => {
           </section>
         <button className="registerButton">Regístrate</button>
       </form>
-        <p className='linkToRegister'>¿Eres <p className='text-greenSearch'>Reducer</p>?<Link to='/login'>  Iniciar Sesión</Link></p>
+        <span className='linkToRegister'>¿Eres <span className='text-greenSearch'>Reducer</span>?<Link to='/login'>  Iniciar Sesión</Link></span>
     </div>
   )
 }
