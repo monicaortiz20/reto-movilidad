@@ -24,6 +24,10 @@ const App = () => {
       signOut(auth)
   }
 
+  const logoutMail = () => {
+    signOut()
+}
+
   const loginWithGoogle = () => {
       const googleProvider = new GoogleAuthProvider()
          return signInWithPopup(auth,googleProvider)}
@@ -44,6 +48,7 @@ const App = () => {
     userLname,
     userGoogle,
     logout,
+    logoutMail,
     loginWithGoogle
   }
 return (

@@ -36,7 +36,8 @@ const Register = () => {
   addDoc(dbRef, data)
     .then(docRef => {
       console.log("Document has been added successfully");
-      console.log('esto es data registrada', data)
+      console.log('esto es data registrada', data.name)
+      setUserName(data.name)
       navigate('/')
     })
     .catch(error => {
@@ -125,7 +126,7 @@ const Register = () => {
           <section className='termsConditions'>
           <input   type="checkbox" /><p className="checkbox">Acepto los <p className='underline'>términos</p> y <p className='underline'>condiciones</p></p>
           </section>
-        <button className="registerButton">Regístrate</button>
+        <button  onClick={(setUserName, setUserLname)} className="registerButton">Regístrate</button>
       </form>
         <p className='linkToRegister'>¿Eres <p className='text-greenSearch'>Reducer</p>?<Link to='/login'>  Iniciar Sesión</Link></p>
     </div>
