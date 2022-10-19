@@ -36,8 +36,12 @@
 .hr{
     @apply h-[1px] bg-neutro w-[243px] justify-start
 }
+
+.searchContainer{
+    @apply flex flex-row
+}
 .searchRoute{
-    @apply flex flex-col justify-center items-center text-center   p-0 gap-6 w-[108px] h-[43px] rounded-lg bg-greenSearch 
+    @apply flex justify-center items-center text-center bg-greenSearch  text-blackController w-[108px]  p-0 gap-6  h-[43px] rounded-lg
 }
 
 /* Div del mapa  */

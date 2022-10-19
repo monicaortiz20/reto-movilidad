@@ -9,6 +9,8 @@ import Register from './Register/Register';
 
 
 const Main = () => {
+
+  
   return (
     <main>
       <Routes>
