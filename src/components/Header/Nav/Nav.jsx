@@ -6,7 +6,7 @@ import './Nav.css'
 
 const Nav = () => {
   const navigate = useNavigate()
-  const {logout, logoutMail} = useContext(authContext)
+  const {logout, logOutUser} = useContext(authContext)
   const {userName,setUserName}= useContext(authContext)
   const {userGoogle,setUserGoogle}= useContext(authContext)
   const [showSidebar, setShowSidebar] = useState(false)
@@ -24,14 +24,9 @@ useEffect(() => {
 
   const handleLogout = async () => {
     try {
-      if(userGoogle){
-        await logout()
-        // navigate('/')
-      }else{
-        logoutMail()
-        console.log('usuario deslogado')
-      }
-    } catch (error) {
+        logOutUser()
+        console.log('usuario desconectado')
+      } catch (error) {
       console.log(error)
     }
   }
