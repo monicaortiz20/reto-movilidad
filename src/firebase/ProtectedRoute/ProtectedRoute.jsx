@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { authContext } from '../../context/authContext';
 
 const ProtectedRoute = ({children}) => {

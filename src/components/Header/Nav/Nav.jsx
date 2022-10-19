@@ -25,11 +25,12 @@ useEffect(() => {
   const handleLogout = async () => {
     try {
       await logout()
-      navigate('/')
+      // navigate('/')
     } catch (error) {
       console.log(error)
     }
   }
+
   return (<>
     {/* phone navigation */}
     <div className="navContainer">

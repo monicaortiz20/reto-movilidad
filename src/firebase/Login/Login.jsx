@@ -24,6 +24,14 @@ const Login = () => {
   const navigate = useNavigate()
   const [error, setError] = useState()
 
+  const {userGoogle,setUserGoogle}= useContext(authContext)
+
+  useEffect(()=> {
+    if(userGoogle != null) {
+      navigate('/')
+    }
+  },[userGoogle])
+
 
   const handleChange = ({ target: { name, value } }) => {
     setUser({ ...user, [name]: value })
@@ -32,7 +40,7 @@ const Login = () => {
   const handleGoogleLogin = async () => {
     try {
       await loginWithGoogle()
-      navigate('/')
+      // navigate('/')
 
     } catch (error) {
       setError(error.message)
