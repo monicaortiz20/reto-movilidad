@@ -9,12 +9,14 @@ import tt, { LngLat,setLngLat } from "@tomtom-international/web-sdk-services";
 import {useDebounce} from 'use-debounce'
 import './Home.css';
 import { authContext } from '../../../context/authContext';
+// import { data } from 'autoprefixer';
 
  const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
 
 function Home() {
   //Context
- const{userName,setUsername}=useContext(authContext)
+ const {userName,setUserName}=useContext(authContext)
+ console.log(userName)
  const {userGoogle,setUserGoogle}= useContext(authContext)
 
  //Estado para peticion a api propoa
@@ -212,7 +214,7 @@ const getPolution= async()=>{
         : <div className="controllsDiv">
           <div>
             <section className="userWhere">
-              {({ userName } || { userGoogle }) ? <h5 className="userName">¡Hola, {userName}{userGoogle}!</h5>
+              {({userName} || { userGoogle }) ? <h5 className="userName">¡Hola, {`${userName.name}`}!</h5>
                 : <h5 className="userName">¡Bienvenido!</h5>}
               <h4 className="whereTo">¿A dónde vas?</h4>
               <section className="sectionInputs">
