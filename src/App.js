@@ -13,8 +13,8 @@ const App = () => {
   const [userLname,setUserLname]= useState('')
   const [userGoogle, setUserGoogle] = useState('')
 
-  const signup = (email, password) => 
-  createUserWithEmailAndPassword(auth, email, password);
+
+
 
   const login = (email, password) => {
       signInWithEmailAndPassword(auth, email, password);
@@ -38,7 +38,6 @@ const App = () => {
  },[])
 
   const functions = {
-    signup,
     login,
     userName,
     userLname,

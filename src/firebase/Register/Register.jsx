@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react'
 import { authContext } from '../../context/authContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import {auth} from '../src/firebase/firebaseConfig'
 import { app } from '../firebaseConfig'
 import { Alert } from '../Alert/Alert';
 import './Register.css';
@@ -19,7 +21,7 @@ const Register = () => {
   const navigate = useNavigate()
   
   const [error, setError] = useState()
-  const { signup } = useContext(authContext)
+  // const { signup } = useContext(authContext)
 
 
   const dbRef = collection(db, "users");
@@ -43,6 +45,17 @@ const Register = () => {
       console.log(error);
     })
   }
+
+  const signup = (email, password) => 
+  createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in
+    const user = userCredential.user;
+    // ...
+  })
+
+
+
 
 
 
