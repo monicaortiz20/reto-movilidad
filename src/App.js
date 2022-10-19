@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect,useContext} from 'react'
 import {BrowserRouter} from 'react-router-dom';
 import { authContext } from '../src/context/authContext';
 import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
@@ -9,7 +9,7 @@ import Main from './components/Main/Main';
 import Footer from './components/Footer/Footer';
 
 const App = () => {
-  const [userName, setUserName] = useState('')
+  const [userName, setUserName] = useState()
   const [userLname,setUserLname]= useState('')
   const [userGoogle, setUserGoogle] = useState('')
 
@@ -61,6 +61,7 @@ const App = () => {
     signup,
     login,
     userName,
+    setUserName,
     userLname,
     userGoogle,
     logout,

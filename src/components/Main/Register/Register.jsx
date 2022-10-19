@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { app } from '../../../firebase/firebaseConfig'
 import { Alert } from '../../../firebase/Alert/Alert';
+import { useForm } from 'react-hook-form';
 import {useDebounce} from 'use-debounce'
 import './Register.css';
 import R from '../../../assets/img/R-logo-final.png';
@@ -12,11 +13,15 @@ const db = getFirestore(app);
 
 
 const Register = () => {
-  const {userName, setUserName} = useContext(authContext )
-  const {userLname, setUserLname} = useContext(authContext)
+  const {userName, setUserName} = useContext(authContext)
+  // const {userLname, setUserLname} = useContext(authContext)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  // const [nameRegister, setNameRegister] = useState('')
-  // const [lNameRegister, setLNameRegister] = useState('')
+  const [userLname, setUserLname]= useState('')
   const [userMail, setUserMail] = useState('')
   const [password, setPassword] = useState('')
   const [password2, setPassword2] = useState('')
@@ -32,7 +37,7 @@ const Register = () => {
 
   const data = {
     name: userName,
-    lastName: userLname, 
+    lastName: userLname , 
     mail: userMail,
     password: password    
   };
@@ -47,18 +52,18 @@ const Register = () => {
   .then(docRef => {
     console.log("Document has been added successfully");
     console.log('esto es data registrada', data.name)
-    // navigate('/')
+    navigate('/')
   })
   }
 
 
 
-  const getName = (event) => {
-    event.preventDefault()
-    setUserName(event.target.value)
+  // const getName = (event) => {
+  //   event.preventDefault()
+  //   setUserName(event.target.value)
 
 
-  };
+  // };
 
   const getLname = (event) => {
     event.preventDefault()
@@ -81,55 +86,60 @@ const Register = () => {
     setPassword2(event.target.value);
   };
 
+  const sendContext = (data) =>{
+    console.log("Esto es data",data) //recibe valores de los input del form como obj
+    setUserName(data)
+    console.log(setUserName)
+  }
 
 
   return (
     <div className='registerContainer'>
 
       {error && <Alert message={error} />}
-        <section className='logoContainer'>
-          <img className="logo" src={R} alt="reduce.logo" />
-          <p className='welcome'>Bienvenido!</p>
-        </section>
-      <form className="formRegister"onSubmit={addUser}>
-        <input className='regInputs' onChange={getName}
+      <section className='logoContainer'>
+        <img className="logo" src={R} alt="reduce.logo" />
+        <p className='welcome'>Bienvenido!</p>
+      </section>
+      <form className="formRegister" onSubmit={handleSubmit( data=> sendContext(data))}>
+        <input className='regInputs' 
           type="name"
           name='name'
           placeholder='Nombre'
-          value={userName}
-           />
+       
+          {...register("name")} 
+        />
         <input className="regInputs" onChange={getLname}
           type="apellido"
           name='apellido'
           placeholder='Apellidos'
-          value={userLname}
-        />    
+        />
         <input className="regInputs" onChange={getUserMail}
           type="email"
           name='email'
           placeholder='Email'
           value={userMail}
-        />      
+        />
         <input className="regInputs" onChange={getPassword}
           type="password"
           name='password'
           placeholder='Contraseña'
           id='password'
           value={password}
-           />
+        />
         <input className="regInputs" onChange={getPassword2}
           type="password"
           name='password'
           placeholder='Repetir Contraseña'
-          id='password2' 
+          id='password2'
           value={password2}
-          />
-          <section className='termsConditions'>
-          <input   type="checkbox" /><span className="checkbox">Acepto los términos y condiciones</span>
-          </section>
-        <button className="registerButton">Regístrate</button>
+        />
+        <section className='termsConditions'>
+          <input type="checkbox" /><span className="checkbox">Acepto los términos y condiciones</span>
+        </section>
+        <button className="registerButton" onClick={addUser}>Regístrate</button>
       </form>
-        <span className='linkToRegister'>¿Eres <span className='text-greenSearch'>Reducer</span>?<Link to='/login'>  Iniciar Sesión</Link></span>
+      <span className='linkToRegister'>¿Eres <span className='text-greenSearch'>Reducer</span>?<Link to='/login'>  Iniciar Sesión</Link></span>
     </div>
   )
 }
