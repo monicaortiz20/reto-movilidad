@@ -15,21 +15,33 @@ const App = () => {
 
   const signup = (email, password) => { 
   createUserWithEmailAndPassword(auth, email, password);
-  setUserName()
-  setUserLname()
+  // setUserName()
+  // setUserLname()
   }
 
   const login = (email, password) => {
-      signInWithEmailAndPassword(auth, email, password);
+      signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log('userCredential:', userCredential)
+        const user = userCredential.user;
+        setUserName(user)
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   }
 
   const logout = () => {
       signOut(auth)
   }
 
-//   const logoutMail = () => {
-//     signOut()
-// }
+  const logOutUser = () => {
+    signOut(auth).then(() => {
+      console.log('el usuario se ha desconectado')
+    }).catch((error) => {
+    });
+}
 
   const loginWithGoogle = () => {
       const googleProvider = new GoogleAuthProvider()
@@ -39,8 +51,8 @@ const App = () => {
   //para saber qué user está autenticado
   useEffect(() => {
     const unsubscribe =  onAuthStateChanged(auth, (currentUser)  => {
-         setUserGoogle(currentUser.displayName)
-         console.log('soy display name ', currentUser.displayName)
+         setUserGoogle(currentUser)
+         console.log('soy display name ', currentUser)
      })
      return () => unsubscribe();
  },[])
@@ -53,6 +65,7 @@ const App = () => {
     userLname,
     userGoogle,
     logout,
+    logOutUser,
     loginWithGoogle
   }
 return (

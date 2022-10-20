@@ -99,7 +99,7 @@ const Register = () => {
       {error && <Alert message={error} />}
       <section className='logoContainer'>
         <img className="logo" src={R} alt="reduce.logo" />
-        <p className='welcome'>Bienvenido!</p>
+        <p className='welcome'>¡Bienvenido!</p>
       </section>
       <form className="formRegister" onSubmit={handleSubmit( data=> sendContext(data))}>
         <input className='regInputs' 
