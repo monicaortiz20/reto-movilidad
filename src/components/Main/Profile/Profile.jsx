@@ -9,8 +9,6 @@ import news from '../../../assets/vectors/bell.png'
 import help from '../../../assets/vectors/help.png'
 import './Profile.css'
 
-
-
 const Profile = () => {
 
   const {userName,setUserName} = useContext(authContext)
@@ -27,7 +25,6 @@ const Profile = () => {
         <h1 className='userName'>{userName}{userLname}{userGoogle}</h1>
         </section>
         <section className='buttonsContainer'>
-         
           <button className='profileBtns'>
           <img src={accountImg} alt="user-icon" />
           <p>Mi cuenta</p></button>
@@ -47,7 +44,6 @@ const Profile = () => {
           <button className='profileBtns'>
           <img src={news} alt="news" /> 
           <p>Noticias relacionadas </p></button>
-         
           <button className='profileBtns'>
           <img src={help} alt="help" /> 
           <p>Ayuda</p></button>
