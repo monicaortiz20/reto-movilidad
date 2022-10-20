@@ -374,7 +374,7 @@ function Home() {
                 </SwiperSlide>
               </Swiper>
             </div>
-                  <button className='bg-greenSearch w-[100px] h-[40px]' id="volver" onClick={toggleBar} >Volver atrás</button>
+            <button className='bg-greenSearch w-full lg:w-4/6 h-[40px] text-black rounded-lg py-1 ' id="volver" onClick={toggleBar} >Volver atrás</button>
       </div>
 </div>
 </div>
