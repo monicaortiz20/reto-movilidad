@@ -10,6 +10,7 @@ import './Home.css';
 import { authContext } from '../../../context/authContext';
 // import { data } from 'autoprefixer';
 const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
+
 function Home() {
   //Context
   const { userName, setUserName } = useContext(authContext)
@@ -17,13 +18,14 @@ function Home() {
   const { userGoogle, setUserGoogle } = useContext(authContext)
   //Estado para peticion a api propia
   const [distance, setDistance] = useState();
+  const [routeTime, setRouteTime] = useState();
+
   const [trenEmision, setTrenEmision] = useState();
   const [metroEmision, setMetroEmision] = useState();
   const [motoEmision, setMotoEmision] = useState();
   const [busEmision, setBusEmision] = useState();
   const [cocheEmision, setCocheEmision] = useState();
   //  const [painted,setPainted]= useState(false)
-console.log('esto es la prueba')
   const [showSidebar, setShowSidebar] = useState(false)
 
   //States
@@ -120,8 +122,12 @@ console.log('esto es la prueba')
         console.log("soy data de calculateRoute", data);
         const direction = routeData.toGeoJson().features[0].geometry.coordinates;
         const distance = data.features[0].properties.summary.lengthInMeters
+
+        const routeTime = data.features[0].properties.summary.travelTimeInSeconds/60
         setDistance(distance)
+        setRouteTime(routeTime)
         console.log(distance);
+
         map.addLayer({
           id: Math.random().toString(),
           type: "line",
@@ -265,7 +271,7 @@ console.log('esto es la prueba')
               </span>
               <hr />
               </div>
-              <button className='bg-blue-400 w-[100px] h-[40px]' id="volver" onClick={toggleBar} >Volver atrás</button>
+              <button className='bg-blue-400 w-[100px] h-[40px]' id="volver" onClick={calculateRoute} >Volver atrás</button>
             </div>
       </div>
       </div>
