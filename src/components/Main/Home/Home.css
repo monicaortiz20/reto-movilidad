@@ -66,3 +66,14 @@
 }
 }
 
+/* Iconos transportes */
+.iconosTransporte{
+@apply w-8 h-8
+}
+
+#hoja{
+    @apply animate-bounce
+}
+#exclamation{
+    @apply animate-pulse  h-7
+}
