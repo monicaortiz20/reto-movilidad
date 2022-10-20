@@ -1,4 +1,4 @@
-import React , {useEffect,useState,useRef,useContext} from 'react'
+import React, { useEffect, useState, useRef, useContext } from 'react'
 import axios from 'axios'
 import '@tomtom-international/web-sdk-maps/dist/maps.css'
 import '@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css';
@@ -6,20 +6,21 @@ import "@tomtom-international/web-sdk-maps/dist/maps.css";
 import * as ttmaps from "@tomtom-international/web-sdk-maps";
 import tt, { LngLat,setLngLat } from "@tomtom-international/web-sdk-services";
 import {useNavigate} from 'react-router-dom'
-
-import {useDebounce} from 'use-debounce'
+import { useDebounce } from 'use-debounce'
 import './Home.css';
 import { authContext } from '../../../context/authContext';
 import { data } from 'autoprefixer';
-// import { data } from 'autoprefixer';
 
- const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
+
+const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
 
 function Home() {
   //Context
+
  const {userName,setUserName}=useContext(authContext)
 
  const {userGoogle,setUserGoogle}= useContext(authContext)
+
 
 
  const [showSidebar, setShowSidebar] = useState(false)
@@ -35,9 +36,11 @@ function Home() {
   const [map, setMap] = useState({});
   const [input, setInput] = useState("")
   const [input2, setInput2] = useState("")
-  const [debouncedText] = useDebounce(input, 500); //almacenamos el valor del input
-  const  [debouncedText2]=  useDebounce(input2, 500);
-  const [center,setCenter] = useState(["-3.6886008", "40.4069749"])
+
+
+  const [debouncedText] = useDebounce(input, 500);
+  const [debouncedText2] = useDebounce(input2, 500);
+  const [center, setCenter] = useState(["-3.6886008", "40.4069749"])
 
   //Estado para peticion a api propia
   const [distance, setDistance] = useState();
@@ -54,58 +57,83 @@ function Home() {
 
 
   const getAddress = async () => {
-    try{
-      const  data  = await axios.get(` https://api.tomtom.com/search/2/geocode/${input}.json?storeResult=false&typeahead=true&limit=1&countrySet=ES&lat=40.4165&lon=-3.70256&view=Unified&key=${TOMTOMAPIKEY}`)
-      const lat= data.data.results[0].position.lat.toString()
-      const lon= data.data.results[0].position.lon.toString()
+    try {
+      const data = await axios.get(` https://api.tomtom.com/search/2/geocode/${input}.json?storeResult=false&typeahead=true&limit=1&countrySet=ES&lat=40.4165&lon=-3.70256&view=Unified&key=${TOMTOMAPIKEY}`)
+      const lat = data.data.results[0].position.lat.toString()
+      const lon = data.data.results[0].position.lon.toString()
 
       setStartLatitude(lon)
       setStartLongitude(lat)
-  
-    return data
-  }catch(error){
-        console.log(error);
-    }
-}
 
-
-const getAddress2 = async () => {
-  try{
-    const  data2  = await axios.get(` https://api.tomtom.com/search/2/geocode/${input2}.json?storeResult=false&typeahead=true&limit=1&countrySet=ES&lat=40.4165&lon=-3.70256&view=Unified&key=${TOMTOMAPIKEY}`)
-
-    const lat= data2.data.results[0].position.lat.toString()
-    const lon= data2.data.results[0].position.lon.toString()
-
-    setDestinationLatitude(lon)
-    setDestinationLongitude(lat)
-
-  return data2
-}catch(error){
+      return data
+    } catch (error) {
       console.log(error);
+    }
   }
-}
+  const getAddress2 = async () => {
+    try {
+      const data2 = await axios.get(` https://api.tomtom.com/search/2/geocode/${input2}.json?storeResult=false&typeahead=true&limit=1&countrySet=ES&lat=40.4165&lon=-3.70256&view=Unified&key=${TOMTOMAPIKEY}`)
+
+      const lat = data2.data.results[0].position.lat.toString()
+      const lon = data2.data.results[0].position.lon.toString()
+
+      setDestinationLatitude(lon)
+      setDestinationLongitude(lat)
+
+      return data2
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const getPolution = async () => {
+
+    const polution = await axios.get(` https://xinmye.pythonanywhere.com/estimar?distance=${distance}`)
+    console.log('esto es polution', polution);
+
+    //trae distancia en metros
+    const tren = polution.data.resultado[3].tren.value*distance/1000
+    const metro = polution.data.resultado[4].metro.value*distance/1000
+    const moto = polution.data.resultado[1].moto.value*distance/1000
+    const bus = polution.data.resultado[5].bus.value*distance/1000
+    const coche = polution.data.resultado[0].coche.value*distance/1000
+
+    console.log(tren, metro, moto, bus, coche)
+    setTrenEmision(tren)
+    setMetroEmision(metro)
+    setMotoEmision(moto)
+    setBusEmision(bus)
+    setCocheEmision(coche)
+    
+    console.log('esto es emisionessss', trenEmision, metroEmision, motoEmision, busEmision, cocheEmision)
+
+  }
+
+
 
   useEffect(() => {
     getAddress()
     getAddress2()
     calculateRoute()
-    
+
+
     let map = ttmaps.map({
       key: `${TOMTOMAPIKEY}`,
       container: mapElement.current,
       center: center,
       zoom: mapZoom
     });
-   
+
     setMap(map);
 
-       return () => map
-    
-    
+    return () => map
+
+
+
   }, [debouncedText, debouncedText2]);
 
 
-  
+
   const handleChange = (e) => {
     setInput(e.target.value)
   }
@@ -125,9 +153,9 @@ const getAddress2 = async () => {
         console.log(routeData.toGeoJson());
         const data = routeData.toGeoJson();
         setResult(data);
-        console.log("soy data de calculateRoute",data);
+        console.log("soy data de calculateRoute", data);
         const direction = routeData.toGeoJson().features[0].geometry.coordinates;
-        const distance= data.features[0].properties.summary.lengthInMeters
+        const distance = data.features[0].properties.summary.lengthInMeters
         setDistance(distance)
         console.log(distance);
         map.addLayer({
@@ -158,57 +186,56 @@ const getAddress2 = async () => {
             "line-width": 6
           }
         })
-        
+
         map.setCenter([parseFloat(startLatitude), parseFloat(startLongitude)]);
         map.on('data', () => {
           let div = document.createElement('div')
-          div.innerHTML= '<p>You´re here!</p>'
-        
+          div.innerHTML = '<p>You´re here!</p>'
+
           let popup = new ttmaps.Popup({
             offset: 35,
           }).setDOMContent(div)
-        
+
           const element = document.createElement('div')
+          element.className = 'marker'
+
+          let marker = new ttmaps.Marker({
+            width: 32,
+            height: 32,
+            anchor: 'bottom',
+            color: '#B4C43B',
+          }).setLngLat([Number(startLatitude), Number(startLongitude)]).setPopup(popup)
+
+          marker.addTo(map)
+
+          // MarkerDestination:
+          map.on('data', () => {
+            let div2 = document.createElement('div')
+            div2.innerHTML = '<p>This is your destiny!</p>'
+
+            let popup2 = new ttmaps.Popup({
+              offset: 35,
+            }).setDOMContent(div2)
+
+            const element = document.createElement('div')
             element.className = 'marker'
-        
-            let marker = new ttmaps.Marker({
+
+            let markerDestination = new ttmaps.Marker({
               width: 32,
-              height:32,
+              height: 32,
               anchor: 'bottom',
-              color:'#B4C43B',
-            }).setLngLat([Number(startLatitude), Number(startLongitude)]).setPopup(popup)
-       
-            marker.addTo(map)
+              color: '#B4C43B',
 
-           // MarkerDestination:
-    map.on('data', () => {
-      let div2 = document.createElement('div')
-      div2.innerHTML= '<p>This is your destiny!</p>'
-    
-      let popup2 = new ttmaps.Popup({
-        offset: 35,
-      }).setDOMContent(div2)
-    
-      const element = document.createElement('div')
-        element.className = 'marker'
-    
-        let markerDestination = new ttmaps.Marker({
-          width: 32,
-          height:32,
-          anchor: 'bottom',
-          color:'#B4C43B',
+            }).setLngLat([Number(destinationLatitude), Number(destinationLongitude)]).setPopup(popup2)
 
-        }).setLngLat([Number(destinationLatitude), Number(destinationLongitude)]).setPopup(popup2)
-   
-        markerDestination.addTo(map)
-        markerDestination.off('remove',()=>calculateRoute())
-    })
-            
+            markerDestination.addTo(map)
+            markerDestination.off('remove', () => calculateRoute())
+          })
+
         })
       })
-      .catch((err) => {console.log(err)}
+      .catch((err) => { console.log(err) }
       )
-}
 
 const navigate = useNavigate();
 const navigateHome = () => {
@@ -322,7 +349,12 @@ const callInstructions= ()=> {
         </div>
   </div>
 </div>
+
     </>
   )
-  }
+}
+}
 export default Home;
+
+
+

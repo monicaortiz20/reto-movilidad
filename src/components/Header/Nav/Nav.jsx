@@ -71,7 +71,7 @@ useEffect(() => {
         <span><Link onClick={toggleBar} to ="/profile" className='linkmvl'>Profile</Link></span>
         </div>
         <div className='linksSideBar'>
-        { ({userName}|| {userGoogle})?
+        { ({userName} || {userGoogle})?
         <button onClick={(handleLogout,toggleBar)} className='linkmvl' >Log out</button>
         :''}
         </div>
