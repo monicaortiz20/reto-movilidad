@@ -31,6 +31,7 @@ function Home() {
  const {userGoogle,setUserGoogle}= useContext(authContext)
 >>>>>>> 9bb1fe04c7d19a6820bde7f8fcf5c65150dc2f1f
 
+<<<<<<< HEAD
   //Estado para peticion a api propia
   const [distance, setDistance] = useState();
   const [trenEmision, setTrenEmision] = useState();
@@ -39,6 +40,8 @@ function Home() {
   const [busEmision, setBusEmision] = useState();
   const [cocheEmision, setCocheEmision] = useState();
   //  const [painted,setPainted]= useState(false)
+=======
+>>>>>>> 11bc023961f0f23525306fd1ff29edf4e9e9a7fb
 
  const [showSidebar, setShowSidebar] = useState(false)
 
@@ -62,6 +65,19 @@ function Home() {
   const  [debouncedText2]=  useDebounce(input2, 200);
   const [center,setCenter] = useState(["-3.6886008", "40.4069749"])
 >>>>>>> 9bb1fe04c7d19a6820bde7f8fcf5c65150dc2f1f
+
+  //Estado para peticion a api propia
+  const [distance, setDistance] = useState();
+  const [trenEmision, setTrenEmision] = useState();
+  const [metroEmision, setMetroEmision] = useState();
+  const [motoEmision, setMotoEmision] = useState();
+  const [busEmision, setBusEmision] = useState();
+  const [cocheEmision, setCocheEmision] = useState();
+
+
+
+
+
 
 
   const getAddress = async () => {
@@ -274,12 +290,24 @@ const navigateHome = () => {
   navigate('/');
 };
 
-const getPolution= async()=>{
-
-  const  polution  = await axios.get(` https://xinmye.pythonanywhere.com/estimar?distance=${distance}`)
-  console.log(polution);
+const getPolution = async () => {
+  const polution = await axios.get(` https://xinmye.pythonanywhere.com/estimar?distance=${distance}`)
+  console.log('esto es polution', polution);
+  //trae distancia en metros
+  const tren = polution.data.resultado[3].tren.value*distance/1000
+  const metro = polution.data.resultado[4].metro.value*distance/1000
+  const moto = polution.data.resultado[1].moto.value*distance/1000
+  const bus = polution.data.resultado[5].bus.value*distance/1000
+  const coche = polution.data.resultado[0].coche.value*distance/1000
+  console.log(tren, metro, moto, bus, coche)
+  setTrenEmision(tren)
+  setMetroEmision(metro)
+  setMotoEmision(moto)
+  setBusEmision(bus)
+  setCocheEmision(coche)
+  
+  console.log('esto es emisionessss', trenEmision, metroEmision, motoEmision, busEmision, cocheEmision)
 }
-
 const toggleBar = () =>{
   showSidebar
     ? setShowSidebar(false)
@@ -302,7 +330,7 @@ function cambiar(){
     <div className='homeContainer'>
       <div ref={mapElement}  className="mapDiv">
       </div>
-      <div className="controllsDiv">
+      <div className="controllsDiv bg-blue-500">
           <div>
             <section className="userWhere">
               {({userName} || { userGoogle }) ? <h5 className="userName">¡Hola!</h5>
@@ -348,11 +376,8 @@ function cambiar(){
               >Buscar</button>
               <button onClick={toggleBar} className="bg-blue-400 w-[100px] h-[30px] "></button>
               {/* <div className="controllsDiv text-neutro"> */}
-              <div id='infoRuta' className={`controllsDiv text-neutro 
-     
-      `
-    }
-      >        
+              <div id='infoRuta' className={`controllsDiv text-neutro sideBar
+      ${showSidebar ? '-translate-x-0 ' : '-translate-x-full'}`}>        
                 <div className='mitadSuperior flex flex-col'>
                 <span className='distanceTransport flex flex-row'>
                 <p>Distancia: 700 km</p>
@@ -371,7 +396,11 @@ function cambiar(){
                 </span>
                 <span className='flex flex-row'>
                 <img src="" alt="exclamacion de mierda" /> 
-                <p>3100 g de emisiones </p>
+                    <p>Emisiones: {trenEmision} kg/metro</p>
+                    <p>Emisiones: {metroEmision} kg/metro</p>
+                    <p>Emisiones: {motoEmision} kg/metro</p>
+                    <p>Emisiones: {busEmision} kg/metro</p>
+                    <p>Emisiones: {cocheEmision} kg/metro</p>
                 </span>
                 <hr />
                 </div>
