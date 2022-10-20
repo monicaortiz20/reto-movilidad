@@ -1,0 +1,41 @@
+
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .registerContainer{
+        @apply flex flex-col sm:w-[800px]
+    }
+    .logoContainer{
+        @apply flex flex-col items-center justify-center content-center my-5
+    }
+    .logo{
+        @apply   w-[93px] h-[99px] left-[126px] top-[88px] 
+    }
+    .welcome{
+        @apply w-[183px] text-3xl font-bold text-neutro
+    }
+    .formRegister{
+        @apply gap-3 flex flex-col items-center justify-center
+    }
+    .regInputs{
+        @apply  w-[288px] sm:w-[600px] h-[54px] rounded-lg left-[39px]  top-[48px] text-sm gap-6 px-4 py-3 bg-neutroLogin  border-gray-200  text-blackLogin placeholder-blackLogin
+    }
+    .registerButton{
+        @apply  flex items-center justify-center w-[288px] sm:w-[600px] h-[54px] rounded-lg left-[39px] top-[231px] gap-6 px-4 py-3 bg-greenSearch text-blackController font-bold  p-3  text-xl
+    }
+    .termsConditions{
+        @apply flex w-[288px] sm:w-[600px] 
+    }
+    .termsConditions>span{
+        @apply sm:text-2xl sm:w-full
+    }
+    .checkbox{
+        @apply text-neutro flex flex-row gap-1 w-[288px] justify-start px-2 
+    }
+   
+    .linkToRegister{
+        @apply flex py-1 flex-row justify-center gap-1  text-neutro text-sm
+    }
+    
+}

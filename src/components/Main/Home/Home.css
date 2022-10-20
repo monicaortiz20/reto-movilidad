@@ -5,10 +5,16 @@
 
 
 @layer base {
+
+ .homeContainer{
+        @apply flex w-[100vw] h-screen relative
+
+    }
+
 /* div padre del buscador  */
 .controllsDiv{                                                            
     
-    @apply flex flex-col justify-between items-center rounded-2xl pt-[24px] pr-[24px] pb-[16px] pl-[24px] gap-[24px] bg-blackController w-[291px] h-[242px] absolute top-[605px] left-[34px]
+    @apply overflow-hidden flex flex-col  justify-center gap-6 items-center rounded-2xl bg-blackController w-[291px] h-[242px] absolute bottom-0 md:bottom-0  left-[50%] -translate-x-[50%]
 }
 /* nombre de user y a donde vas? */
 
@@ -30,14 +36,26 @@
 .hr{
     @apply h-[1px] bg-neutro w-[243px] justify-start
 }
+
+.searchContainer{
+    @apply flex flex-row
+}
 .searchRoute{
-    @apply flex flex-col justify-center items-center text-center   p-0 gap-6 w-[108px] h-[43px] rounded-lg bg-greenSearch 
+    @apply flex justify-center items-center text-center bg-greenSearch  text-blackController w-[108px]  p-0 gap-6  h-[43px] rounded-lg
 }
 
+.searchBox{
+    @apply w-full px-5 py-2
+}
 /* Div del mapa  */
 .mapDiv{
-    @apply h-[800px] w-[360px] relative rounded-2xl
-    
+    @apply  w-[100vw] relative  h-screen
+
+}
+
+/* Marker */
+.marker{
+    @apply bg-marker
 }
 }
 

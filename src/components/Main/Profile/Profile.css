@@ -1,4 +1,33 @@
-.button{
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+    .profileContainer{
+        @apply  flex flex-col justify-center items-center max-h-64
+    }
+    .userInfo{
+        @apply flex flex-col py-8 gap-2 items-center
+    }
+    .userImg{
+        @apply bg-neutroLogin h-20 w-20 rounded-[4rem]
+    }
+    .userName{
+        @apply text-neutro font-bold text-2xl
+    }
+
+
+  .buttonsContainer{
+    @apply flex gap-[1rem] flex-col items-center justify-center content-center
+  }
+    .profileBtns{
+        @apply gap-9 px-[2rem] rounded-lg flex flex-row items-center content-center h-[56px] w-[288px] bg-neutroLogin text-blackController font-semibold
+    }
+    /* .btnSection{
+        @apply flex  bg-neutroLogin
+    } */
+/* .button{
     height: 30px;
     width: 60px;
+} */
 }

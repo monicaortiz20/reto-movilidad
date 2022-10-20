@@ -1,12 +1,16 @@
 
 import React, { useState, useContext, useEffect } from 'react'
-import { authContext } from '../../context/authContext';
-import { useNavigate } from 'react-router-dom';
-import { Alert } from '../Alert/Alert';
+import { authContext } from '../../../context/authContext';
+import {auth, registerNewUser} from '../../../firebase/firebaseConfig'
+// import { onAuthStateChanged } from 'firebase/firebase-auth'
+// import {userExists, db} from '../firebaseConfig'
+import { Link, useNavigate } from 'react-router-dom';
+import { Alert } from '../../../firebase/Alert/Alert';
 import './Login.css'
-import logoR from '../../assets/img/logo-final.png'
-import { onAuthStateChanged } from 'firebase/auth';
-import { userExists } from '../firebaseConfig';
+import logoR from '../../../assets/img/logo-final.png';
+// import userEvent from '@testing-library/user-event';
+
+
 
 
 const Login = () => {
@@ -20,27 +24,14 @@ const Login = () => {
   const navigate = useNavigate()
   const [error, setError] = useState()
 
-//-------------------------------------
-  //llamos a useEffect para ejecutar código cada vez que se actualiza/renderiza el componente
-  //o se actualiza algún estado
-  //para detectar si el usuario está logueado o no, es decir, si esta autenticado
+  const {userGoogle,setUserGoogle}= useContext(authContext)
 
-  // useEffect(() => {
-  //   onAuthStateChanged(auth, handleUserStateChanged);
-  // }, []);
+  useEffect(()=> {
+    if(userGoogle != null) {
+      navigate('/')
+    }
+  },[userGoogle])
 
-  // async function handleUserStateChanged(user){
-  //   if(user){
-  //     const isRegistered = await userExists(user.uid)
-  //     if(isRegistered){
-  //       console.log(user.displayName)
-  //       navigate('/')
-  //     }
-  //   } else {
-  //     console.log('No hay nadie autenticado')
-  //   }
-  // }
-//------------------------------------- 
 
   const handleChange = ({ target: { name, value } }) => {
     setUser({ ...user, [name]: value })
@@ -49,7 +40,7 @@ const Login = () => {
   const handleGoogleLogin = async () => {
     try {
       await loginWithGoogle()
-      navigate('/')
+      // navigate('/')
 
     } catch (error) {
       setError(error.message)
@@ -85,7 +76,7 @@ const Login = () => {
               <input onChange={handleChange} className="password" type="Password" placeholder="Password" />
             {/* </div> */}
 
-            <span className="linkRegister"> Crear cuenta nueva</span>
+            <Link to='/register' className="linkRegister"> Crear cuenta nueva</Link>
             <button type="submit" className="loginBtn"> Log in</button>
             <span className="or">o continúa con </span>
 

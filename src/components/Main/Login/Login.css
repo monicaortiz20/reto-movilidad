@@ -7,17 +7,17 @@
         @apply overflow-auto flex items-center justify-center h-[100vh]  bg-blackController 
     }
     .loginDiv{
-        @apply flex flex-col flex-wrap items-center justify-center content-center
+        @apply flex flex-col h-screen w-[100vw] sm:w-[40vw] content-center items-center gap-20
     }
    .logoCont{
-    @apply flex 
+    @apply flex mt-10
 
    }
    .logoR{
     @apply w-[323px] h-[105px]
    }
     .formDiv{
-        @apply  flex flex-col w-[100%] mt-[30%] mb-[-17rem] h-[33rem] gap-[1rem] py-12 items-center justify-center rounded-tl-[40px] rounded-tr-[40px] bg-blackLogin 
+        @apply  flex flex-col w-[100%]  mb-[-17rem]  gap-[1rem] py-12 items-center justify-center rounded-tl-[40px] rounded-tr-[40px] bg-blackLogin 
     }
 
     .form{

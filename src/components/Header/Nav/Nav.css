@@ -3,11 +3,8 @@
 @tailwind utilities;
 
 @layer base{
-    .burgerBtn{
-        @apply fill-current text-greenSearch 
-    }
     .navContainer{
-        @apply lg:hidden  select-none bg-slate-100 
+        @apply   select-none bg-blue-400
     }
     .homeLink{
         @apply flex items-center gap-2 text-xl p-2
@@ -19,8 +16,7 @@
         @apply flex text-5xl text-greenSearch items-center cursor-pointer fixed left-12 top-0 z-50
     }
     .burgerBtn{
-        @apply fixed  z-30 flex items-center cursor-pointer  top-4
-    }
+        @apply fixed z-30 lg:text-sm  flex items-center cursor-pointer top-2 lg:top-5 left-5 lg:left-8  fill-current text-greenSearch  bg-black/5  rounded-md  }
     .sideBar{
        @apply top-0 right-0 w-[100vw] bg-blackLogin
                 text-white fixed h-full z-40  ease-in-out duration-300

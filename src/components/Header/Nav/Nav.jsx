@@ -1,27 +1,32 @@
-import React, {useContext,useState} from 'react'
+import React, {useContext,useEffect,useState} from 'react'
 import { authContext } from '../../../context/authContext';
 import { Navigate, useNavigate } from 'react-router-dom'
 import {Link} from 'react-router-dom'
 import './Nav.css'
 
 const Nav = () => {
-
   const navigate = useNavigate()
-  const {user, logout} = useContext(authContext)
+  const {logout, logOutUser} = useContext(authContext)
+  const {userName,setUserName}= useContext(authContext)
+  const {userGoogle,setUserGoogle}= useContext(authContext)
   const [showSidebar, setShowSidebar] = useState(false)
-
   const toggleBar = () =>{
-    showSidebar 
+    showSidebar
       ? setShowSidebar(false)
       : setShowSidebar(true)
   }
 
+useEffect(() => {
+  if (userGoogle != null) {
+    navigate('/')
+  }
+}, [userGoogle])
+
   const handleLogout = async () => {
     try {
-      await logout()
-      navigate('/')
-      
-    } catch (error) {
+        logOutUser()
+        console.log('usuario desconectado')
+      } catch (error) {
       console.log(error)
     }
   }
@@ -42,21 +47,20 @@ const Nav = () => {
           className="burgerBtn"
           viewBox='0 0 100 80'
           width='30'
-          height='30' 
+          height='30'
         >
           <rect width='100' height='10'></rect>
           <rect y='30' width='100' height='10'></rect>
           <rect y='60' width='100' height='10'></rect>
         </svg>
       )}
-
       <div
         className={`sideBar
       ${showSidebar ? '-translate-x-0 ' : '-translate-x-full'}`}
-      >  
+      >
        <div className='linksSideBar'>
           <Link onClick={toggleBar} to="/" className='linkmvl'>Home</Link>
-        </div> 
+        </div>
         <div className='linksSideBar'>
           <Link onClick={toggleBar} to="/login" className='linkmvl'>Iniciar Sesión</Link>
         </div>
@@ -64,13 +68,15 @@ const Nav = () => {
           <Link onClick={toggleBar} to ="/register" className='linkmvl'>Regístrate</Link>
         </div>
         <div className='linksSideBar'>
-          {user? 
-        <span><Link to ="/profile" className='linkmvl'>Profile</Link>¡Holaaa!<button onClick={(handleLogout,toggleBar)}>Log out</button></span>
-        : 'no hay user'}
+        <span><Link onClick={toggleBar} to ="/profile" className='linkmvl'>Profile</Link></span>
+        </div>
+        <div className='linksSideBar'>
+        { ({userName} || {userGoogle})?
+        <button onClick={(handleLogout,toggleBar)} className='linkmvl' >Log out</button>
+        :''}
         </div>
       </div>
     </div>
-
     {/* PC navigation
     <div className='containerDesk'>
       <div className='homeDeskDiv'>
@@ -85,7 +91,7 @@ const Nav = () => {
         <Link  to="/register" className='flex items-center gap-2 group'>
           <span>Regístrate</span>
         </Link>
-        {user? 
+        {user?
         <span><Link to ="/profile" className='flex items-center gap-2 group'>Perfil</Link>¡Hola, {user}!<button onClick={handleLogout,toggleBar}>Log out</button></span>
         : ''}
       </div>
@@ -94,17 +100,3 @@ const Nav = () => {
   )
 }
 export default Nav
-
-
-/* <>
-<div>
-    <Link to ="/" className='Home'>Home</Link>
-
-    <Link to ="/login" className='Login'>Login</Link>
-    <Link to ="/register" className='Register'>Register</Link>
-    {user? 
-    <span><Link to ="/profile" className='Profile'>Profile</Link>¡Hola, {user}!<button onClick={handleLogout}>Log out</button></span>
-    : ''}
-
-</div>
-</> */
