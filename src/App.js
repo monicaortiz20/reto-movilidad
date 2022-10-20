@@ -52,7 +52,7 @@ const App = () => {
   useEffect(() => {
     const unsubscribe =  onAuthStateChanged(auth, (currentUser)  => {
          setUserGoogle(currentUser)
-         console.log('soy display name ', currentUser)
+         
      })
      return () => unsubscribe();
  },[])

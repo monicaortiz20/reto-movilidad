@@ -5,7 +5,6 @@ import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { app } from '../../../firebase/firebaseConfig'
 import { Alert } from '../../../firebase/Alert/Alert';
 import { useForm } from 'react-hook-form';
-import {useDebounce} from 'use-debounce'
 import './Register.css';
 import R from '../../../assets/img/R-logo-final.png';
 
@@ -27,8 +26,6 @@ const Register = () => {
   const [password2, setPassword2] = useState('')
   const navigate = useNavigate()
   
-  // const [debouncedName] = useDebounce(nameRegister, 2000);
-  // const [debouncedLname] = useDebounce(lNameRegister, 2000);
   const [error, setError] = useState()
   const { signup } = useContext(authContext)
 
@@ -42,9 +39,7 @@ const Register = () => {
     password: password    
   };
 
-// useEffect(() => {
 
-// }, [debouncedName, debouncedLname])
 
   const addUser = (e) => {
     e.preventDefault()
@@ -88,8 +83,8 @@ const Register = () => {
 
   const sendContext = (data) =>{
     console.log("Esto es data",data) //recibe valores de los input del form como obj
-    setUserName(data)
-    console.log(setUserName)
+    setUserName(data.name)
+    console.log('esto es userName', userName)
   }
 
 

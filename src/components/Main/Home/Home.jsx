@@ -19,7 +19,7 @@ function Home() {
   console.log('esto es el userName:', userName)
   const { userGoogle, setUserGoogle } = useContext(authContext)
 
-  //Estado para peticion a api propoa
+  //Estado para peticion a api propia
   const [distance, setDistance] = useState();
   const [trenEmision, setTrenEmision] = useState();
   const [metroEmision, setMetroEmision] = useState();
