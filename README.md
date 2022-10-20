@@ -126,7 +126,8 @@ Desarrollo de Api en Python que devuelva la ruta más favorable en kilómetros; 
     * PENTESTING: prueba de pentest con una herramienta llamada OWASP ZAP. Se obtiene un informe completo donde obtendremos en más detalle los tipos de vulnerabilidad encontradas y cómo solventarlas. 
     
     
+    
 
+![R-logo-final](https://user-images.githubusercontent.com/107259913/197071872-f99751ad-f159-47f8-bdf9-3991b5786817.png) 
 
-    ![R-logo-final](https://user-images.githubusercontent.com/107259913/197069081-fe72ae26-8285-4c1d-af84-da6cccd5c34c.png) <img width="32" alt="Eco_marker2x" src="https://user-images.githubusercontent.com/107259913/197071794-1be012a3-7f2c-469a-a658-4a575ce6dc1a.png">
 
