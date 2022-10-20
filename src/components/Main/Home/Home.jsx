@@ -35,8 +35,8 @@ function Home() {
   const [map, setMap] = useState({});
   const [input, setInput] = useState("")
   const [input2, setInput2] = useState("")
-  const [debouncedText] = useDebounce(input, 200); //almacenamos el valor del input
-  const  [debouncedText2]=  useDebounce(input2, 200);
+  const [debouncedText] = useDebounce(input, 500); //almacenamos el valor del input
+  const  [debouncedText2]=  useDebounce(input2, 500);
   const [center,setCenter] = useState(["-3.6886008", "40.4069749"])
 
   //Estado para peticion a api propia
@@ -239,16 +239,11 @@ const toggleBar = () =>{
     ? setShowSidebar(false)
     : setShowSidebar(true)
 }
-function cambiar(){
-  // let contenedor=document.getElementById("searchContainer"); //búsca ruta y pinta
-  let contenedor2=document.getElementById("infoRuta"); //saca datos rutas
-  let boton=document.getElementsById("buscar"); //buscar ruta y pinta
-  let boton2=document.getElementsById("volver"); //vuelve a buscador
-  if (boton.id=='buscar'){
-    contenedor2.style.display = 'flex'
-  }else if(boton2.id=="volver"){
-    contenedor2.style.display = 'none'
-  }else{console.log("Esto no tira")}
+
+const callInstructions= ()=> {
+  calculateRoute();
+  getPolution();
+  toggleBar();
 }
 
   return (
@@ -256,8 +251,8 @@ function cambiar(){
     <div className='homeContainer'>
       <div ref={mapElement}  className="mapDiv">
       </div>
-      <div className="controllsDiv bg-blue-500">
-          <div>
+      <div className="controllsDiv">
+          <div className='searchBox '>
             <section className="userWhere">
               {({userName} || { userGoogle }) ? <h5 className="userName">¡Hola!</h5>
                 : <h5 className="userName">¡Bienvenido!</h5>}
@@ -290,13 +285,11 @@ function cambiar(){
             </section>
           </div>
           <div className="searchContainer">
-          <div className="searchRoute z-0"  onClick={calculateRoute}>
-              <button id="buscar" onClick={getPolution} className=' bg-greenSearch  text-blackController w-[108px] h-[30px]'
-              >Buscar</button>
-              <button onClick={toggleBar} className="bg-blue-400 w-[100px] h-[30px] "></button>
+          <div className="searchRoute " >
+              <button className='bg-greenSearch rounded-md w-full h-full' onClick={callInstructions}>Buscar</button>
               {/* <div className="controllsDiv text-neutro"> */}
-              <div id='infoRuta' className={`controllsDiv text-neutro sideBar
-      ${showSidebar ? '-translate-x-0 ' : '-translate-x-full'}`}>        
+              <div id='infoRuta' className={`text-neutro sideBar absolute -top-5 left-0 
+      ${showSidebar ? '-translate-x-0 ' : '-translate-x-[500px]'}`}>        
                 <div className='mitadSuperior flex flex-col'>
                 <span className='distanceTransport flex flex-row'>
                 <p>Distancia: 700 km</p>
@@ -323,7 +316,7 @@ function cambiar(){
                 </span>
                 <hr />
                 </div>
-                <button className='bg-blue-400 w-[100px] h-[30px] z-0 ' id="volver" onClick={toggleBar} >Volver atrás</button>
+                <button className='bg-blue-400 w-[100px] h-[40px]' id="volver" onClick={toggleBar} >Volver atrás</button>
               </div>
         </div>
         </div>
