@@ -43,14 +43,8 @@ function Home() {
   const [motoEmision, setMotoEmision] = useState();
   const [busEmision, setBusEmision] = useState();
   const [cocheEmision, setCocheEmision] = useState();
-<<<<<<< HEAD
   //  const [painted,setPainted]= useState(false)
-=======
-  const [routeTime, setRouteTime] = useState();
-
-
-
->>>>>>> 1081ee163148ea203b234480a67b3fffed56885f
+  console.log('esto es cocheEmision', cocheEmision)
   const [showSidebar, setShowSidebar] = useState(false)
 
   
@@ -146,31 +140,17 @@ function Home() {
         locations: `${startLatitude},${startLongitude}:${destinationLatitude},${destinationLongitude}`,
       })
       .then(function (routeData) {
-        console.log(routeData.toGeoJson());
         const data = routeData.toGeoJson();
         setResult(data);
-        console.log("soy data de calculateRoute", data);
-<<<<<<< HEAD
+
         const direction = routeData.toGeoJson().features[0].geometry.coordinates;
         const distance = data.features[0].properties.summary.lengthInMeters
-
-        const routeTime = data.features[0].properties.summary.travelTimeInSeconds/60
-        setDistance(distance)
-        setRouteTime(routeTime)
-        console.log(distance);
-
-=======
-        const direction =
-          routeData.toGeoJson().features[0].geometry.coordinates;
-        const distance = data.features[0].properties.summary.lengthInMeters;
         const distanceKm = distance / 1000;
         const routeTime = data.features[0].properties.summary.travelTimeInSeconds/60
-        console.log("soy route time",Math.ceil(routeTime))
         const routeRound= Math.ceil(routeTime)
         setDistance(distanceKm);
         setRouteTime(routeRound)
-        console.log("Soy la distancia en kmetros supuestamente", distanceKm);
->>>>>>> 1081ee163148ea203b234480a67b3fffed56885f
+
         map.addLayer({
           id: Math.random().toString(),
           type: "line",
@@ -253,6 +233,7 @@ function Home() {
   }
 
   const callInstructions= ()=> {  calculateRoute();  getPolution();  toggleBar();}
+
   return (
     <>
     <div className='homeContainer'>
@@ -291,41 +272,6 @@ function Home() {
             <button className='buttonSearch' onClick={callInstructions}>Buscar</button>
           </section>
         </div>
-<<<<<<< HEAD
-        <div className="searchContainer">
-        <div className="searchRoute " >
-            <button className='bg-greenSearch rounded-md w-full h-full' onClick={callInstructions}>Buscar</button>
-            {/* <div className="controllsDiv text-neutro"> */}
-            <div id='infoRuta' className={`text-neutro sideBar absolute -top-5 left-0
-    ${showSidebar ? '-translate-x-0 ' : 'translate-x-[400px]'}`}>
-              <div className='mitadSuperior flex flex-col'>
-              <span className='distanceTransport flex flex-row'>
-              <p>Distancia: 700 km</p>
-              <img src="" alt="tren" />45min
-              </span>
-              <span className='flex flex-row'>
-              <img src="" alt="" />
-              <p>Ruta mas ecologica</p>
-              </span>
-              <hr />
-              </div>
-              <div className='mitadInferior flex flex-col'>
-              <span className='distanceTransport flex flex-row'>
-              <p>Distancia: 700 km</p>
-              <img src="" alt="coche " />45min
-              </span>
-              <span className='flex flex-row'>
-              <img src="" alt="exclamacion de mierda" />
-                  <p>Emisiones: {trenEmision} kg/metro</p>
-                  <p>Emisiones: {metroEmision} kg/metro</p>
-                  <p>Emisiones: {motoEmision} kg/metro</p>
-                  <p>Emisiones: {busEmision} kg/metro</p>
-                  <p>Emisiones: {cocheEmision} kg/metro</p>
-              </span>
-              <hr />
-              </div>
-              <button className='bg-blue-400 w-[100px] h-[40px]' id="volver" onClick={calculateRoute} >Volver atrás</button>
-=======
         <div id="infoRuta" className={`${showSidebar ? '-translate-x-0' : 'translate-x-[400px]'}`}>
             <div className='swiperContainer'> {/* este div necesita altura y anchura definidas para que swiper se alimente */}
               <Swiper
@@ -364,11 +310,8 @@ function Home() {
                     </span>
                   </div>
                 </SwiperSlide>
-
                 {/* slide 2 */}
-
                 <SwiperSlide className='sliderSwipe'>
-
                   <div className='mitadSuperior'>
                     <span className='distanceTransport'>
                       <span className='flex gap-2'>Distancia:
@@ -398,11 +341,8 @@ function Home() {
                     </span>
                             </div>
                 </SwiperSlide>
-
-
                 {/* SLIDE 3 */}
                 <SwiperSlide className='sliderSwipe'>
-
                   <div className='mitadSuperior'>
                     <span className='distanceTransport'>
                       <span className='flex gap-2'>Distancia:
@@ -430,14 +370,11 @@ function Home() {
                       {/* <img src={exclamacion} id="exclamation" alt="!" /> */}
                       {motoEmision} kg C02 emisión total
                     </span>
-                    
                   </div>
                 </SwiperSlide>
               </Swiper>
->>>>>>> 1081ee163148ea203b234480a67b3fffed56885f
             </div>
                   <button className='bg-greenSearch w-[100px] h-[40px]' id="volver" onClick={toggleBar} >Volver atrás</button>
-          
       </div>
 </div>
 </div>
