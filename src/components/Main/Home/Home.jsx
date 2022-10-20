@@ -265,11 +265,7 @@ function Home() {
             </section>
           </div>
           <button className="searchRoute" onClick={getPolution} >Buscar</button>
-          <p>Emisiones: {trenEmision} kg/metro</p>
-          <p>Emisiones: {metroEmision} kg/metro</p>
-          <p>Emisiones: {motoEmision} kg/metro</p>
-          <p>Emisiones: {busEmision} kg/metro</p>
-          <p>Emisiones: {cocheEmision} kg/metro</p>
+
         </div>
       </div>
     </>

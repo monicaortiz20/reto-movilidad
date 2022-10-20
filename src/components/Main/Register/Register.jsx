@@ -135,6 +135,8 @@ const Register = () => {
         <button className="registerButton" onClick={addUser}>Regístrate</button>
       </form>
       <span className='linkToRegister'>¿Eres <span className='text-greenSearch'>Reducer</span>?<Link to='/login'>  Iniciar Sesión</Link></span>
+      {/* <div style={( color= 'red',  position='absolute', left='10px' ,top='25px', z-index='1' }>Div 1 </div> */}
+      <div>Div2</div>
     </div>
   )
 }
