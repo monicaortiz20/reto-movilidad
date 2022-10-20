@@ -40,7 +40,7 @@ const Login = () => {
   const handleGoogleLogin = async () => {
     try {
       await loginWithGoogle()
-      // navigate('/')
+      navigate('/')
 
     } catch (error) {
       setError(error.message)

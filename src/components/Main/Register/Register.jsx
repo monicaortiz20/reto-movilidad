@@ -47,7 +47,7 @@ const Register = () => {
   .then(docRef => {
     console.log("Document has been added successfully");
     console.log('esto es data registrada', data.name)
-    navigate('/')
+    navigate('/profile')
   })
   }
 

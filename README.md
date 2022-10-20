@@ -12,6 +12,7 @@ Este proyecto ha sido llevado a cabo con la colaboración de cuatro ramas de tra
 
 
 # Full Stack
+
 Encargados del desarrollo del proyecto: 
    * Frontend realizado con ReactJS funcional; lenguaje Javascript.
    
@@ -49,6 +50,7 @@ Encargados de la visual del proyecto:
   * Logo y Naming = Reduce
   
   ![R-logo-final](https://user-images.githubusercontent.com/107259913/197069081-fe72ae26-8285-4c1d-af84-da6cccd5c34c.png)
+
 
 
 # Data Science
@@ -90,24 +92,32 @@ Encargados de la securización de la aplicación:
     
     
 
-### REDUCE 2.0
+### ![logo-final](https://user-images.githubusercontent.com/107259913/197066382-20f7d4b7-f69a-4ef9-a527-8e247a348e4c.png)  2.0 
 
 Se implementarán funcionalidades de valor a la app como la colaboración de diferentes instituciones de transporte o asociaciones, empresas implicadas en la reducción del impacto de CO2.
 Para ello, se desarrollarán secciones de interés para el usuario que le den acceso a estas empresas. Asimismo, se implantará un sistema de puntos/bonificaciones que podrán ser cangeados en bonos de transporte (metro/bus/tren) para fomentar el uso de los mismos.
 
 
-#  Full Stack
+![07 - Version 2 0_page-0001](https://user-images.githubusercontent.com/107259913/197071245-a8c22307-baa9-47ec-8114-bba86edc04e7.jpg)
+
+
+
+###  Full Stack
 
 Al disponer una intraestructura preparada para la implementación de un Backend, está contemplado el desarrollo del mismo para la segunda fase del proyecto, haciendo uso de Express.js y Node.js. 
 
 
+###  UX/UI Product Design
 
-# Data Science
+Se valorará la posibilidad de introducir alternativas de transporte no introducidas en esta primera versión. Se realizarán test de usabilidad.
+
+
+### Data Science
 
 Desarrollo de Api en Python que devuelva la ruta más favorable en kilómetros; comparando los resultados de los diferentes APIs de rutas agregadas.
 
 
-# Ciberseguridad
+### Ciberseguridad
 
     * WAF: para garantizar la seguridad del servidor web mediante el análisis de paquetes de petición HTTP / HTTPS y modelos de tráfico.
     * IDS/IPS: IDS es un sistema de detección de intrusos y IPS es un sistema de prevención de intrusos.
@@ -116,8 +126,8 @@ Desarrollo de Api en Python que devuelva la ruta más favorable en kilómetros; 
     * PENTESTING: prueba de pentest con una herramienta llamada OWASP ZAP. Se obtiene un informe completo donde obtendremos en más detalle los tipos de vulnerabilidad encontradas y cómo solventarlas. 
     
     
-
-
-![logo-final](https://user-images.githubusercontent.com/107259913/197066382-20f7d4b7-f69a-4ef9-a527-8e247a348e4c.png)
-
     
+
+![R-logo-final](https://user-images.githubusercontent.com/107259913/197071872-f99751ad-f159-47f8-bdf9-3991b5786817.png) 
+
+
