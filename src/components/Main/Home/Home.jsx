@@ -23,7 +23,7 @@ function Home() {
   const [busEmision, setBusEmision] = useState();
   const [cocheEmision, setCocheEmision] = useState();
   //  const [painted,setPainted]= useState(false)
-
+console.log('esto es la prueba')
   const [showSidebar, setShowSidebar] = useState(false)
 
   //States
@@ -40,6 +40,7 @@ function Home() {
   const [debouncedText] = useDebounce(input, 500);
   const [debouncedText2] = useDebounce(input2, 500);
   const [center, setCenter] = useState(["-3.6886008", "40.4069749"])
+
   const getAddress = async () => {
     try {
       const data = await axios.get(` https://api.tomtom.com/search/2/geocode/${input}.json?storeResult=false&typeahead=true&limit=1&countrySet=ES&lat=40.4165&lon=-3.70256&view=Unified&key=${TOMTOMAPIKEY}`)
@@ -52,6 +53,7 @@ function Home() {
       console.log(error);
     }
   }
+
   const getAddress2 = async () => {
     try {
       const data2 = await axios.get(` https://api.tomtom.com/search/2/geocode/${input2}.json?storeResult=false&typeahead=true&limit=1&countrySet=ES&lat=40.4165&lon=-3.70256&view=Unified&key=${TOMTOMAPIKEY}`)
@@ -64,6 +66,7 @@ function Home() {
       console.log(error);
     }
   }
+
   const getPolution = async () => {
     const polution = await axios.get(` https://xinmye.pythonanywhere.com/estimar?distance=${distance}`)
     console.log('esto es polution', polution);
