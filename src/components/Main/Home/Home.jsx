@@ -4,20 +4,32 @@ import '@tomtom-international/web-sdk-maps/dist/maps.css'
 import '@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css';
 import "@tomtom-international/web-sdk-maps/dist/maps.css";
 import * as ttmaps from "@tomtom-international/web-sdk-maps";
+<<<<<<< HEAD
 import tt, { LngLat, setLngLat } from "@tomtom-international/web-sdk-services";
+=======
+import tt, { LngLat,setLngLat } from "@tomtom-international/web-sdk-services";
+import {useNavigate} from 'react-router-dom'
+>>>>>>> 9bb1fe04c7d19a6820bde7f8fcf5c65150dc2f1f
 
 import { useDebounce } from 'use-debounce'
 import './Home.css';
 import { authContext } from '../../../context/authContext';
+import { data } from 'autoprefixer';
 // import { data } from 'autoprefixer';
 
 const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
 
 function Home() {
   //Context
+<<<<<<< HEAD
   const { userName, setUserName } = useContext(authContext)
   console.log('esto es el userName:', userName)
   const { userGoogle, setUserGoogle } = useContext(authContext)
+=======
+ const {userName,setUserName}=useContext(authContext)
+
+ const {userGoogle,setUserGoogle}= useContext(authContext)
+>>>>>>> 9bb1fe04c7d19a6820bde7f8fcf5c65150dc2f1f
 
   //Estado para peticion a api propia
   const [distance, setDistance] = useState();
@@ -27,6 +39,8 @@ function Home() {
   const [busEmision, setBusEmision] = useState();
   const [cocheEmision, setCocheEmision] = useState();
   //  const [painted,setPainted]= useState(false)
+
+ const [showSidebar, setShowSidebar] = useState(false)
 
   //States
   const [startLatitude, setStartLatitude] = useState("");
@@ -39,9 +53,15 @@ function Home() {
   const [map, setMap] = useState({});
   const [input, setInput] = useState("")
   const [input2, setInput2] = useState("")
+<<<<<<< HEAD
   const [debouncedText] = useDebounce(input, 500);
   const [debouncedText2] = useDebounce(input2, 500);
   const [center, setCenter] = useState(["-3.6886008", "40.4069749"])
+=======
+  const [debouncedText] = useDebounce(input, 200); //almacenamos el valor del input
+  const  [debouncedText2]=  useDebounce(input2, 200);
+  const [center,setCenter] = useState(["-3.6886008", "40.4069749"])
+>>>>>>> 9bb1fe04c7d19a6820bde7f8fcf5c65150dc2f1f
 
 
   const getAddress = async () => {
@@ -59,6 +79,7 @@ function Home() {
     }
   }
 
+<<<<<<< HEAD
 
   const getAddress2 = async () => {
     try {
@@ -101,6 +122,8 @@ function Home() {
 
 
 
+=======
+>>>>>>> 9bb1fe04c7d19a6820bde7f8fcf5c65150dc2f1f
   useEffect(() => {
     getAddress()
     getAddress2()
@@ -116,9 +139,15 @@ function Home() {
 
     setMap(map);
 
+<<<<<<< HEAD
     return () => map
 
 
+=======
+       return () => map
+    
+    
+>>>>>>> 9bb1fe04c7d19a6820bde7f8fcf5c65150dc2f1f
   }, [debouncedText, debouncedText2]);
 
 
@@ -225,6 +254,7 @@ function Home() {
       })
       .catch((err) => { console.log(err) }
       )
+<<<<<<< HEAD
   }
   return (
     <>
@@ -235,6 +265,48 @@ function Home() {
           <div>
             <section className="userWhere">
               {({ userName } || { userGoogle }) ? <h5 className="userName">¡Hola, {`${userName}`}!</h5>
+=======
+}
+
+const navigate = useNavigate();
+const navigateHome = () => {
+  // navigate to /
+  navigate('/');
+};
+
+const getPolution= async()=>{
+
+  const  polution  = await axios.get(` https://xinmye.pythonanywhere.com/estimar?distance=${distance}`)
+  console.log(polution);
+}
+
+const toggleBar = () =>{
+  showSidebar
+    ? setShowSidebar(false)
+    : setShowSidebar(true)
+}
+function cambiar(){
+  // let contenedor=document.getElementById("searchContainer"); //búsca ruta y pinta
+  let contenedor2=document.getElementById("infoRuta"); //saca datos rutas
+  let boton=document.getElementsById("buscar"); //buscar ruta y pinta
+  let boton2=document.getElementsById("volver"); //vuelve a buscador
+  if (boton.id=='buscar'){
+    contenedor2.style.display = 'flex'
+  }else if(boton2.id=="volver"){
+    contenedor2.style.display = 'none'
+  }else{console.log("Esto no tira")}
+}
+
+  return (
+    <>
+    <div className='homeContainer'>
+      <div ref={mapElement}  className="mapDiv">
+      </div>
+      <div className="controllsDiv">
+          <div>
+            <section className="userWhere">
+              {({userName} || { userGoogle }) ? <h5 className="userName">¡Hola!</h5>
+>>>>>>> 9bb1fe04c7d19a6820bde7f8fcf5c65150dc2f1f
                 : <h5 className="userName">¡Bienvenido!</h5>}
               <h4 className="whereTo">¿A dónde vas?</h4>
               <section className="sectionInputs">
@@ -264,10 +336,52 @@ function Home() {
               </section>
             </section>
           </div>
+<<<<<<< HEAD
           <button className="searchRoute" onClick={getPolution} >Buscar</button>
 
         </div>
       </div>
+=======
+          <div className="searchContainer">
+          <div className="searchRoute z-0"  onClick={calculateRoute}>
+              <button id="buscar" onClick={getPolution} className=' bg-greenSearch  text-blackController w-[108px] h-[30px]'
+              >Buscar</button>
+              <button onClick={toggleBar} className="bg-blue-400 w-[100px] h-[30px] "></button>
+              {/* <div className="controllsDiv text-neutro"> */}
+              <div id='infoRuta' className={`controllsDiv text-neutro 
+     
+      `
+    }
+      >        
+                <div className='mitadSuperior flex flex-col'>
+                <span className='distanceTransport flex flex-row'>
+                <p>Distancia: 700 km</p>
+                <img src="" alt="tren" />45min
+                </span>
+                <span className='flex flex-row'>
+                <img src="" alt="HOJA DE MIERDA" /> 
+                <p>Ruta mas ecologica</p>
+                </span>
+                <hr />
+                </div>
+                <div className='mitadInferior flex flex-col'>
+                <span className='distanceTransport flex flex-row'>
+                <p>Distancia: 700 km</p>
+                <img src="" alt="coche " />45min
+                </span>
+                <span className='flex flex-row'>
+                <img src="" alt="exclamacion de mierda" /> 
+                <p>3100 g de emisiones </p>
+                </span>
+                <hr />
+                </div>
+                <button className='bg-blue-400 w-[100px] h-[30px] z-0 ' id="volver" onClick={toggleBar} >Volver atrás</button>
+              </div>
+        </div>
+        </div>
+  </div>
+</div>
+>>>>>>> 9bb1fe04c7d19a6820bde7f8fcf5c65150dc2f1f
     </>
   )
 }
