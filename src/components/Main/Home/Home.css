@@ -14,7 +14,7 @@
 /* div padre del buscador  */
 .controllsDiv{                                                            
     
-    @apply overflow-hidden flex flex-col  justify-center gap-6 items-center rounded-2xl bg-blackController w-[291px] h-[242px] absolute bottom-0 md:bottom-0  left-[50%] -translate-x-[50%]
+    @apply overflow-hidden flex flex-col  justify-start  items-center rounded-2xl bg-blackController w-[291px] lg:w-[500px] h-[242px] pt-3 absolute bottom-0 md:bottom-0  left-[50%] -translate-x-[50%]
 }
 /* nombre de user y a donde vas? */
 
@@ -25,16 +25,16 @@
     @apply text-neutro text-lg mb-[6px]
 }
 .sectionInputs{
-    @apply w-[246px]
+    @apply w-full
 }
 .originInput{
-    @apply w-[144px] h-[20px] flex items-center mb-1 bg-blackController text-neutro
+    @apply w-full h-[20px]  flex items-center mb-3 bg-blackController text-neutro focus:bg-blackController active:bg-blackController
 }
 .destinyInput{
-     @apply w-[144px] h-[20px] flex items-center mb-1  bg-blackController text-neutro
+     @apply w-full h-[20px] flex items-center mb-3  bg-blackController text-neutro focus:bg-blackController active:bg-blackController
 }
 .hr{
-    @apply h-[2px]  justify-start text-neutro w-full 
+    @apply h-[2px]  justify-start text-neutro w-full  mb-5
 }
 
 .searchContainer{
@@ -45,10 +45,10 @@
 }
 
 .searchBox{
-    @apply w-full px-5 py-2
+    @apply w-full px-5 py-2 h-full
 }
 .buttonSearch{
-    @apply bg-greenSearch rounded-md w-full h-full
+    @apply bg-greenSearch rounded-md w-full lg:w-4/6 h-full self-center py-1    
 }
 
 #infoRuta{
@@ -66,7 +66,7 @@
 }
 }
 .mitadSuperior{
-    @apply flex flex-col h-1/3 w-full justify-center items-center mt-6
+    @apply flex flex-col h-1/3 w-full justify-center items-center mt-16 
 }
 .distanceTransport{
     @apply w-full  flex justify-between items-end mb-2

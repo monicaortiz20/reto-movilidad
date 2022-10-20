@@ -147,7 +147,7 @@ function Home() {
         const direction =
           routeData.toGeoJson().features[0].geometry.coordinates;
         const distance = data.features[0].properties.summary.lengthInMeters;
-        const distanceKm = distance / 1000;
+        const distanceKm = distance / 1000; 
         const routeTime = data.features[0].properties.summary.travelTimeInSeconds/60
         console.log("soy route time",Math.ceil(routeTime))
         const routeRound= Math.ceil(routeTime)
@@ -243,8 +243,8 @@ function Home() {
     </div>
     <div className="controllsDiv">
         <div className='searchBox '>
-          <section className="userWhere">
-            {({userName} || { userGoogle }) ? <h5 className="userName">¡Hola!</h5>
+          <section className="userWhere flex flex-col">
+            {({userName} || { userGoogle }) ? <h5 className="userName">¡Hola <span className='text-greenSearch'>Reducer</span>!</h5>
               : <h5 className="userName">¡Bienvenido!</h5>}
             <h4 className="whereTo">¿A dónde vas?</h4>
             <section className="sectionInputs">
@@ -274,7 +274,7 @@ function Home() {
             <button className='buttonSearch' onClick={callInstructions}>Buscar</button>
           </section>
         </div>
-        <div id="infoRuta" className={`${showSidebar ? '-translate-x-0' : 'translate-x-[400px]'}`}>
+        <div id="infoRuta" className={`${showSidebar ? '-translate-x-0' : 'translate-x-[400px] lg:translate-x-[600px]' }`}>
             <div className='swiperContainer'> {/* este div necesita altura y anchura definidas para que swiper se alimente */}
               <Swiper
                 pagination={true}
@@ -383,7 +383,7 @@ function Home() {
                 </SwiperSlide>
               </Swiper>
             </div>
-                  <button className='bg-greenSearch w-[100px] h-[40px]' id="volver" onClick={toggleBar} >Volver atrás</button>
+                  <button className='bg-greenSearch w-full lg:w-4/6 h-[40px] text-black rounded-lg py-1 ' id="volver" onClick={toggleBar} >Volver atrás</button>
           
       </div>
 </div>

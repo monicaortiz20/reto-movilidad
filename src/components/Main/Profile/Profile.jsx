@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import { authContext } from '../../../context/authContext';
-import profilePic from '../../../assets/vectors/User.png'
+import profilePic from '../../../assets/vectors/fotoPerfil.png'
 import accountImg from '../../../assets/vectors/profile.png'
 import activity from '../../../assets/vectors/activity.png'
 import invite from '../../../assets/vectors/userImg.png'
@@ -11,18 +11,11 @@ import './Profile.css'
 
 const Profile = () => {
 
-  const {userName,setUserName} = useContext(authContext)
-  const {userLname,setUserLname} = useContext(authContext)
-  const {userGoogle,setUserGoogle}= useContext(authContext)
-
-
-
-
   return (
       <div className='profileContainer'>
         <section className='userInfo'>
         <img src={profilePic} alt="user pic" className='userImg'/>
-        <h1 className='userName'>{userName}{userLname}{userGoogle}</h1>
+        <h1 className='userName'>¡Hola Marina!</h1>
         </section>
         <section className='buttonsContainer'>
           <button className='profileBtns'>

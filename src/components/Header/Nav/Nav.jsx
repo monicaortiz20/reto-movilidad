@@ -46,8 +46,8 @@ useEffect(() => {
           onClick={toggleBar}
           className="burgerBtn"
           viewBox='0 0 100 80'
-          width='30'
-          height='30'
+          width='45'
+          height='45'
         >
           <rect width='100' height='10'></rect>
           <rect y='30' width='100' height='10'></rect>
@@ -68,34 +68,12 @@ useEffect(() => {
           <Link onClick={toggleBar} to ="/register" className='linkmvl'>Regístrate</Link>
         </div>
         <div className='linksSideBar'>
-        <span><Link onClick={toggleBar} to ="/profile" className='linkmvl'>Profile</Link></span>
+        <span><Link onClick={toggleBar} to ="/profile" className='linkmvl'>Perfil</Link></span>
         </div>
-        <div className='linksSideBar'>
-        { ({userName} || {userGoogle})?
-        <button onClick={(handleLogout,toggleBar)} className='linkmvl' >Log out</button>
-        :''}
-        </div>
+        
       </div>
     </div>
-    {/* PC navigation
-    <div className='containerDesk'>
-      <div className='homeDeskDiv'>
-        <Link  to="/" className='linkToHome'>
-          Reduce <span className='appTextDesk'>App</span>
-        </Link>
-      </div>
-      <div className='rightDivLinks'>
-        <Link  to="/login" className='flex items-center gap-2 group'>
-          <span>Iniciar Sesión</span>
-        </Link>
-        <Link  to="/register" className='flex items-center gap-2 group'>
-          <span>Regístrate</span>
-        </Link>
-        {user?
-        <span><Link to ="/profile" className='flex items-center gap-2 group'>Perfil</Link>¡Hola, {user}!<button onClick={handleLogout,toggleBar}>Log out</button></span>
-        : ''}
-      </div>
-    </div> */}
+   
   </>
   )
 }
