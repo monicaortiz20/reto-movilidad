@@ -92,7 +92,7 @@ Encargados de la securización de la aplicación:
     
     
 
-![logo-final](https://user-images.githubusercontent.com/107259913/197066382-20f7d4b7-f69a-4ef9-a527-8e247a348e4c.png)  2.0 
+### ![logo-final](https://user-images.githubusercontent.com/107259913/197066382-20f7d4b7-f69a-4ef9-a527-8e247a348e4c.png)  2.0 
 
 Se implementarán funcionalidades de valor a la app como la colaboración de diferentes instituciones de transporte o asociaciones, empresas implicadas en la reducción del impacto de CO2.
 Para ello, se desarrollarán secciones de interés para el usuario que le den acceso a estas empresas. Asimismo, se implantará un sistema de puntos/bonificaciones que podrán ser cangeados en bonos de transporte (metro/bus/tren) para fomentar el uso de los mismos.
