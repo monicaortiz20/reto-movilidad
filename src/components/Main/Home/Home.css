@@ -47,6 +47,13 @@
 .searchBox{
     @apply w-full px-5 py-2
 }
+.buttonSearch{
+    @apply bg-greenSearch rounded-md w-full h-full
+}
+
+#infoRuta{
+    @apply text-neutro py-2 px-2 gap-2 absolute flex flex-col items-center justify-center -top-5 left-0 bg-blackController h-full w-full
+}
 /* Div del mapa  */
 .mapDiv{
     @apply  w-[100vw] relative  h-screen

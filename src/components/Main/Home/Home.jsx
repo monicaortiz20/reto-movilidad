@@ -231,43 +231,42 @@ console.log('esto es la prueba')
               />
               <hr className="hr" />
             </section>
+            <button className='buttonSearch' onClick={callInstructions}>Buscar</button>
           </section>
         </div>
-        <div className="searchContainer">
-        <div className="searchRoute " >
-            <button className='bg-greenSearch rounded-md w-full h-full' onClick={callInstructions}>Buscar</button>
-            {/* <div className="controllsDiv text-neutro"> */}
-            <div id='infoRuta' className={`text-neutro sideBar absolute -top-5 left-0
-    ${showSidebar ? '-translate-x-0 ' : 'translate-x-[400px]'}`}>
-              <div className='mitadSuperior flex flex-col'>
-              <span className='distanceTransport flex flex-row'>
-              <p>Distancia: 700 km</p>
-              <img src="" alt="tren" />45min
-              </span>
-              <span className='flex flex-row'>
-              <img src="" alt="" />
-              <p>Ruta mas ecologica</p>
-              </span>
-              <hr />
-              </div>
-              <div className='mitadInferior flex flex-col'>
-              <span className='distanceTransport flex flex-row'>
-              <p>Distancia: 700 km</p>
-              <img src="" alt="coche " />45min
-              </span>
-              <span className='flex flex-row'>
-              <img src="" alt="exclamacion de mierda" />
-                  <p>Emisiones: {trenEmision} kg/metro</p>
-                  <p>Emisiones: {metroEmision} kg/metro</p>
-                  <p>Emisiones: {motoEmision} kg/metro</p>
-                  <p>Emisiones: {busEmision} kg/metro</p>
-                  <p>Emisiones: {cocheEmision} kg/metro</p>
-              </span>
-              <hr />
-              </div>
-              <button className='bg-blue-400 w-[100px] h-[40px]' id="volver" onClick={toggleBar} >Volver atrás</button>
-            </div>
-      </div>
+        <div id="infoRuta" className={`${showSidebar ? '-translate-x-0' : 'translate-x-[400px]'}`}>
+                {/* <div className="controllsDiv text-neutro"> */}
+                  <div className='mitadSuperior flex flex-col h-1/3 w-full justify-center items-center'>
+                    <span className='distanceTransport w-full  flex justify-between '>
+                    <p>Distancia: 700 km</p>
+                    <span className='flex gap-2'>
+                    <img src="" alt="tren"  />
+                    45 min
+                    </span>
+                    </span>
+                    <span className='flex justify-start w-full gap-3'>
+                    <img src="" alt="hoja"  />
+                    Ruta mas ecologica
+                    </span>
+                    <hr className='text-neutro w-full ' />
+                  </div>
+                  <div className='mitadInferior  flex flex-col w-full h-1/3 justify-center items-center '>
+                  <span className=' flex flex-wrap'>
+                  <p>Distancia: 700 km</p>
+                  <img src="" alt="coche " />45min
+                  </span>
+                  <span className='flex flex-row'>
+                    <img src="" alt="exclamacion"/>
+                        <p> {trenEmision} kg/mt</p>
+                        <p> {metroEmision} kg/mt</p>
+                        <p> {motoEmision} kg/mt</p>
+                        <p> {busEmision} kg/mt</p>
+                        <p> {cocheEmision} kg/mt</p>
+                  </span>
+                  <hr />
+                  </div>
+                  <button className='bg-greenSearch w-[100px] h-[40px]' id="volver" onClick={toggleBar} >Volver atrás</button>
+          
       </div>
 </div>
 </div>
