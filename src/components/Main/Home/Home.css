@@ -34,7 +34,7 @@
      @apply w-[144px] h-[20px] flex items-center mb-1  bg-blackController text-neutro
 }
 .hr{
-    @apply h-[1px] bg-neutro w-[243px] justify-start
+    @apply h-[2px]  justify-start text-neutro w-full 
 }
 
 .searchContainer{
@@ -65,10 +65,24 @@
     @apply bg-marker
 }
 }
-
+.mitadSuperior{
+    @apply flex flex-col h-1/3 w-full justify-center items-center mt-6
+}
+.distanceTransport{
+    @apply w-full  flex justify-between items-end mb-2
+}
+.mitadInferior{
+    @apply flex flex-col w-full h-1/3 justify-center items-center mt-2
+}
+.distanceImg{
+    @apply flex flex-wrap w-full justify-between
+}
+.emisionContainer{
+    @apply flex justify-start w-full gap-3
+}
 /* Iconos transportes */
 .iconosTransporte{
-@apply w-8 h-8
+@apply animate-pulse
 }
 
 #hoja{
@@ -76,4 +90,15 @@
 }
 #exclamation{
     @apply animate-pulse  h-7
+}
+
+.swiperContainer{
+    @apply relative h-full w-full
+}
+
+.swiperParams{
+    @apply  h-full w-full
+}
+.sliderSwipe{
+    @apply flex flex-col
 }

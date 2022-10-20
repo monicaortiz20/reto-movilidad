@@ -14,10 +14,17 @@ import coche from '../../../assets/vectors/car.png'
 import metro from '../../../assets/vectors/metro.png'
 import bus from '../../../assets/vectors/bus.png'
 import moto from '../../../assets/vectors/moto.png'
-// import bici from '../../../assets/vectors/car.png'
+import bici from '../../../assets/vectors/bici.png'
 import leaf from '../../../assets/vectors/hoja.png'
 import exclamacion from '../../../assets/vectors/icons8-atención-50.png'
- 
+
+import { Swiper, SwiperSlide } from 'swiper/react'
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/pagination'
+
+// import required modules
+import { Pagination } from 'swiper'
 
 // import { data } from 'autoprefixer';
 const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
@@ -103,18 +110,17 @@ function Home() {
     console.log('esto es distance', distance);
     const polution = await axios.get(` https://xinmye.pythonanywhere.com/estimar?distance=${distance}`)
     //trae distancia en metros
-    
     const tren = polution.data.resultado[3].tren.value*distance
-    const metro = polution.data.resultado[4].metro.value*(distance)
+    const metro = polution.data.resultado[4].metro.value*distance
     const moto = polution.data.resultado[1].moto.value*distance
     const bus = polution.data.resultado[5].bus.value*distance
     const coche = polution.data.resultado[0].coche.value*distance
     console.log(tren, metro, moto, bus, coche)
-    setTrenEmision(tren)
-    setMetroEmision(metro)
-    setMotoEmision(moto)
-    setBusEmision(bus)
-    setCocheEmision(coche)
+    setTrenEmision(Math.ceil(tren))
+    setMetroEmision(Math.ceil(metro))
+    setMotoEmision(Math.ceil(moto))
+    setBusEmision(Math.ceil(bus))
+    setCocheEmision(Math.ceil(coche))
    
     console.log('esto es emisionessss', trenEmision, metroEmision, motoEmision, busEmision, cocheEmision)
   }
@@ -143,6 +149,7 @@ function Home() {
         const distance = data.features[0].properties.summary.lengthInMeters;
         const distanceKm = distance / 1000;
         const routeTime = data.features[0].properties.summary.travelTimeInSeconds/60
+        console.log("soy route time",Math.ceil(routeTime))
         const routeRound= Math.ceil(routeTime)
         setDistance(distanceKm);
         setRouteTime(routeRound)
@@ -268,96 +275,114 @@ function Home() {
           </section>
         </div>
         <div id="infoRuta" className={`${showSidebar ? '-translate-x-0' : 'translate-x-[400px]'}`}>
-                {/* <div className="controllsDiv text-neutro"> */}
-                  <div className='mitadSuperior flex flex-col h-1/3 w-full justify-center items-center mt-6'>
-                    <span className='distanceTransport w-full  flex justify-between items-end mb-2'>
-                    <p className='flex gap-2'>Distancia:
-                      <p>{distance}km</p>
-                    </p>
-                    <span className='flex gap-2'>
-                      <img src={tren} alt="tren"  className='h-7'  />
-                      {routeTime} min
+            <div className='swiperContainer'> {/* este div necesita altura y anchura definidas para que swiper se alimente */}
+              <Swiper
+                pagination={true}
+                modules={[Pagination]}
+                className='swiperParams '
+              >
+                <SwiperSlide className='sliderSwipe'>
+                  {/* SLIDE 1 */}
+                  <div className='mitadSuperior '>
+                    <span className='distanceTransport '>
+                      <span className='flex gap-2'>Distancia:
+                        <p>{distance}km</p>
+                      </span>
+                      <span className='flex gap-2'>
+                        <img src={tren} alt="tren" className='h-7 iconosTransporte' />
+                        {routeTime} min
+                      </span>
                     </span>
-                    </span>
-                    <span className='flex justify-start w-full gap-3'>
-                      <img src= {leaf}  id="hoja" alt= "leaf"  />
+                    <span className='emisionContainer'>
+                      <img src={leaf} id="hoja" alt="leaf" />
                       Ruta mas ecologica
                     </span>
-                    <hr className='text-neutro w-full ' />
+                    <hr className='hr ' />
                   </div>
-                  <div className='mitadInferior  flex flex-col w-full h-1/3 justify-center items-center '>
-                  <span className=' flex flex-wrap w-full justify-between'>
-                  <p>Distancia: {distance}km</p>
-                    <span className='flex gap-2'>
-                      <img src={coche} className="iconosTransporte" alt="coche " />{routeTime} min
+                  <div className='mitadInferior'>
+                    <span className=' distanceImg'>
+                      <p>Distancia: {distance}km</p>
+                      <span className='flex gap-2'>
+                        <img src={coche} className="iconosTransporte  w-8 h-8" alt="coche " />{routeTime} min
+                      </span>
                     </span>
-                  </span>
-                  <span className='flex justify-start w-full gap-3'>
-                      <img src= {exclamacion}  id="exclamation" alt= "!"  />
+                    <span className='emisionContainer'>
+                      <img src={exclamacion} id="exclamation" alt="!" />
                       {cocheEmision} kg C02 emisión total
                     </span>
-                  <hr />
                   </div>
+                </SwiperSlide>
 
-                  {/* <div className='mitadSuperior flex flex-col h-1/3 w-full justify-center items-center'>
-                    <span className='distanceTransport w-full  flex justify-between '>
-                    <p>Distancia: 700 km</p>
-                    <span className='flex gap-2'>
-                    <img src={tren} alt="tren"   />
-                    45 min
-                    </span>
-                    </span>
-                    <span className='flex justify-start w-full gap-3'>
-                    <img src="" alt= "leaf"  />
-                    Ruta mas ecologica
-                    </span>
-                    <hr className='text-neutro w-full ' />
-                  </div>
-                  <div className='mitadInferior  flex flex-col w-full h-1/3 justify-center items-center '>
-                  <span className=' flex flex-wrap'>
-                  <p>Distancia: 700 km</p>
-                  <img src="" alt="coche " />45min
-                  </span>
-                  <span className='flex flex-row'>
-                    <img src="" alt="exclamacion"/>
-                        <p> tren: {trenEmision} kg/mt</p>
-                        <p> {metroEmision} kg/mt</p>
-                        <p> {motoEmision} kg/mt</p>
-                        <p> {busEmision} kg/mt</p>
-                        <p> {cocheEmision} kg/mt</p>
-                  </span>
-                  <hr />
-                  </div> */}
+                {/* slide 2 */}
 
-                  {/* <div className='mitadSuperior flex flex-col h-1/3 w-full justify-center items-center'>
-                    <span className='distanceTransport w-full  flex justify-between '>
-                    <p>Distancia: 700 km</p>
-                    <span className='flex gap-2'>
-                    <img src={tren} alt="tren"   />
-                    45 min
+                <SwiperSlide className='sliderSwipe'>
+
+                  <div className='mitadSuperior'>
+                    <span className='distanceTransport'>
+                      <span className='flex gap-2'>Distancia:
+                        <p>{distance}km</p>
+                      </span>
+                      <span className='flex gap-2'>
+                        <img src={metro} alt="tren" className='h-7 iconosTransporte' />
+                        {routeTime} min
+                      </span>
                     </span>
+                    <span className='emisionContainer'>
+                      {/* <img src={exclamacion} id="exclamation" alt="!" /> */}
+                      {metroEmision} kg C02 emisión total
                     </span>
-                    <span className='flex justify-start w-full gap-3'>
-                    <img src="" alt= "leaf"  />
-                    Ruta mas ecologica
-                    </span>
-                    <hr className='text-neutro w-full ' />
+                    <hr className='hr' />
                   </div>
-                  <div className='mitadInferior  flex flex-col w-full h-1/3 justify-center items-center '>
-                  <span className=' flex flex-wrap'>
-                  <p>Distancia: 700 km</p>
-                  <img src="" alt="coche " />45min
-                  </span>
-                  <span className='flex flex-row'>
-                    <img src="" alt="exclamacion"/>
-                        <p> tren: {trenEmision} kg/mt</p>
-                        <p> {metroEmision} kg/mt</p>
-                        <p> {motoEmision} kg/mt</p>
-                        <p> {busEmision} kg/mt</p>
-                        <p> {cocheEmision} kg/mt</p>
-                  </span>
-                  <hr />
-                  </div> */}
+                  <div className='mitadInferior'>
+                    <span className=' distanceImg'>
+                      <p>Distancia: {distance}km</p>
+                      <span className='flex gap-2'>
+                        <img src={bus} className="iconosTransporte" alt="bus" />{routeTime} min
+                      </span>
+                    </span>
+                    <span className='emisionContainer'>
+                      {/* <img src={exclamacion} id="exclamation" alt="!" /> */}
+                      {busEmision} kg C02 emisión total
+                    </span>
+                            </div>
+                </SwiperSlide>
+
+
+                {/* SLIDE 3 */}
+                <SwiperSlide className='sliderSwipe'>
+
+                  <div className='mitadSuperior'>
+                    <span className='distanceTransport'>
+                      <span className='flex gap-2'>Distancia:
+                        <p>{distance}km</p>
+                      </span>
+                      <span className='flex gap-2'>
+                        <img src={bici} alt="bici" className='h-7 iconosTransporte' />
+                        {routeTime} min
+                      </span>
+                    </span>
+                    <span className='emisionContainer'>
+                      <img src={leaf} id="hoja" alt="leaf" />
+                      Ruta mas ecologica
+                    </span>
+                    <hr className='hr ' />
+                  </div>
+                  <div className='mitadInferior'>
+                    <span className=' distanceImg'>
+                      <p>Distancia: {distance}km</p>
+                      <span className='flex gap-2'>
+                        <img src={moto} className="iconosTransporte w-8 h-8" alt="moto" />{routeTime} min
+                      </span>
+                    </span>
+                    <span className='emisionContainer'>
+                      {/* <img src={exclamacion} id="exclamation" alt="!" /> */}
+                      {motoEmision} kg C02 emisión total
+                    </span>
+                    
+                  </div>
+                </SwiperSlide>
+              </Swiper>
+            </div>
                   <button className='bg-greenSearch w-[100px] h-[40px]' id="volver" onClick={toggleBar} >Volver atrás</button>
           
       </div>
