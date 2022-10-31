@@ -29,7 +29,7 @@ import { Pagination } from 'swiper'
 
 // import { data } from 'autoprefixer';
 const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
-const CARBONAPI= process.env.REACT_APP_APIKEY_CARBONAPI
+const CARBONAPI = process.env.REACT_APP_APIKEY_CARBONAPI
 
 function Home() {
   //Context
@@ -110,7 +110,7 @@ function Home() {
 
   const getPolution = async () => {
     console.log('esto es distance', distance);
-    const url = `https://app.trycarbonapi.com/api/carTravel`;
+    const url = `https://app.trycarbonapi.com/api/carTravel?distance=${distance}&vehicle=SmallDieselCar`;
 const options = {
   body:{
       "distance": distance,
