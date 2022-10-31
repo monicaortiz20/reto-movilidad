@@ -23,9 +23,12 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/pagination'
+import "swiper/css/effect-cube";
+
+
 
 // import required modules
-import { Pagination } from 'swiper'
+import { EffectCube } from 'swiper'
 
 // import { data } from 'autoprefixer';
 const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
@@ -110,44 +113,99 @@ function Home() {
 
   const getPolution = async () => {
     console.log('esto es distance', distance);
-    const url = `https://app.trycarbonapi.com/api/carTravel?distance=${distance}&vehicle=SmallDieselCar`;
-const options = {
-  body:{
-      "distance": distance,
-      "vehicle": "SmallDieselCar"
+
+  //fetch for car polutions 
+    const url = `https://app.trycarbonapi.com/api/carTravel?distance=${distance}&vehicle=MediumPetrolCar`;
+    const options = {
+      body: {
+        "distance": distance,
+        "vehicle": "MediumPetrolCar"
       },
+      headers: {
+        Authorization: `Bearer ${CARBONAPI}`
+      },
+      method: 'post'
+    };
+    let request = await fetch(url, options)
+    let response = await request.json();
+
+    //fetch for motorbike
+    const urlMotorbike = `https://app.trycarbonapi.com/api/motorBike?distance=${distance}&type=MediumMotorBike`;
+    const options2 = {
+      body: {
+        "distance": distance,
+        "type": "MediumMotorBike"
+      },
+      headers: {
+        Authorization: `Bearer ${CARBONAPI}`
+      },
+      method: 'post'
+    };
+    let request2 = await fetch(urlMotorbike, options2)
+    let response2 = await request2.json();
+    console.log(response2,"soy la moto")
+
+  //fetch for public transports 
+//************TRAIN*************
+  const urlTrain= `https://app.trycarbonapi.com/api/publicTransit?distance=${distance}&type=NationalTrain`;
+    const options3 = {
+      body: {
+        "distance": distance,
+        "type": "NationalTrain"
+      },
+      headers: {
+        Authorization: `Bearer ${CARBONAPI}`
+      },
+      method: 'post'
+    };
+    let request3 = await fetch(urlTrain, options3)
+    let response3 = await request3.json();
+    console.log("soy el tren",response3)
+//*************BUS****
+const urlBus= `https://app.trycarbonapi.com/api/publicTransit?distance=${distance}&type=ClassicBus`;
+const options4 = {
+  body: {
+    "distance": distance,
+    "type": "ClassicBus"
+  },
   headers: {
     Authorization: `Bearer ${CARBONAPI}`
   },
-  Response:{
-  
+  method: 'post'
+};
+let request4 = await fetch(urlBus, options4)
+let response4 = await request4.json();
+
+//Subway*************
+const urlSubway= `https://app.trycarbonapi.com/api/publicTransit?distance=${distance}&type=Subway`;
+const options5 = {
+  body: {
+    "distance": distance,
+    "type": "Subway"
+  },
+  headers: {
+    Authorization: `Bearer ${CARBONAPI}`
   },
   method: 'post'
 };
-console.log(fetchToCurl(url, options));
-let request= await fetch(url, options)
-let response= await request.json();
-console.log("soy response**********",response)
+let request5 = await fetch(urlSubway, options5)
+let response5 = await request5.json();
+
+
 // request
+const coche = response.carbon.slice(0,5)
+setCocheEmision(coche)
+const moto = response2.carbon.slice(0,5)
+setMotoEmision(moto)
+const tren = response3.carbon.slice(0,5)
+setTrenEmision(tren)
+const bus = response4.carbon.slice(0,5)
+setBusEmision(bus)
+console.log(bus);
+const metro = response5.carbon.slice(0,5)
+setMetroEmision(metro)
 
 
-
-    // const polution = await axios.get(` https://xinmye.pythonanywhere.com/estimar?distance=${distance}`)
-    //trae distancia en metros
-    const tren = fetchToCurl(url,options)
-    console.log(tren);
-    // const metro = polution.data.resultado[4].metro.value*distance
-    // const moto = polution.data.resultado[1].moto.value*distance
-    // const bus = polution.data.resultado[5].bus.value*distance
-    const coche = response.carbon
-
-    // const coche = polution.data.resultado[0].coche.value*distance
-    console.log(tren, metro, moto, bus, coche)
-    setTrenEmision(Math.ceil(tren))
-    setMetroEmision(Math.ceil(metro))
-    setMotoEmision(Math.ceil(moto))
-    setBusEmision(Math.ceil(bus))
-    setCocheEmision(coche)
    
     console.log('esto es emisionessss', trenEmision, metroEmision, motoEmision, busEmision, cocheEmision)
   }
@@ -302,8 +360,15 @@ console.log("soy response**********",response)
         <div id="infoRuta" className={`${showSidebar ? '-translate-x-0' : 'translate-x-[400px] lg:translate-x-[600px]' }`}>
             <div className='swiperContainer'> {/* este div necesita altura y anchura definidas para que swiper se alimente */}
               <Swiper
-                pagination={true}
-                modules={[Pagination]}
+                effect={"cube"}
+                grabCursor={true}
+                cubeEffect={{
+                  shadow: true,
+                  slideShadows: true,
+                  shadowOffset: 20,
+                  shadowScale: 0.94,
+                }}
+                modules={[EffectCube]}
                 className='swiperParams '
               >
                 <SwiperSlide className='sliderSwipe'>
@@ -320,7 +385,7 @@ console.log("soy response**********",response)
                     </span>
                     <span className='emisionContainer'>
                       <img src={leaf} id="hoja" alt="leaf" />
-                      Ruta mas ecologica
+                      Ruta mas ecológica, {trenEmision} kg C02 de emisión total
                     </span>
                     <hr className='hr ' />
                   </div>
@@ -333,7 +398,7 @@ console.log("soy response**********",response)
                     </span>
                     <span className='emisionContainer'>
                       <img src={exclamacion} id="exclamation" alt="!" />
-                      {cocheEmision} de emisión total
+                      {cocheEmision} kg C02 de emisión total
                     </span>
                   </div>
                 </SwiperSlide>
@@ -382,7 +447,7 @@ console.log("soy response**********",response)
                     </span>
                     <span className='emisionContainer'>
                       <img src={leaf} id="hoja" alt="leaf" />
-                      Ruta mas ecologica
+                      Ruta mas ecológica, 0 kg C02 de emisión total
                     </span>
                     <hr className='hr ' />
                   </div>
