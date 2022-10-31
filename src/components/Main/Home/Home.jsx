@@ -9,6 +9,7 @@ import { useDebounce } from 'use-debounce'
 import './Home.css';
 import { authContext } from '../../../context/authContext';
 import { debounce } from 'debounce';
+import fetchToCurl from 'fetch-to-curl';
 import tren from '../../../assets/vectors/train.png' 
 import coche from '../../../assets/vectors/car.png'
 import metro from '../../../assets/vectors/metro.png'
@@ -28,6 +29,7 @@ import { Pagination } from 'swiper'
 
 // import { data } from 'autoprefixer';
 const TOMTOMAPIKEY = process.env.REACT_APP_APIKEY
+const CARBONAPI= process.env.REACT_APP_APIKEY_CARBONAPI
 
 function Home() {
   //Context
@@ -55,7 +57,7 @@ function Home() {
   const [destinationLongitude, setDestinationLongitude] = useState("");
   const [result, setResult] = useState({});
   const mapElement = useRef();
-  const [mapZoom, setMapZoom] = useState(10);
+  const [mapZoom, setMapZoom] = useState(14);
   const [map, setMap] = useState({});
   const [input, setInput] = useState("")
   const [input2, setInput2] = useState("")
@@ -108,19 +110,44 @@ function Home() {
 
   const getPolution = async () => {
     console.log('esto es distance', distance);
-    const polution = await axios.get(` https://xinmye.pythonanywhere.com/estimar?distance=${distance}`)
+    const url = `https://app.trycarbonapi.com/api/carTravel`;
+const options = {
+  body:{
+      "distance": distance,
+      "vehicle": "SmallDieselCar"
+      },
+  headers: {
+    Authorization: `Bearer ${CARBONAPI}`
+  },
+  Response:{
+  
+  },
+  method: 'post'
+};
+console.log(fetchToCurl(url, options));
+let request= await fetch(url, options)
+let response= await request.json();
+console.log("soy response**********",response)
+// request
+
+
+
+    // const polution = await axios.get(` https://xinmye.pythonanywhere.com/estimar?distance=${distance}`)
     //trae distancia en metros
-    const tren = polution.data.resultado[3].tren.value*distance
-    const metro = polution.data.resultado[4].metro.value*distance
-    const moto = polution.data.resultado[1].moto.value*distance
-    const bus = polution.data.resultado[5].bus.value*distance
-    const coche = polution.data.resultado[0].coche.value*distance
+    const tren = fetchToCurl(url,options)
+    console.log(tren);
+    // const metro = polution.data.resultado[4].metro.value*distance
+    // const moto = polution.data.resultado[1].moto.value*distance
+    // const bus = polution.data.resultado[5].bus.value*distance
+    const coche = response.carbon
+
+    // const coche = polution.data.resultado[0].coche.value*distance
     console.log(tren, metro, moto, bus, coche)
     setTrenEmision(Math.ceil(tren))
     setMetroEmision(Math.ceil(metro))
     setMotoEmision(Math.ceil(moto))
     setBusEmision(Math.ceil(bus))
-    setCocheEmision(Math.ceil(coche))
+    setCocheEmision(coche)
    
     console.log('esto es emisionessss', trenEmision, metroEmision, motoEmision, busEmision, cocheEmision)
   }
@@ -232,7 +259,7 @@ function Home() {
       : setShowSidebar(true)
   }
 
-  const callInstructions= ()=> {  calculateRoute();  getPolution();  toggleBar();}
+  const callInstructions= ()=> { getPolution(); calculateRoute();    toggleBar();}
 
   return (
     <>
@@ -306,7 +333,7 @@ function Home() {
                     </span>
                     <span className='emisionContainer'>
                       <img src={exclamacion} id="exclamation" alt="!" />
-                      {cocheEmision} kg C02 emisión total
+                      {cocheEmision} de emisión total
                     </span>
                   </div>
                 </SwiperSlide>
