@@ -37,7 +37,6 @@ const CARBONAPI = process.env.REACT_APP_APIKEY_CARBONAPI
 function Home() {
   //Context
   const { userName, setUserName } = useContext(authContext)
-  // console.log('esto es el userName:', userName)
   const { userGoogle, setUserGoogle } = useContext(authContext)
   //Estado para peticion a api propia
   const [distance, setDistance] = useState();
@@ -48,8 +47,6 @@ function Home() {
   const [motoEmision, setMotoEmision] = useState();
   const [busEmision, setBusEmision] = useState();
   const [cocheEmision, setCocheEmision] = useState();
-  //  const [painted,setPainted]= useState(false)
-  console.log('esto es cocheEmision', cocheEmision)
   const [showSidebar, setShowSidebar] = useState(false)
 
   
@@ -201,13 +198,8 @@ const tren = response3.carbon.slice(0,5)
 setTrenEmision(tren)
 const bus = response4.carbon.slice(0,5)
 setBusEmision(bus)
-console.log(bus);
 const metro = response5.carbon.slice(0,5)
-setMetroEmision(metro)
-
-
-   
-    console.log('esto es emisionessss', trenEmision, metroEmision, motoEmision, busEmision, cocheEmision)
+setMetroEmision(metro)   
   }
 
 
